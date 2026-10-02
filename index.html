@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>OBATKU — Sistem Manajemen Stok Obat Offline-First Puskesmas 3T</title>
+  <title>OBATKU — Sistem Manajemen Stok Obat Offline-First Puskesmas 3T (NEXORA 2026)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -15,12 +15,16 @@
       --forest-green: #2D6A4F;
       --mint-accent: #D8F3DC;
       --mint-light: #E8F8F0;
+      --mint-border: #B7E4C7;
       --safe-green: #27AE60;
       --safe-bg: #E8F8F0;
+      --safe-border: #A9DFBF;
       --warning-yellow: #F39C12;
       --warning-bg: #FEF5E7;
+      --warning-border: #FAD7A0;
       --critical-red: #E74C3C;
       --critical-bg: #FDEDEC;
+      --critical-border: #F5B7B1;
       --surface: #F8FAFC;
       --card-bg: #FFFFFF;
       --text-main: #1A202C;
@@ -28,7 +32,9 @@
       --border-color: #E2E8F0;
       --radius-sm: 8px;
       --radius-md: 14px;
-      --radius-lg: 20px;
+      --radius-lg: 22px;
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * {
@@ -40,7 +46,7 @@
     }
 
     body {
-      background: #0D1F17;
+      background: #0B1912;
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
@@ -50,10 +56,10 @@
       overflow-x: hidden;
     }
 
-    /* Top Control Bar for Judges / Reviewers */
+    /* Top Control Bar for Reviewers & Judges */
     .judge-bar {
       width: 100%;
-      background: #132E22;
+      background: #11281E;
       border-bottom: 1px solid rgba(216, 243, 220, 0.15);
       padding: 10px 20px;
       display: flex;
@@ -98,16 +104,21 @@
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s ease;
+      transition: var(--transition-fast);
+      min-height: 36px;
     }
 
     .btn-control:hover {
       background: rgba(255, 255, 255, 0.18);
       border-color: var(--mint-accent);
       color: var(--mint-accent);
+    }
+
+    .btn-control:active {
+      transform: scale(0.96);
     }
 
     .btn-control.active {
@@ -126,7 +137,7 @@
       color: #fff;
     }
 
-    /* Outer Stage */
+    /* Outer Stage Container */
     .stage-container {
       width: 100%;
       flex: 1;
@@ -140,30 +151,29 @@
     .phone-wrapper {
       width: 100%;
       max-width: 420px;
-      height: 860px;
+      height: 870px;
       background: #fff;
-      border-radius: 40px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 0 10px #1E2923, 0 0 0 12px rgba(216, 243, 220, 0.2);
+      border-radius: 42px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 0 10px #1A2E24, 0 0 0 12px rgba(216, 243, 220, 0.2);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       position: relative;
-      transition: all 0.3s ease;
+      transition: all var(--transition-smooth);
     }
 
-    /* Desktop Expanded Mode */
     .phone-wrapper.fullscreen-mode {
-      max-width: 900px;
-      height: 92vh;
+      max-width: 860px;
+      height: 94vh;
       border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
     }
 
-    /* Phone Status Bar */
+    /* Status Bar */
     .phone-statusbar {
       background: var(--deep-green);
       color: #fff;
-      padding: 8px 18px 4px 18px;
+      padding: 8px 20px 4px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -196,7 +206,7 @@
     .app-title-box h1 {
       font-size: 18px;
       font-weight: 800;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -208,7 +218,7 @@
       opacity: 0.9;
     }
 
-    /* Persistent Network Banner */
+    /* Persistent Interactive Network Banner */
     .status-banner {
       padding: 8px 16px;
       display: flex;
@@ -219,18 +229,23 @@
       transition: background 0.3s;
       z-index: 35;
       border-bottom: 1px solid rgba(0,0,0,0.06);
+      cursor: pointer;
+    }
+
+    .status-banner:hover {
+      filter: brightness(0.97);
     }
 
     .status-banner.offline {
       background: var(--warning-bg);
       color: #8A4B00;
-      border-color: #F8D7A6;
+      border-color: var(--warning-border);
     }
 
     .status-banner.online {
       background: var(--safe-bg);
       color: #145A32;
-      border-color: #A9DFBF;
+      border-color: var(--safe-border);
     }
 
     .btn-sync-mini {
@@ -245,6 +260,35 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      transition: var(--transition-fast);
+    }
+    .btn-sync-mini:active {
+      transform: scale(0.92);
+    }
+
+    /* Onboarding / Flow Banner */
+    .onboarding-hint {
+      background: linear-gradient(135deg, #E8F8F0 0%, #D8F3DC 100%);
+      border: 1.5px solid var(--forest-green);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--deep-green);
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .onboarding-hint button {
+      background: transparent;
+      border: none;
+      color: var(--forest-green);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 4px;
     }
 
     /* Scrollable App Body */
@@ -254,18 +298,22 @@
       overflow-x: hidden;
       background: var(--surface);
       padding: 14px;
-      padding-bottom: 90px;
+      padding-bottom: 95px;
       position: relative;
     }
 
-    /* Screens Switching */
+    /* Seamless Animated Screen Transitions */
     .screen-tab {
       display: none;
-      animation: fadeIn 0.25s ease-out;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
     }
 
     .screen-tab.active {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @keyframes fadeIn {
@@ -281,6 +329,14 @@
       padding: 14px;
       margin-bottom: 14px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .card-interactive:hover {
+      border-color: var(--forest-green);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+      cursor: pointer;
     }
 
     /* Faskes Info Header */
@@ -298,7 +354,7 @@
       position: absolute;
       right: -8px;
       bottom: -15px;
-      font-size: 70px;
+      font-size: 75px;
       font-weight: 900;
       color: rgba(255, 255, 255, 0.08);
       pointer-events: none;
@@ -319,7 +375,7 @@
     .faskes-name {
       font-size: 16px;
       font-weight: 800;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .faskes-loc {
@@ -341,15 +397,21 @@
     .metric-card {
       background: #fff;
       border-radius: var(--radius-md);
-      padding: 12px 10px;
+      padding: 12px 8px;
       text-align: center;
       border: 1.5px solid var(--border-color);
       cursor: pointer;
-      transition: transform 0.15s, border-color 0.15s;
+      transition: all var(--transition-fast);
+      position: relative;
     }
 
     .metric-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+    }
+
+    .metric-card:active {
+      transform: scale(0.96);
     }
 
     .metric-card.safe {
@@ -366,10 +428,10 @@
     }
 
     .metric-num {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 800;
       line-height: 1.1;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
     .metric-card.safe .metric-num { color: var(--safe-green); }
@@ -381,6 +443,17 @@
       font-weight: 700;
       color: var(--text-muted);
       line-height: 1.2;
+    }
+
+    .metric-action-hint {
+      font-size: 9px;
+      margin-top: 4px;
+      font-weight: 700;
+      color: var(--forest-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
     }
 
     /* Section Titles */
@@ -404,7 +477,14 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      transition: all 0.2s;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .med-item:hover {
+      border-color: var(--forest-green);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transform: translateY(-1.5px);
     }
 
     .med-header {
@@ -416,7 +496,7 @@
 
     .med-title {
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text-main);
     }
 
@@ -424,18 +504,19 @@
       font-size: 11px;
       color: var(--text-muted);
       font-family: 'JetBrains Mono', monospace;
+      margin-top: 1px;
     }
 
     .med-badges {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       flex-wrap: wrap;
       align-items: center;
     }
 
     .badge-status {
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 3px 8px;
       border-radius: 6px;
       display: inline-flex;
@@ -485,14 +566,14 @@
 
     .med-expiry {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .expiry-critical { color: var(--critical-red); font-weight: 800; }
     .expiry-warning { color: #D68910; }
     .expiry-safe { color: var(--safe-green); }
 
-    /* Stepper Button Controls */
+    /* Stepper Button Controls (44px target for mobile accessibility) */
     .stepper-box {
       display: flex;
       align-items: center;
@@ -500,8 +581,8 @@
     }
 
     .btn-step {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
       border: 1.5px solid var(--deep-green);
       background: #fff;
@@ -520,13 +601,13 @@
     }
 
     .btn-step:active {
-      transform: scale(0.92);
+      transform: scale(0.9);
     }
 
     .stock-val {
       font-size: 14px;
       font-weight: 800;
-      min-width: 45px;
+      min-width: 48px;
       text-align: center;
     }
 
@@ -568,7 +649,8 @@
       padding: 10px 14px 10px 38px;
       font-size: 13px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color var(--transition-fast);
+      background: #fff;
     }
 
     .search-input-box input:focus {
@@ -590,12 +672,16 @@
       color: #fff;
       border: none;
       border-radius: 12px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       display: flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .btn-barcode-scan:active {
+      transform: scale(0.95);
     }
 
     /* Filter Chips */
@@ -605,7 +691,9 @@
       overflow-x: auto;
       padding-bottom: 6px;
       margin-bottom: 12px;
+      scrollbar-width: none;
     }
+    .chips-row::-webkit-scrollbar { display: none; }
 
     .chip {
       background: #fff;
@@ -617,7 +705,11 @@
       cursor: pointer;
       white-space: nowrap;
       color: var(--text-muted);
-      transition: all 0.2s;
+      transition: all var(--transition-fast);
+      min-height: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .chip.active {
@@ -629,7 +721,7 @@
     /* Floating Action Button (FAB) */
     .fab-btn {
       position: absolute;
-      bottom: 78px;
+      bottom: 84px;
       right: 18px;
       background: var(--deep-green);
       color: #fff;
@@ -641,10 +733,11 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
       cursor: pointer;
       z-index: 45;
-      transition: transform 0.2s, background 0.2s;
+      transition: transform var(--transition-fast), background var(--transition-fast);
+      min-height: 48px;
     }
 
     .fab-btn:hover {
@@ -652,13 +745,17 @@
       transform: scale(1.04);
     }
 
-    /* Bottom Navigation Bar */
+    .fab-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* 5-Tab Bottom Navigation Bar */
     .phone-bottom-nav {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 68px;
+      height: 72px;
       background: #fff;
       border-top: 1.5px solid var(--border-color);
       display: flex;
@@ -677,19 +774,26 @@
       font-size: 10px;
       font-weight: 700;
       cursor: pointer;
-      padding: 6px 10px;
+      padding: 6px 8px;
       border-radius: 12px;
-      transition: all 0.2s;
+      transition: all var(--transition-fast);
       min-width: 58px;
+      min-height: 48px;
+      justify-content: center;
     }
 
     .nav-item i {
       font-size: 18px;
+      transition: transform var(--transition-fast);
     }
 
     .nav-item.active {
       color: var(--deep-green);
       background: var(--mint-light);
+    }
+
+    .nav-item.active i {
+      transform: scale(1.1);
     }
 
     .nav-badge-dot {
@@ -706,7 +810,7 @@
       border-radius: 50%;
     }
 
-    /* Form Styles */
+    /* Forms & Inputs */
     .form-group {
       margin-bottom: 14px;
     }
@@ -728,6 +832,7 @@
       font-size: 14px;
       outline: none;
       background: #fff;
+      transition: border-color var(--transition-fast);
     }
 
     .form-input:focus, .form-select:focus {
@@ -752,6 +857,9 @@
       align-items: center;
       gap: 4px;
       cursor: pointer;
+      transition: var(--transition-fast);
+      min-height: 52px;
+      justify-content: center;
     }
 
     .sediaan-btn.selected {
@@ -770,6 +878,8 @@
       gap: 12px;
       cursor: pointer;
       background: #fff;
+      transition: var(--transition-fast);
+      min-height: 52px;
     }
 
     .rack-option.selected {
@@ -794,13 +904,21 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.72);
       backdrop-filter: blur(4px);
       z-index: 200;
       display: none;
-      align-items: center;
+      align-items: flex-end; /* Mobile Bottom Sheet */
       justify-content: center;
-      padding: 16px;
+      padding: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    @media (min-width: 600px) {
+      .modal-overlay {
+        align-items: center;
+        padding: 20px;
+      }
     }
 
     .modal-overlay.active {
@@ -809,15 +927,27 @@
 
     .modal-box {
       background: #fff;
-      border-radius: 24px;
+      border-radius: 28px 28px 0 0;
       width: 100%;
       max-width: 500px;
-      max-height: 88vh;
+      max-height: 90vh;
       overflow-y: auto;
-      padding: 22px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      padding: 24px;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
       position: relative;
-      animation: popIn 0.25s ease-out;
+      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (min-width: 600px) {
+      .modal-box {
+        border-radius: 24px;
+        animation: popIn 0.25s ease-out;
+      }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
     }
 
     @keyframes popIn {
@@ -825,15 +955,96 @@
       to { transform: scale(1); opacity: 1; }
     }
 
+    .modal-drag-indicator {
+      width: 40px;
+      height: 4px;
+      background: #CBD5E1;
+      border-radius: 2px;
+      margin: 0 auto 16px auto;
+    }
+
     .modal-close {
       position: absolute;
-      top: 18px;
-      right: 18px;
+      top: 20px;
+      right: 20px;
       font-size: 18px;
       cursor: pointer;
       color: var(--text-muted);
       border: none;
       background: none;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .modal-close:hover {
+      background: #F1F5F9;
+    }
+
+    /* Multi-Step Order Progress Indicator */
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .step-indicator::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 30px;
+      right: 30px;
+      height: 2px;
+      background: var(--border-color);
+      z-index: 1;
+    }
+
+    .step-node {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .step-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #E2E8F0;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+
+    .step-node.active .step-circle {
+      background: var(--deep-green);
+      color: #fff;
+      box-shadow: 0 0 0 4px var(--mint-accent);
+    }
+
+    .step-node.completed .step-circle {
+      background: var(--safe-green);
+      color: #fff;
+    }
+
+    .step-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .step-node.active .step-label {
+      color: var(--deep-green);
     }
 
     /* AI Chart Canvas */
@@ -868,6 +1079,42 @@
       border-bottom: 1px solid var(--border-color);
     }
 
+    /* Progress Bar for Sync */
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #E2E8F0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 12px 0;
+      display: none;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--safe-green);
+      transition: width 0.3s ease;
+    }
+
+    /* Quick Action Pill on Dashboard */
+    .quick-action-pill {
+      background: #fff;
+      border: 1px solid var(--critical-border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: var(--transition-fast);
+    }
+    .quick-action-pill:hover {
+      background: var(--critical-bg);
+      transform: translateX(3px);
+    }
+
     /* Toast Notification */
     .toast-box {
       position: fixed;
@@ -886,12 +1133,60 @@
       gap: 10px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.4);
       z-index: 300;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       pointer-events: none;
     }
 
     .toast-box.show {
       transform: translateX(-50%) translateY(0);
+    }
+
+    /* Settings Switch Toggle */
+    .switch-toggle {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .switch-toggle input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #CBD5E1;
+      transition: .3s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute; content: "";
+      height: 18px; width: 18px;
+      left: 3px; bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: var(--forest-green); }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--text-muted);
+    }
+    .empty-state i {
+      font-size: 38px;
+      margin-bottom: 10px;
+      opacity: 0.5;
+    }
+    .empty-state h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .empty-state p {
+      font-size: 12px;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -903,7 +1198,7 @@
       <i class="fa-solid fa-mortar-pestle" style="color: var(--mint-accent); font-size: 18px;"></i>
       <div>
         <strong style="font-size: 14px; letter-spacing: 0.5px;">OBATKU</strong>
-        <span class="judge-badge">3T Puskesmas Edition</span>
+        <span class="judge-badge">NEXORA 2026 Edition</span>
       </div>
     </div>
 
@@ -954,13 +1249,13 @@
         </div>
       </div>
 
-      <!-- Status Banner -->
-      <div class="status-banner offline" id="statusBanner">
+      <!-- Persistent Interactive Network Banner -->
+      <div class="status-banner offline" id="statusBanner" onclick="switchTab('sync')" title="Ketuk untuk membuka menu sinkronisasi">
         <div>
           <i class="fa-solid fa-triangle-exclamation" id="bannerIcon"></i>
           <span id="bannerText">Offline — 3 transaksi tersimpan lokal</span>
         </div>
-        <button class="btn-sync-mini" onclick="performSync()">
+        <button class="btn-sync-mini" onclick="event.stopPropagation(); performSync()">
           <i class="fa-solid fa-arrows-rotate"></i> Sinkron
         </button>
       </div>
@@ -968,35 +1263,60 @@
       <!-- Main Screen Content Area -->
       <div class="screen-content">
 
-        <!-- SCREEN 1: BERANDA / DASHBOARD -->
+        <!-- ============================================== -->
+        <!-- TAB 1: DASHBOARD (BERANDA)                    -->
+        <!-- ============================================== -->
         <div class="screen-tab active" id="tab-dashboard">
-          <!-- Faskes Info -->
+          
+          <!-- Guided Micro-Onboarding (Dismissible) -->
+          <div class="onboarding-hint" id="onboardingBanner">
+            <div style="display:flex; align-items: center; gap:8px;">
+              <i class="fa-solid fa-hand-pointer" style="font-size: 16px;"></i>
+              <span><strong>Alur Mengalir:</strong> Ketuk kartu <strong>Kritis (3)</strong> di bawah untuk langsung menindaklanjuti stok darurat.</span>
+            </div>
+            <button onclick="dismissOnboarding()"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <!-- Faskes Info Header -->
           <div class="card faskes-card">
             <span class="badge-3t"><i class="fa-solid fa-location-dot"></i> Wilayah 3T Terpencil</span>
             <div class="faskes-name">Pustu Sei Berembang</div>
             <div class="faskes-loc">
-              <i class="fa-regular fa-hospital"></i> Puskesmas Induk Muara Siberut
+              <i class="fa-regular fa-hospital"></i> Puskesmas Induk Muara Siberut &bull; Mentawai
             </div>
           </div>
 
-          <!-- Key Metrics -->
+          <!-- Key Metrics Cards with Direct Seamless Navigation -->
           <div class="metrics-grid">
-            <div class="metric-card safe" onclick="goToInventory('aman')">
+            <div class="metric-card safe" onclick="goToInventory('aman')" title="Klik untuk filter obat aman">
               <div class="metric-num" id="metricSafe">136</div>
               <div class="metric-lbl">Obat Aman</div>
+              <div class="metric-action-hint">Lihat <i class="fa-solid fa-chevron-right"></i></div>
             </div>
-            <div class="metric-card warning" onclick="goToInventory('waspada')">
+            <div class="metric-card warning" onclick="goToInventory('waspada')" title="Klik untuk filter mendekati kadaluarsa">
               <div class="metric-num" id="metricWarning">12</div>
               <div class="metric-lbl">Waspada (ED)</div>
+              <div class="metric-action-hint" style="color:#B9770E;">Rotasi <i class="fa-solid fa-chevron-right"></i></div>
             </div>
-            <div class="metric-card critical" onclick="goToInventory('kritis')">
-              <div class="metric-num" id="metricCritical">8</div>
+            <div class="metric-card critical" onclick="goToInventory('kritis')" title="Klik untuk tindakan darurat">
+              <div class="metric-num" id="metricCritical">3</div>
               <div class="metric-lbl">Kritis / Defisit</div>
+              <div class="metric-action-hint" style="color:var(--critical-red);">Tindakan <i class="fa-solid fa-chevron-right"></i></div>
             </div>
+          </div>
+
+          <!-- Priority Action: Top 3 Critical Items Direct Triage -->
+          <div class="section-title" style="color: var(--critical-red);">
+            <span><i class="fa-solid fa-triangle-exclamation"></i> Perhatian Mendesak (Top Kritis)</span>
+            <span style="font-size: 11px; color: var(--forest-green); cursor: pointer;" onclick="goToInventory('kritis')">Semua Kritis <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+
+          <div id="dashboardCriticalPills">
+            <!-- Injected by JS: Quick Actions directly from Dashboard -->
           </div>
 
           <!-- Logistics Boat Schedule -->
-          <div class="card ship-card">
+          <div class="card ship-card card-interactive" onclick="switchTab('sync')">
             <div class="ship-row">
               <div class="ship-icon"><i class="fa-solid fa-ship"></i></div>
               <div style="flex:1;">
@@ -1008,34 +1328,38 @@
                   <i class="fa-regular fa-clock"></i> Est. Tiba: <strong>14 Okt 2026</strong> (Radio VHF Ch 16)
                 </div>
               </div>
+              <i class="fa-solid fa-chevron-right" style="opacity: 0.6; font-size: 12px;"></i>
             </div>
           </div>
 
-          <!-- Field Tips -->
+          <!-- Field Tips (FEFO) -->
           <div class="card" style="background: var(--mint-light); border-color: var(--forest-green);">
             <div style="display:flex; gap: 8px; align-items: flex-start;">
               <i class="fa-solid fa-lightbulb" style="color: var(--forest-green); font-size: 16px; margin-top: 2px;"></i>
               <div>
                 <strong style="font-size: 12px; color: var(--deep-green);">Tips Logistik Lapangan: FEFO</strong>
                 <p style="font-size: 11px; color: var(--text-main); margin-top: 2px; line-height: 1.4;">
-                  Selalu rotasi obat dengan sistem <em>First Expired First Out</em> sebelum didistribusikan ke Posyandu keliling.
+                  Rotasi obat dengan sistem <em>First Expired First Out</em> sebelum didistribusikan ke Posyandu keliling.
                 </p>
               </div>
             </div>
           </div>
 
-          <!-- Recent Medicines -->
+          <!-- Activity & Recent Mutations Log -->
           <div class="section-title">
-            <span><i class="fa-solid fa-clock-rotate-left"></i> Mutasi Stok Terbaru</span>
-            <span style="font-size: 11px; color: var(--forest-green); cursor: pointer;" onclick="switchTab('inventory')">Lihat Semua</span>
+            <span><i class="fa-solid fa-clock-rotate-left"></i> Aktivitas Mutasi Terbaru</span>
+            <span style="font-size: 11px; color: var(--forest-green); cursor: pointer;" onclick="switchTab('inventory')">Katalog Lengkap</span>
           </div>
 
-          <div id="recentMedicinesContainer">
+          <div id="recentActivityContainer">
             <!-- Injected by JS -->
           </div>
+
         </div>
 
-        <!-- SCREEN 2: KATALOG INVENTARIS OBAT -->
+        <!-- ============================================== -->
+        <!-- TAB 2: INVENTORY (DAFTAR OBAT)                -->
+        <!-- ============================================== -->
         <div class="screen-tab" id="tab-inventory">
           <!-- Search Bar & Barcode Scanner -->
           <div class="search-row">
@@ -1051,66 +1375,32 @@
           <!-- Filter Chips -->
           <div class="chips-row">
             <div class="chip active" onclick="setFilter('semua', this)">Semua (<span id="countSemua">0</span>)</div>
+            <div class="chip" onclick="setFilter('kritis', this)" style="border-color: var(--critical-border);">Kritis (<span id="countKritis">0</span>)</div>
+            <div class="chip" onclick="setFilter('waspada', this)" style="border-color: var(--warning-border);">Waspada (<span id="countWaspada">0</span>)</div>
             <div class="chip" onclick="setFilter('aman', this)">Aman (<span id="countAman">0</span>)</div>
-            <div class="chip" onclick="setFilter('waspada', this)">Waspada (<span id="countWaspada">0</span>)</div>
-            <div class="chip" onclick="setFilter('kritis', this)">Kritis (<span id="countKritis">0</span>)</div>
             <div class="chip" onclick="setFilter('cold_chain', this)"><i class="fa-solid fa-snowflake"></i> Cold Chain</div>
           </div>
 
-          <!-- Medicine List -->
+          <!-- Medicine List Container -->
           <div id="medicineListContainer">
             <!-- Injected by JS -->
           </div>
         </div>
 
-        <!-- SCREEN 3: PERINGATAN KEDALUWARSA / EWS -->
-        <div class="screen-tab" id="tab-expiry">
-          <div class="card" style="background: var(--critical-bg); border-color: var(--critical-red);">
-            <div style="display:flex; gap:10px;">
-              <i class="fa-solid fa-shield-virus" style="color: var(--critical-red); font-size: 22px;"></i>
-              <div>
-                <strong style="color: var(--critical-red); font-size: 13px;">Early Warning System (EWS) 3T</strong>
-                <p style="font-size: 11px; color: #7B241C; margin-top: 2px;">
-                  Protokol fail-safe pengamanan obat kadaluarsa dan otomatisasi berita acara pemusnahan Kemenkes RI.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tier 1: Kritis (H <= 7 Hari) -->
-          <div class="section-title" style="color: var(--critical-red);">
-            <span><i class="fa-solid fa-circle-exclamation"></i> Kritis (H ≤ 7 Hari)</span>
-            <span class="badge-status critical" id="badgeCountCritical">0 Item</span>
-          </div>
-          <div id="expiryCriticalList"></div>
-
-          <!-- Tier 2: Waspada (H <= 30 Hari) -->
-          <div class="section-title" style="color: #D68910; margin-top: 16px;">
-            <span><i class="fa-solid fa-triangle-exclamation"></i> Waspada (H ≤ 30 Hari)</span>
-            <span class="badge-status warning" id="badgeCountWarning">0 Item</span>
-          </div>
-          <div id="expiryWarningList"></div>
-
-          <!-- Tier 3: Perhatian (H <= 90 Hari) -->
-          <div class="section-title" style="color: var(--text-muted); margin-top: 16px;">
-            <span><i class="fa-regular fa-calendar-check"></i> Perhatian RKO (H ≤ 90 Hari)</span>
-            <span class="badge-status" style="background:#EDF2F7; color:#4A5568;" id="badgeCountAttention">0 Item</span>
-          </div>
-          <div id="expiryAttentionList"></div>
-        </div>
-
-        <!-- SCREEN 4: PREDIKSI KEBUTUHAN BERBASIS AI -->
+        <!-- ============================================== -->
+        <!-- TAB 3: PREDIKSI (AI EDGE ENGINE)              -->
+        <!-- ============================================== -->
         <div class="screen-tab" id="tab-prediction">
-          <!-- AI Model Badge -->
+          <!-- AI Model Header Badge -->
           <div class="card" style="background: linear-gradient(135deg, #132E22 0%, #1E4634 100%); color: #fff; border: 1px solid var(--forest-green);">
             <div style="display:flex; justify-content: space-between; align-items: center;">
               <div>
                 <span class="badge-3t" style="background: rgba(216,243,220,0.15);">Edge-AI v2.4 (On-Device)</span>
                 <div style="font-size: 16px; font-weight: 800; margin-top: 4px;">Prediksi Konsumsi Obat</div>
-                <div style="font-size: 11px; opacity: 0.85;">Dianalisis dari 8.420 riwayat resep faskes 3T</div>
+                <div style="font-size: 11px; opacity: 0.85;">Analisis lokal dari 8.420 riwayat resep faskes 3T</div>
               </div>
               <div style="text-align: right;">
-                <div style="font-size: 22px; font-weight: 900; color: var(--mint-accent);">92%</div>
+                <div style="font-size: 24px; font-weight: 900; color: var(--mint-accent);">92%</div>
                 <div style="font-size: 10px; opacity: 0.8;">Akurasi Model</div>
               </div>
             </div>
@@ -1122,25 +1412,29 @@
               <strong style="font-size: 13px; color: var(--deep-green);">
                 <i class="fa-solid fa-chart-line"></i> Proyeksi Kebutuhan (6 Bulan)
               </strong>
-              <span style="font-size: 10px; color: var(--text-muted);">Pola Musiman ISPA & Diare</span>
+              <span style="font-size: 10px; color: var(--text-muted);">Pola Musiman</span>
             </div>
             
             <div class="chart-container">
               <canvas id="predictionChart" width="380" height="200"></canvas>
             </div>
-            <div style="font-size: 10px; color: #B9770E; background: var(--warning-bg); padding: 6px 10px; border-radius: 6px; margin-top: 6px;">
-              <i class="fa-solid fa-cloud-rain"></i> <strong>Musim Hujan (Des-Feb):</strong> Model memproyeksikan lonjakan kasus ISPA & Diare sebesar +45%.
+            <div style="font-size: 11px; color: #B9770E; background: var(--warning-bg); padding: 8px 10px; border-radius: 8px; margin-top: 6px; border: 1px solid var(--warning-border);">
+              <i class="fa-solid fa-cloud-showers-heavy"></i> <strong>Pola Musim Hujan (Desember - Februari):</strong><br>
+              Model memproyeksikan lonjakan kasus ISPA & Diare hingga +45%. Stok buffer ditingkatkan secara otomatis.
             </div>
           </div>
 
-          <!-- RKO Recommendation Table -->
+          <!-- RKO Recommendation Table & Direct Order Flow -->
           <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <strong style="font-size: 13px; color: var(--deep-green);">
-                <i class="fa-solid fa-table-list"></i> Rencana Kebutuhan Obat (RKO)
-              </strong>
-              <button class="btn-control" style="background: var(--forest-green); padding: 4px 8px; font-size: 11px;" onclick="exportRkoCsv()">
-                <i class="fa-solid fa-file-csv"></i> Ekspor CSV
+              <div>
+                <strong style="font-size: 13px; color: var(--deep-green);">
+                  <i class="fa-solid fa-table-list"></i> Rekomendasi RKO Otomatis
+                </strong>
+                <p style="font-size: 10px; color: var(--text-muted);">Rencana Kebutuhan Obat periode depan</p>
+              </div>
+              <button class="btn-control" style="background: var(--forest-green); padding: 5px 10px; font-size: 11px;" onclick="exportRkoCsv()">
+                <i class="fa-solid fa-file-csv"></i> Unduh CSV
               </button>
             </div>
 
@@ -1150,29 +1444,44 @@
                   <th>Nama Obat</th>
                   <th>Proyeksi</th>
                   <th>Stok Riil</th>
-                  <th>Rekomendasi</th>
+                  <th>Kekurangan</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody id="rkoTableBody">
                 <!-- Injected by JS -->
               </tbody>
             </table>
+
+            <div style="margin-top: 14px;">
+              <button class="btn-control" style="width: 100%; background: var(--deep-green); height: 46px; font-size: 13px; justify-content: center;" onclick="openBatchOrderModal()">
+                <i class="fa-solid fa-file-circle-check"></i> Buat Surat Pesanan RKO Kolektif
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- SCREEN 5: SINKRONISASI DATA MULTI-KANAL -->
+        <!-- ============================================== -->
+        <!-- TAB 4: SINKRONISASI DATA                      -->
+        <!-- ============================================== -->
         <div class="screen-tab" id="tab-sync">
           <!-- Connection Status Card -->
-          <div class="card" style="text-align: center; padding: 20px;">
-            <div id="syncStatusIcon" style="font-size: 48px; color: var(--warning-yellow); margin-bottom: 8px;">
+          <div class="card" style="text-align: center; padding: 22px;">
+            <div id="syncStatusIcon" style="font-size: 46px; color: var(--warning-yellow); margin-bottom: 8px;">
               <i class="fa-solid fa-cloud-arrow-up"></i>
             </div>
-            <div style="font-size: 16px; font-weight: 800;" id="syncStatusTitle">Mode Offline Terproteksi</div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="syncStatusDesc">
-              Semua mutasi obat tersimpan di database lokal SQLite terenkripsi.
+            <div style="font-size: 17px; font-weight: 800;" id="syncStatusTitle">Mode Offline Terproteksi</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px; max-width: 320px; margin-left: auto; margin-right: auto;" id="syncStatusDesc">
+              Semua mutasi obat tersimpan di database lokal SQLite terenkripsi. Siap dialirkan saat kanal transmisi terbuka.
             </div>
-            <div style="margin-top: 14px;">
-              <button class="btn-control" style="background: var(--deep-green); padding: 10px 20px; font-size: 13px; margin: 0 auto;" onclick="performSync()">
+
+            <!-- Progress Bar during sync -->
+            <div class="progress-track" id="syncProgressTrack">
+              <div class="progress-fill" id="syncProgressFill"></div>
+            </div>
+
+            <div style="margin-top: 16px;">
+              <button class="btn-control" id="btnMainSync" style="background: var(--deep-green); padding: 12px 24px; font-size: 14px; margin: 0 auto;" onclick="performSync()">
                 <i class="fa-solid fa-arrows-rotate"></i> Sinkronkan Sekarang
               </button>
             </div>
@@ -1180,8 +1489,8 @@
 
           <!-- Pending Transaction Queue -->
           <div class="section-title">
-            <span><i class="fa-solid fa-layer-group"></i> Antrean Tertunda (<span id="queueCount">3</span>)</span>
-            <span style="font-size: 11px; color: var(--text-muted);">Prioritas Transmisi</span>
+            <span><i class="fa-solid fa-layer-group"></i> Antrean Transaksi Tertunda (<span id="queueCount">3</span>)</span>
+            <span style="font-size: 11px; color: var(--text-muted);">Urutan Pengiriman</span>
           </div>
 
           <div id="pendingQueueContainer">
@@ -1189,30 +1498,30 @@
           </div>
 
           <!-- Multi-Channel Options -->
-          <div class="section-title" style="margin-top: 16px;">
-            <span><i class="fa-solid fa-tower-broadcast"></i> Kanal Komunikasi 3T</span>
+          <div class="section-title" style="margin-top: 18px;">
+            <span><i class="fa-solid fa-tower-broadcast"></i> Pilihan Jalur Transmisi 3T</span>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <div class="card" style="margin: 0; padding: 12px; border-color: var(--forest-green);">
+            <div class="card card-interactive" style="margin: 0; padding: 12px; border-color: var(--forest-green);" onclick="selectSyncChannel('wifi')">
               <i class="fa-solid fa-wifi" style="color: var(--forest-green); font-size: 20px;"></i>
               <div style="font-size: 12px; font-weight: 800; margin-top: 6px;">Internet 4G / WiFi</div>
-              <div style="font-size: 10px; color: var(--text-muted);">Jalur utama jika tersedia sinyal</div>
+              <div style="font-size: 10px; color: var(--text-muted);">Otomatis saat sinyal pulih</div>
             </div>
 
-            <div class="card" style="margin: 0; padding: 12px; opacity: 0.85;">
+            <div class="card card-interactive" style="margin: 0; padding: 12px;" onclick="selectSyncChannel('sms')">
               <i class="fa-solid fa-comment-sms" style="color: #0284C7; font-size: 20px;"></i>
               <div style="font-size: 12px; font-weight: 800; margin-top: 6px;">SMS Gateway (2G)</div>
-              <div style="font-size: 10px; color: var(--text-muted);">Kompresi data terenkripsi</div>
+              <div style="font-size: 10px; color: var(--text-muted);">Kompresi base64 data kecil</div>
             </div>
 
-            <div class="card" style="margin: 0; padding: 12px; opacity: 0.85;">
+            <div class="card card-interactive" style="margin: 0; padding: 12px;" onclick="selectSyncChannel('lora')">
               <i class="fa-solid fa-network-wired" style="color: #7C3AED; font-size: 20px;"></i>
               <div style="font-size: 12px; font-weight: 800; margin-top: 6px;">LoRa / P2P Mesh</div>
               <div style="font-size: 10px; color: var(--text-muted);">Transmisi radio ke kapal medis</div>
             </div>
 
-            <div class="card" style="margin: 0; padding: 12px; border-color: var(--safe-green); cursor: pointer;" onclick="exportFullInventoryCsv()">
+            <div class="card card-interactive" style="margin: 0; padding: 12px; border-color: var(--safe-green);" onclick="exportFullInventoryCsv()">
               <i class="fa-solid fa-sd-card" style="color: var(--safe-green); font-size: 20px;"></i>
               <div style="font-size: 12px; font-weight: 800; margin-top: 6px;">Ekspor SD Card</div>
               <div style="font-size: 10px; color: var(--safe-green); font-weight: 700;">Unduh CSV Fisik</div>
@@ -1221,8 +1530,116 @@
 
           <!-- Security Badge -->
           <div style="margin-top: 14px; text-align: center; font-size: 11px; color: var(--text-muted);">
-            <i class="fa-solid fa-lock" style="color: var(--forest-green);"></i> Enkripsi At-Rest AES-256 Kemenkes RI Compliant
+            <i class="fa-solid fa-lock" style="color: var(--forest-green);"></i> Kepatuhan Enkripsi Offline AES-256 Standar Kemenkes RI
           </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- TAB 5: PENGATURAN (SETTINGS & PROFIL)          -->
+        <!-- ============================================== -->
+        <div class="screen-tab" id="tab-settings">
+          
+          <!-- Facility & Officer Profile Card -->
+          <div class="card">
+            <div style="display:flex; align-items:center; gap: 12px;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--mint-light); display:flex; align-items:center; justify-content:center; color: var(--deep-green); font-size: 22px;">
+                <i class="fa-solid fa-user-nurse"></i>
+              </div>
+              <div style="flex: 1;">
+                <strong style="font-size: 15px; color: var(--deep-green);">Bidan Siti Rahma, A.Md.Keb</strong>
+                <div style="font-size: 11px; color: var(--text-muted);">NIP. 19980512 202401 2 003</div>
+                <div style="font-size: 11px; color: var(--forest-green); font-weight: 700; margin-top: 2px;">
+                  Pustu Sei Berembang &bull; Faskes 3T Terdaftar
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alert Threshold Configuration -->
+          <div class="card">
+            <strong style="font-size: 13px; color: var(--deep-green);">
+              <i class="fa-solid fa-sliders"></i> Threshold Peringatan Kedaluwarsa
+            </strong>
+            <p style="font-size: 11px; color: var(--text-muted); margin: 3px 0 12px 0;">
+              Atur batas hari peringatan dini untuk rotasi FEFO faskes.
+            </p>
+
+            <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="font-size: 12px; font-weight: 700; color: var(--critical-red);">
+                <i class="fa-solid fa-circle" style="font-size: 8px;"></i> Zona Kritis (Hari Kedaluwarsa):
+              </span>
+              <span style="font-size: 12px; font-weight: 800; background: var(--critical-bg); color: var(--critical-red); padding: 2px 8px; border-radius: 6px;">
+                ≤ <span id="thresholdKritisVal">7</span> Hari
+              </span>
+            </div>
+
+            <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="font-size: 12px; font-weight: 700; color: #B9770E;">
+                <i class="fa-solid fa-circle" style="font-size: 8px;"></i> Zona Waspada:
+              </span>
+              <span style="font-size: 12px; font-weight: 800; background: var(--warning-bg); color: #B9770E; padding: 2px 8px; border-radius: 6px;">
+                ≤ <span id="thresholdWaspadaVal">30</span> Hari
+              </span>
+            </div>
+
+            <div style="display:flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 12px; font-weight: 700; color: var(--forest-green);">
+                <i class="fa-solid fa-circle" style="font-size: 8px;"></i> Zona Perhatian RKO:
+              </span>
+              <span style="font-size: 12px; font-weight: 800; background: var(--mint-light); color: var(--forest-green); padding: 2px 8px; border-radius: 6px;">
+                ≤ 90 Hari
+              </span>
+            </div>
+          </div>
+
+          <!-- Low Power & 2G Data Saving -->
+          <div class="card">
+            <strong style="font-size: 13px; color: var(--deep-green);">
+              <i class="fa-solid fa-leaf"></i> Optimalisasi Lapangan 3T
+            </strong>
+
+            <div style="display:flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+              <div>
+                <div style="font-size: 12px; font-weight: 700;">Mode Hemat Baterai (2G Only)</div>
+                <div style="font-size: 10px; color: var(--text-muted);">Matikan animasi & sinkronisasi otomatis latar</div>
+              </div>
+              <label class="switch-toggle">
+                <input type="checkbox" checked onchange="showToast('Mode Hemat Daya Aktif')">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div style="display:flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+              <div>
+                <div style="font-size: 12px; font-weight: 700;">Feedback Haptik & Audio Scanner</div>
+                <div style="font-size: 10px; color: var(--text-muted);">Bunyi beep saat verifikasi obat & barcode</div>
+              </div>
+              <label class="switch-toggle">
+                <input type="checkbox" checked id="soundFeedbackToggle" onchange="showToast('Feedback Suara Diperbarui')">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- System Info & Reset -->
+          <div class="card">
+            <strong style="font-size: 13px; color: var(--deep-green);">
+              <i class="fa-solid fa-circle-info"></i> Informasi Sistem
+            </strong>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.6;">
+              Aplikasi: <strong>OBATKU v1.2.0-NEXORA</strong><br>
+              Engine Penyimpanan: <strong>SQLite (IndexedDB Offline Mirror)</strong><br>
+              Enkripsi Lokal: <strong>AES-256 At-Rest</strong><br>
+              Faskes: <strong>Puskesmas Pembantu Sei Berembang (3T)</strong>
+            </div>
+
+            <div style="margin-top: 14px;">
+              <button class="btn-control" style="width: 100%; background: #EF4444; height: 42px; font-size: 12px; justify-content: center;" onclick="resetDemoData()">
+                <i class="fa-solid fa-rotate-left"></i> Reset ke Data Awal Demo
+              </button>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -1232,7 +1649,7 @@
         <i class="fa-solid fa-plus"></i> Tambah Obat
       </button>
 
-      <!-- Bottom Navigation Bar -->
+      <!-- 5-Tab Bottom Navigation Bar -->
       <div class="phone-bottom-nav">
         <div class="nav-item active" onclick="switchTab('dashboard')">
           <i class="fa-solid fa-house"></i>
@@ -1242,26 +1659,204 @@
           <i class="fa-solid fa-box-archive"></i>
           <span>Stok</span>
         </div>
-        <div class="nav-item nav-badge-dot" onclick="switchTab('expiry')">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          <span>Peringatan</span>
-        </div>
         <div class="nav-item" onclick="switchTab('prediction')">
           <i class="fa-solid fa-brain"></i>
           <span>Prediksi</span>
         </div>
-        <div class="nav-item" onclick="switchTab('sync')">
+        <div class="nav-item nav-badge-dot" onclick="switchTab('sync')">
           <i class="fa-solid fa-rotate"></i>
           <span>Sinkron</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('settings')">
+          <i class="fa-solid fa-gear"></i>
+          <span>Pengaturan</span>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- MODAL: TAMBAH OBAT -->
+  <!-- ============================================== -->
+  <!-- MODAL: DETAIL OBAT (INFORMATIF & AKSI LANGSUNG) -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="medDetailModal">
+    <div class="modal-box">
+      <div class="modal-drag-indicator"></div>
+      <button class="modal-close" onclick="closeMedDetailModal()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div style="display:flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+        <div>
+          <span class="badge-status safe" id="detailStatusBadge">AMAN</span>
+          <h3 style="font-size: 18px; font-weight: 800; color: var(--deep-green); margin-top: 6px;" id="detailMedName">Paracetamol 500mg</h3>
+          <div style="font-size: 12px; color: var(--text-muted);" id="detailMedForm">Bentuk: Tablet &bull; Sediaan Baku</div>
+        </div>
+        <div id="detailSyncStatus"></div>
+      </div>
+
+      <div class="card" style="background: var(--surface); border: 1.5px solid var(--border-color); margin: 12px 0;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Nomor Bets</span>
+            <div style="font-size: 13px; font-weight: 800; font-family: 'JetBrains Mono', monospace;" id="detailBatch">BN-PCT-8802</div>
+          </div>
+          <div>
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Kedaluwarsa</span>
+            <div style="font-size: 13px; font-weight: 800;" id="detailExpiry">2027-04-30</div>
+          </div>
+          <div>
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Lokasi Rak</span>
+            <div style="font-size: 13px; font-weight: 800;" id="detailRack">Rak Umum</div>
+          </div>
+          <div>
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Status Hari</span>
+            <div style="font-size: 13px; font-weight: 800;" id="detailDaysCountdown">262 hari lagi</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Quantity Adjustment inside Detail -->
+      <div style="display:flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin-bottom: 16px;">
+        <div>
+          <strong style="font-size: 13px;">Koreksi Stok Fisik</strong>
+          <p style="font-size: 11px; color: var(--text-muted);">Sesuai hitung kartu register</p>
+        </div>
+        <div class="stepper-box">
+          <button class="btn-step" id="btnDetailDec">-</button>
+          <span class="stock-val" id="detailQtyVal">240</span>
+          <button class="btn-step" id="btnDetailInc">+</button>
+        </div>
+      </div>
+
+      <!-- Actions based on status -->
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <button class="btn-control" id="btnDetailEmergencyOrder" style="background: var(--warning-yellow); color:#fff; height: 46px; justify-content: center; font-size: 13px;" onclick="triggerOrderFromDetail()">
+          <i class="fa-solid fa-file-circle-plus"></i> Buat Surat Pesanan Darurat
+        </button>
+
+        <button class="btn-control" id="btnDetailDestroy" style="background: var(--critical-red); color:#fff; height: 46px; justify-content: center; font-size: 13px;" onclick="triggerDestructionFromDetail()">
+          <i class="fa-solid fa-fire"></i> Buat Berita Acara Pemusnahan
+        </button>
+
+        <button class="btn-control" style="background: #F1F5F9; color: var(--text-main); height: 42px; justify-content: center; font-size: 12px;" onclick="closeMedDetailModal()">
+          Tutup Detail
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: MULTI-STEP SURAT PESANAN (HAPPY PATH)  -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal-box">
+      <div class="modal-drag-indicator"></div>
+      <button class="modal-close" onclick="closeOrderModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div style="text-align: center; margin-bottom: 12px;">
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--deep-green);">Surat Pesanan Obat Darurat (SPO)</h3>
+        <p style="font-size: 11px; color: var(--text-muted);">Formulir Resmi Pengajuan ke Gudang Farmasi Dinkes</p>
+      </div>
+
+      <!-- Progress Stepper Indicator -->
+      <div class="step-indicator">
+        <div class="step-node active" id="orderStep1Node">
+          <div class="step-circle">1</div>
+          <div class="step-label">Rincian</div>
+        </div>
+        <div class="step-node" id="orderStep2Node">
+          <div class="step-circle">2</div>
+          <div class="step-label">Saksi</div>
+        </div>
+        <div class="step-node" id="orderStep3Node">
+          <div class="step-circle">3</div>
+          <div class="step-label">Selesai</div>
+        </div>
+      </div>
+
+      <!-- STEP 1 CONTENT -->
+      <div id="orderStep1">
+        <div class="card" style="background: var(--warning-bg); border-color: var(--warning-border);">
+          <strong style="color: #935116; font-size: 13px;" id="orderMedTitle">Amoxicillin 500mg Kapsul</strong>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+            Stok Saat Ini: <span id="orderCurrentStock">180</span> &bull; Status: <span style="color:var(--critical-red); font-weight:700;">Segera Habis/ED</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Jumlah Permintaan Pesanan</label>
+          <input type="number" class="form-input" id="orderRequestQty" value="300" min="10">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Alasan Kedaruratan</label>
+          <select class="form-select" id="orderReason">
+            <option value="Buffer Stock Kritis">Buffer Stock Menipis / Defisit</option>
+            <option value="Mendekati Kedaluwarsa (H-7)">Mendekati Kedaluwarsa (H ≤ 7 Hari)</option>
+            <option value="Lonjakan Kasus Musiman (ISPA/Diare)">Lonjakan Kasus Musiman (ISPA / Diare)</option>
+            <option value="Distribusi Posyandu">Persiapan Posyandu Pulau Terpencil</option>
+          </select>
+        </div>
+
+        <button class="btn-control" style="width: 100%; background: var(--deep-green); height: 46px; font-size: 13px; justify-content: center; margin-top: 10px;" onclick="goToOrderStep(2)">
+          Lanjut ke Konfirmasi Petugas <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <!-- STEP 2 CONTENT -->
+      <div id="orderStep2" style="display: none;">
+        <div class="form-group">
+          <label class="form-label">Nama Pembuat Pesanan</label>
+          <input type="text" class="form-input" id="orderOfficerName" value="Bidan Siti Rahma, A.Md.Keb">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Prioritas Pengiriman Logistik</label>
+          <select class="form-select" id="orderPriority">
+            <option value="Kapal Logistik Reguler">Ikut Jadwal Kapal Reguler (KM Mentawai Bahari)</option>
+            <option value="Darurat Kapal Cepat">Prioritas Darurat Kapal Cepat Pemda</option>
+            <option value="P2P Titip Medis">Titip Petugas Medis Keliling</option>
+          </select>
+        </div>
+
+        <div style="background: var(--mint-light); padding: 10px; border-radius: 8px; font-size: 11px; color: var(--deep-green); margin-bottom: 14px;">
+          <i class="fa-solid fa-shield-halved"></i> Transaksi akan dicatat ke dalam antrean sinkronisasi lokal dan dikirimkan saat jaringan 2G/WiFi terhubung.
+        </div>
+
+        <div style="display:flex; gap: 8px;">
+          <button class="btn-control" style="flex:1; background: #E2E8F0; color: var(--text-main); height: 46px; justify-content: center;" onclick="goToOrderStep(1)">
+            Kembali
+          </button>
+          <button class="btn-control" style="flex:2; background: var(--forest-green); height: 46px; justify-content: center; font-size: 13px;" onclick="submitOrderFinal()">
+            <i class="fa-solid fa-check"></i> Terbitkan Surat Pesanan
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3 CONTENT (SUCCESS CELEBRATION) -->
+      <div id="orderStep3" style="display: none; text-align: center; padding: 20px 10px;">
+        <div style="width: 64px; height: 64px; background: var(--safe-bg); color: var(--safe-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 14px auto;">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h3 style="font-size: 17px; font-weight: 800; color: var(--deep-green);">Surat Pesanan Diterbitkan!</h3>
+        <p style="font-size: 12px; color: var(--text-muted); margin: 6px 0 16px 0;">
+          Nomor: <strong>SPO/2026/PST-09/441</strong><br>
+          Tersimpan di SQLite lokal & masuk ke antrean sinkronisasi Dinkes.
+        </p>
+        <button class="btn-control" style="width: 100%; background: var(--deep-green); height: 46px; font-size: 13px; justify-content: center;" onclick="finishOrderFlow()">
+          Selesai & Kembali ke Layar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: TAMBAH OBAT (SBBK BARANG MASUK)         -->
+  <!-- ============================================== -->
   <div class="modal-overlay" id="addMedicineModal">
     <div class="modal-box">
+      <div class="modal-drag-indicator"></div>
       <button class="modal-close" onclick="closeAddMedicineModal()"><i class="fa-solid fa-xmark"></i></button>
       
       <div style="display:flex; align-items: center; gap: 8px; margin-bottom: 12px;">
@@ -1364,9 +1959,12 @@
     </div>
   </div>
 
-  <!-- MODAL: BERITA ACARA PEMUSNAHAN OBAT -->
+  <!-- ============================================== -->
+  <!-- MODAL: BERITA ACARA PEMUSNAHAN OBAT            -->
+  <!-- ============================================== -->
   <div class="modal-overlay" id="destructionModal">
     <div class="modal-box">
+      <div class="modal-drag-indicator"></div>
       <button class="modal-close" onclick="closeDestructionModal()"><i class="fa-solid fa-xmark"></i></button>
       <div style="display:flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--critical-red);">
         <i class="fa-solid fa-fire" style="font-size: 20px;"></i>
@@ -1391,7 +1989,7 @@
 
       <div class="form-group">
         <label class="form-label">Saksi (Petugas Desa / Bhabinkamtibmas)</label>
-        <input type="text" class="form-input" id="destroyWitness" placeholder="Nama saksi lapangan">
+        <input type="text" class="form-input" id="destroyWitness" value="Bripka Hendra (Bhabinkamtibmas)">
       </div>
 
       <div class="form-group">
@@ -1409,36 +2007,43 @@
     </div>
   </div>
 
-  <!-- MODAL: INFO JURI / PRD OVERVIEW -->
+  <!-- ============================================== -->
+  <!-- MODAL: INFO JURI / PRD & ESSAY OVERVIEW        -->
+  <!-- ============================================== -->
   <div class="modal-overlay" id="prdModal">
     <div class="modal-box" style="max-width: 650px;">
+      <div class="modal-drag-indicator"></div>
       <button class="modal-close" onclick="closePrdModal()"><i class="fa-solid fa-xmark"></i></button>
       
       <div style="display:flex; align-items: center; gap: 10px; margin-bottom: 14px;">
         <i class="fa-solid fa-award" style="color: #F1C40F; font-size: 26px;"></i>
         <div>
-          <h2 style="font-size: 18px; font-weight: 800; color: var(--deep-green);">OBATKU — Ringkasan Proposal & PRD Lomba</h2>
-          <p style="font-size: 11px; color: var(--text-muted);">Sistem Manajemen Stok Obat Offline-First Puskesmas 3T Indonesia</p>
+          <h2 style="font-size: 18px; font-weight: 800; color: var(--deep-green);">OBATKU — Inovasi Esai Ilmiah NEXORA 2026</h2>
+          <p style="font-size: 11px; color: var(--text-muted);">Subtema: Kesehatan dan Kesejahteraan &bull; Daerah 3T Indonesia</p>
         </div>
       </div>
 
       <div style="font-size: 12px; line-height: 1.6; color: var(--text-main);">
-        <h4 style="color: var(--forest-green); margin: 12px 0 6px 0;">1. Problem Statement</h4>
-        <p>Di daerah 3T (Kepulauan Mentawai, pedalaman Papua, Maluku), faskes primer menghadapi: sinyal 2G/tanpa internet berbulan-bulan, pasokan kapal berkala sebulan sekali, dan buku register kertas yang memicu stockout serta obat kadaluarsa tidak terdeteksi.</p>
+        <h4 style="color: var(--forest-green); margin: 12px 0 6px 0;">1. Latar Belakang & Problem Statement</h4>
+        <p>Di wilayah 3T (Kepulauan Mentawai, pedalaman Papua, Maluku Tenggara), fasilitas pelayanan primer (Pustu/Poskesdes) menghadapi keterbatasan ekstrem: ketiadaan internet berminggu-minggu, distribusi logistik hanya sebulan sekali via kapal, dan pencatatan kertas yang memicu tingginya obat kadaluarsa dan stockout obat esensial.</p>
 
-        <h4 style="color: var(--forest-green); margin: 12px 0 6px 0;">2. Arsitektur Unggulan</h4>
-        <ul style="padding-left: 18px;">
-          <li><strong>True Offline-First:</strong> Menggunakan embedded local storage (SQLite/IndexedDB) sebagai single source of truth.</li>
-          <li><strong>Multi-Channel Sync:</strong> REST API WiFi/4G, SMS Gateway 2G base64 kompresi, dan Ekspor fisik SD Card.</li>
-          <li><strong>Edge-AI RKO:</strong> Model prediktif tepi v2.4 berjalan lokal tanpa server cloud, memproyeksikan lonjakan musiman (ISPA/Diare).</li>
-          <li><strong>UI Ergonomis Medis:</strong> Target sentuh besar 56dp+, kontras tinggi outdoor, palet Deep Green & Forest Green.</li>
+        <h4 style="color: var(--forest-green); margin: 12px 0 6px 0;">2. Alur Pengguna "Mengalir Seperti Air" (Flow UX)</h4>
+        <p><strong>Melihat Kondisi → Identifikasi Masalah → Ambil Tindakan → Selesai:</strong></p>
+        <ul style="padding-left: 18px; margin-top: 4px;">
+          <li><strong>Deteksi Cepat:</strong> Kartu metrik di Beranda langsung membawa pengguna ke daftar obat yang terfilter.</li>
+          <li><strong>Aksi Seketika:</strong> Tombol aksi cepat di setiap kartu obat membuka modal pembuatan Surat Pesanan Darurat berjenjang.</li>
+          <li><strong>Penyimpanan Instan:</strong> Semua perubahan tercatat secara ACID di SQLite lokal dan siap disinkronkan tanpa mengharuskan internet menyala.</li>
         </ul>
 
-        <h4 style="color: var(--forest-green); margin: 12px 0 6px 0;">3. Key Performance Indicators (KPI)</h4>
-        <p>Penurunan limbah obat kedaluwarsa ≥ 65% dalam 6 bulan; ketersediaan 20 jenis obat esensial &gt; 95%; waktu pembuatan laporan RKO turun dari 5 hari kerja menjadi &lt; 15 menit.</p>
+        <h4 style="color: var(--forest-green); margin: 12px 0 6px 0;">3. Arsitektur Unggulan</h4>
+        <ul style="padding-left: 18px;">
+          <li><strong>True Offline-First:</strong> Menggunakan embedded local storage sebagai single source of truth.</li>
+          <li><strong>Multi-Channel Sync:</strong> WiFi/4G, SMS Gateway 2G berenkripsi base64, LoRa mesh, dan ekspor fisik SD Card.</li>
+          <li><strong>Edge-AI RKO:</strong> Model v2.4 berjalan lokal di ponsel cerdas entry-level memprediksi lonjakan musiman penyakit (ISPA/Diare).</li>
+        </ul>
 
-        <h4 style="color: var(--forest-green); margin: 12px 0 6px 0;">4. Repositori Source Code</h4>
-        <p>Aplikasi mobile native Flutter telah di-push lengkap (61 file, 6.196 baris) di: <br>
+        <h4 style="color: var(--forest-green); margin: 12px 0 6px 0;">4. Repositori Source Code Native Flutter</h4>
+        <p>Aplikasi mobile native Flutter lengkap (61 file) dapat diaudit pada tautan repositori:<br>
           <a href="https://github.com/faridnadir24-bit/lomba" target="_blank" style="color: var(--forest-green); font-weight: 700; word-break: break-all;">
             https://github.com/faridnadir24-bit/lomba
           </a>
@@ -1451,16 +2056,18 @@
     </div>
   </div>
 
-  <!-- Toast Notification -->
+  <!-- Toast Notification Box -->
   <div class="toast-box" id="toastBox">
     <i class="fa-solid fa-circle-check" style="color: var(--mint-accent); font-size: 18px;"></i>
     <span id="toastMsg">Data berhasil disimpan</span>
   </div>
 
-  <!-- Audio Beep for Simulated Barcode Scan -->
+  <!-- JAVASCRIPT APPLICATION CORE LOGIC -->
   <script>
-    // Web Audio API Beep
+    // Audio Feedback Generator
     function playBeep(freq = 1400, duration = 80) {
+      const soundEnabled = document.getElementById('soundFeedbackToggle') ? document.getElementById('soundFeedbackToggle').checked : true;
+      if (!soundEnabled) return;
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = audioCtx.createOscillator();
@@ -1476,16 +2083,16 @@
       } catch (e) {}
     }
 
-    // Default Seed Dataset (Realistic Puskesmas 3T Inventory)
+    // Default Seed Dataset
     const initialMedicines = [
       { id: '1', name: 'Paracetamol 500mg', form: 'Tablet', batch: 'BN-PCT-8802', qty: 240, unit: 'Tablet', expiry: '2027-04-30', rack: 'umum', synced: true },
-      { id: '2', name: 'Amoxicillin 500mg', form: 'Kapsul', batch: 'BN-AMX-2041', qty: 180, unit: 'Kapsul', expiry: '2026-10-02', rack: 'umum', synced: false }, // Kritis (5 hari lagi)
-      { id: '3', name: 'Oralit / Garam Dehidrasi', form: 'Saset', batch: 'BN-ORS-4109', qty: 350, unit: 'Saset', expiry: '2027-11-20', rack: 'darurat', synced: true },
-      { id: '4', name: 'Serum Anti Bisa Ular (SABU)', form: 'Injeksi', batch: 'BN-SABU-009', qty: 6, unit: 'Vial', expiry: '2026-10-25', rack: 'cold_chain', synced: true }, // Waspada (28 hari lagi)
-      { id: '5', name: 'Vaksin BCG (Freeze-Dried)', form: 'Vaksin', batch: 'BN-BCG-9932', qty: 25, unit: 'Ampul', expiry: '2026-10-18', rack: 'cold_chain', synced: false }, // Waspada (21 hari lagi)
-      { id: '6', name: 'Dexamethasone 0.5mg', form: 'Tablet', batch: 'BN-DEX-5541', qty: 5, unit: 'Strip', expiry: '2026-09-30', rack: 'darurat', synced: true }, // Kritis (3 hari lagi!)
+      { id: '2', name: 'Amoxicillin 500mg', form: 'Kapsul', batch: 'BN-AMX-2041', qty: 180, unit: 'Kapsul', expiry: '2026-10-04', rack: 'umum', synced: false }, // Kritis (2 hari lagi)
+      { id: '3', name: 'Oralit Dehidrasi', form: 'Saset', batch: 'BN-ORS-4109', qty: 350, unit: 'Saset', expiry: '2027-11-20', rack: 'darurat', synced: true },
+      { id: '4', name: 'Serum Anti Bisa Ular (SABU)', form: 'Injeksi', batch: 'BN-SABU-009', qty: 6, unit: 'Vial', expiry: '2026-10-25', rack: 'cold_chain', synced: true }, // Waspada (23 hari)
+      { id: '5', name: 'Vaksin BCG Freeze-Dried', form: 'Vaksin', batch: 'BN-BCG-9932', qty: 25, unit: 'Ampul', expiry: '2026-10-18', rack: 'cold_chain', synced: false }, // Waspada (16 hari)
+      { id: '6', name: 'Dexamethasone 0.5mg', form: 'Tablet', batch: 'BN-DEX-5541', qty: 4, unit: 'Strip', expiry: '2026-10-03', rack: 'darurat', synced: true }, // Kritis (1 hari lagi)
       { id: '7', name: 'Metformin 500mg', form: 'Tablet', batch: 'BN-MET-1029', qty: 300, unit: 'Tablet', expiry: '2027-09-15', rack: 'umum', synced: true },
-      { id: '8', name: 'Salbutamol 2mg', form: 'Tablet', batch: 'BN-SAL-7714', qty: 45, unit: 'Tablet', expiry: '2026-10-04', rack: 'darurat', synced: true }, // Kritis (7 hari lagi)
+      { id: '8', name: 'Salbutamol 2mg', form: 'Tablet', batch: 'BN-SAL-7714', qty: 8, unit: 'Tablet', expiry: '2026-10-06', rack: 'darurat', synced: true }, // Kritis (4 hari lagi)
       { id: '9', name: 'Captopril 25mg', form: 'Tablet', batch: 'BN-CAP-3321', qty: 120, unit: 'Tablet', expiry: '2027-06-30', rack: 'umum', synced: true },
       { id: '10', name: 'Ibuprofen 400mg', form: 'Tablet', batch: 'BN-IBU-9941', qty: 90, unit: 'Tablet', expiry: '2027-03-31', rack: 'umum', synced: false },
       { id: '11', name: 'Salep Oksitetrasiklin 1%', form: 'Salep', batch: 'BN-OKS-6612', qty: 30, unit: 'Tube', expiry: '2027-08-31', rack: 'umum', synced: true },
@@ -1494,8 +2101,8 @@
 
     // Pending Mutation Queue
     let pendingQueue = [
-      { id: 'q1', type: 'Stok Keluar', med: 'Paracetamol 500mg', qty: 20, time: '10 menit lalu', ref: 'Resep Rawat Jalan' },
-      { id: 'q2', type: 'Stok Masuk', med: 'Oralit Saset', qty: 100, time: '1 jam lalu', ref: 'SBBK-09/Dinkes' },
+      { id: 'q1', type: 'Stok Keluar', med: 'Paracetamol 500mg', qty: -20, time: '10 menit lalu', ref: 'Resep Rawat Jalan' },
+      { id: 'q2', type: 'Stok Masuk', med: 'Oralit Dehidrasi', qty: 100, time: '1 jam lalu', ref: 'SBBK-09/Dinkes' },
       { id: 'q3', type: 'Koreksi', med: 'Vaksin BCG', qty: -2, time: '3 jam lalu', ref: 'Kerusakan Vial' }
     ];
 
@@ -1506,18 +2113,19 @@
     let currentSearch = '';
     let selectedSediaan = 'Tablet';
     let selectedRack = 'umum';
+    let selectedMedForDetail = null;
     let activeDestroyMedId = null;
 
-    // Save to LocalStorage (Offline single source of truth)
+    // Save to LocalStorage
     function persistData() {
       localStorage.setItem('obatku_inventory', JSON.stringify(medicines));
       updateMetrics();
       renderAll();
     }
 
-    // Days until expiry
+    // Days until expiry from standardized project time
     function getDaysDiff(expiryDateStr) {
-      const today = new Date('2026-09-27'); // Standardized project timeline
+      const today = new Date('2026-10-02');
       const exp = new Date(expiryDateStr);
       const diffTime = exp - today;
       return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -1531,7 +2139,7 @@
       return 'aman';
     }
 
-    // Metrics counter
+    // Update Counts
     function updateMetrics() {
       let safe = 0, warning = 0, critical = 0;
       medicines.forEach(m => {
@@ -1550,26 +2158,50 @@
       document.getElementById('countWaspada').innerText = warning;
       document.getElementById('countKritis').innerText = critical;
 
-      document.getElementById('badgeCountCritical').innerText = `${critical} Item`;
-      document.getElementById('badgeCountWarning').innerText = `${warning} Item`;
-      
-      const attention = medicines.filter(m => {
-        const d = getDaysDiff(m.expiry);
-        return d > 30 && d <= 90;
-      }).length;
-      document.getElementById('badgeCountAttention').innerText = `${attention} Item`;
-
       document.getElementById('queueCount').innerText = pendingQueue.length;
     }
 
-    // Render Recent Medicines on Dashboard
-    function renderRecent() {
-      const container = document.getElementById('recentMedicinesContainer');
-      const recents = medicines.slice(0, 4);
+    // Render Recent Critical Medicines on Dashboard
+    function renderDashboardCriticalPills() {
+      const container = document.getElementById('dashboardCriticalPills');
+      const criticalMeds = medicines.filter(m => getTriageStatus(m) === 'kritis').slice(0, 3);
+
+      if (criticalMeds.length === 0) {
+        container.innerHTML = `
+          <div style="background: var(--safe-bg); border: 1.5px solid var(--safe-border); border-radius: 12px; padding: 12px; text-align: center; color: var(--safe-green); font-size: 12px; font-weight: 700; margin-bottom: 12px;">
+            <i class="fa-solid fa-circle-check"></i> Luar Biasa! Tidak ada obat dalam kondisi kritis saat ini.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = criticalMeds.map(m => {
+        const days = getDaysDiff(m.expiry);
+        const reasonText = days <= 7 ? `ED ${days} hari lagi` : `Stok defisit (${m.qty} ${m.unit})`;
+        return `
+          <div class="quick-action-pill" onclick="openMedDetailModal('${m.id}')">
+            <div style="flex:1;">
+              <strong style="font-size: 13px; color: var(--text-main);">${m.name}</strong>
+              <div style="font-size: 11px; color: var(--critical-red); font-weight: 700; margin-top: 2px;">
+                <i class="fa-solid fa-triangle-exclamation"></i> ${reasonText}
+              </div>
+            </div>
+            <button class="btn-control" style="background: var(--critical-red); font-size: 11px; padding: 5px 10px;" onclick="event.stopPropagation(); startOrderFlowForMed('${m.id}')">
+              Pesan <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render Recent Activity on Dashboard
+    function renderRecentActivity() {
+      const container = document.getElementById('recentActivityContainer');
+      const recents = medicines.slice(0, 3);
       container.innerHTML = recents.map(m => createMedItemHtml(m)).join('');
     }
 
-    // Render Inventory List
+    // Render Inventory Catalog
     function renderInventory() {
       const container = document.getElementById('medicineListContainer');
       let filtered = medicines.filter(m => {
@@ -1585,9 +2217,10 @@
 
       if (filtered.length === 0) {
         container.innerHTML = `
-          <div style="text-align: center; padding: 40px 10px; color: var(--text-muted);">
-            <i class="fa-solid fa-prescription-bottle-medical" style="font-size: 36px; margin-bottom: 8px; opacity: 0.5;"></i>
-            <p style="font-size: 13px;">Tidak ada obat yang cocok dengan pencarian.</p>
+          <div class="empty-state">
+            <i class="fa-solid fa-prescription-bottle-medical"></i>
+            <h4>Tidak Ada Obat Ditemukan</h4>
+            <p>Cobalah mengganti kata kunci pencarian atau memilih filter status yang lain.</p>
           </div>
         `;
         return;
@@ -1596,7 +2229,7 @@
       container.innerHTML = filtered.map(m => createMedItemHtml(m)).join('');
     }
 
-    // Medicine Item HTML Generator
+    // Create Item HTML with Click-to-Detail
     function createMedItemHtml(m) {
       const days = getDaysDiff(m.expiry);
       const status = getTriageStatus(m);
@@ -1620,7 +2253,7 @@
         : `<i class="fa-solid fa-clock-rotate-left" style="color: var(--warning-yellow);" title="Pending Sync"></i>`;
 
       return `
-        <div class="med-item">
+        <div class="med-item" onclick="openMedDetailModal('${m.id}')">
           <div class="med-header">
             <div>
               <div class="med-title">${m.name}</div>
@@ -1640,7 +2273,7 @@
               ${expiryBadge}
             </div>
             <div style="display:flex; align-items:center; gap:10px;">
-              <div class="stepper-box">
+              <div class="stepper-box" onclick="event.stopPropagation()">
                 <button class="btn-step" onclick="adjustStock('${m.id}', -1)">-</button>
                 <span class="stock-val">${m.qty} <small style="font-size: 10px; color:var(--text-muted);">${m.unit}</small></span>
                 <button class="btn-step" onclick="adjustStock('${m.id}', 1)">+</button>
@@ -1652,75 +2285,8 @@
       `;
     }
 
-    // Render Expiry Triage Sections (Screen 3)
-    function renderExpiryScreen() {
-      const critCont = document.getElementById('expiryCriticalList');
-      const warnCont = document.getElementById('expiryWarningList');
-      const attCont = document.getElementById('expiryAttentionList');
-
-      const criticalMeds = medicines.filter(m => getDaysDiff(m.expiry) <= 7);
-      const warningMeds = medicines.filter(m => {
-        const d = getDaysDiff(m.expiry);
-        return d > 7 && d <= 30;
-      });
-      const attentionMeds = medicines.filter(m => {
-        const d = getDaysDiff(m.expiry);
-        return d > 30 && d <= 90;
-      });
-
-      critCont.innerHTML = criticalMeds.length ? criticalMeds.map(m => `
-        <div class="med-item" style="border-left: 4px solid var(--critical-red);">
-          <div class="med-header">
-            <div>
-              <strong style="color: var(--critical-red); font-size: 14px;">${m.name}</strong>
-              <div class="med-batch">Bets: ${m.batch} | Stok: ${m.qty} ${m.unit}</div>
-            </div>
-            <span class="med-expiry expiry-critical">${getDaysDiff(m.expiry)} hari lagi!</span>
-          </div>
-          <div style="display: flex; gap: 8px; margin-top: 6px;">
-            <button class="btn-control" style="background: var(--critical-red); font-size: 11px; padding: 6px 10px;" onclick="openDestructionModal('${m.id}')">
-              <i class="fa-solid fa-fire"></i> Musnahkan
-            </button>
-            <button class="btn-control" style="background: var(--warning-yellow); color: #fff; font-size: 11px; padding: 6px 10px;" onclick="showToast('Surat Pesanan Darurat Dibuat')">
-              <i class="fa-solid fa-file-circle-plus"></i> Pesanan Darurat
-            </button>
-          </div>
-        </div>
-      `).join('') : '<p style="font-size: 12px; color: var(--safe-green);"><i class="fa-solid fa-circle-check"></i> Tidak ada obat dalam zona kritis!</p>';
-
-      warnCont.innerHTML = warningMeds.length ? warningMeds.map(m => `
-        <div class="med-item" style="border-left: 4px solid var(--warning-yellow);">
-          <div class="med-header">
-            <div>
-              <strong style="color: #935116; font-size: 14px;">${m.name}</strong>
-              <div class="med-batch">Bets: ${m.batch} | Stok: ${m.qty} ${m.unit}</div>
-            </div>
-            <span class="med-expiry expiry-warning">${getDaysDiff(m.expiry)} hari lagi</span>
-          </div>
-          <div style="display: flex; gap: 8px; margin-top: 6px;">
-            <button class="btn-control" style="background: var(--forest-green); font-size: 11px; padding: 6px 10px;" onclick="showToast('Dialihkan ke Poli Rawat Jalan')">
-              <i class="fa-solid fa-arrows-turn-to-dots"></i> Rotasi ke Poli
-            </button>
-          </div>
-        </div>
-      `).join('') : '<p style="font-size: 12px; color: var(--safe-green);"><i class="fa-solid fa-circle-check"></i> Tidak ada obat waspada.</p>';
-
-      attCont.innerHTML = attentionMeds.length ? attentionMeds.map(m => `
-        <div class="med-item" style="border-left: 4px solid #CBD5E1;">
-          <div class="med-header">
-            <div>
-              <strong style="font-size: 13px;">${m.name}</strong>
-              <div class="med-batch">Bets: ${m.batch} | Exp: ${m.expiry}</div>
-            </div>
-            <span style="font-size: 11px; color: var(--text-muted);">${getDaysDiff(m.expiry)} hari</span>
-          </div>
-        </div>
-      `).join('') : '<p style="font-size: 12px; color: var(--text-muted);">Tidak ada item.</p>';
-    }
-
-    // Render Prediction Table & Chart (Screen 4)
+    // Render Prediction Chart & RKO Table
     function renderPredictionScreen() {
-      // Draw Canvas Chart
       const canvas = document.getElementById('predictionChart');
       if (canvas && canvas.getContext) {
         const ctx = canvas.getContext('2d');
@@ -1728,12 +2294,10 @@
         const h = canvas.height;
         ctx.clearRect(0, 0, w, h);
 
-        // Chart styling
         const months = ['Okt', 'Nov', 'Des', 'Jan', 'Feb', 'Mar'];
-        const values = [420, 510, 780, 890, 720, 480]; // Seasonal wave in Dec-Jan
+        const values = [420, 510, 780, 890, 720, 480];
         const maxVal = 1000;
 
-        // Draw Grid Lines
         ctx.strokeStyle = '#E2E8F0';
         ctx.lineWidth = 1;
         for (let i = 1; i <= 4; i++) {
@@ -1744,14 +2308,12 @@
           ctx.stroke();
         }
 
-        // Draw Line & Gradient Area
         const stepX = (w - 60) / (values.length - 1);
         const points = values.map((val, idx) => ({
           x: 40 + idx * stepX,
           y: (h - 40) - (val / maxVal) * (h - 60)
         }));
 
-        // Area Gradient
         const grad = ctx.createLinearGradient(0, 0, 0, h);
         grad.addColorStop(0, 'rgba(45, 106, 79, 0.4)');
         grad.addColorStop(1, 'rgba(216, 243, 220, 0.02)');
@@ -1767,7 +2329,6 @@
         ctx.fillStyle = grad;
         ctx.fill();
 
-        // Stroke Line
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
         for (let i = 1; i < points.length; i++) {
@@ -1777,7 +2338,6 @@
         ctx.lineWidth = 3;
         ctx.stroke();
 
-        // Points & Labels
         points.forEach((pt, i) => {
           ctx.beginPath();
           ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
@@ -1787,7 +2347,6 @@
           ctx.lineWidth = 2;
           ctx.stroke();
 
-          // X Label
           ctx.fillStyle = '#64748B';
           ctx.font = '10px Plus Jakarta Sans';
           ctx.textAlign = 'center';
@@ -1795,13 +2354,13 @@
         });
       }
 
-      // RKO Recommendation Table
+      // Dynamic RKO table with direct order button
       const rkoData = [
-        { name: 'Paracetamol 500mg', proj: 550, stock: 240, def: 310 },
-        { name: 'Amoxicillin 500mg', proj: 400, stock: 180, def: 220 },
-        { name: 'Oralit Dehidrasi', proj: 600, stock: 350, def: 250 },
-        { name: 'Dexamethasone 0.5mg', proj: 80, stock: 5, def: 75 },
-        { name: 'Anti Bisa Ular (SABU)', proj: 10, stock: 6, def: 4 }
+        { id: '1', name: 'Paracetamol 500mg', proj: 550, stock: 240, def: 310 },
+        { id: '2', name: 'Amoxicillin 500mg', proj: 400, stock: 180, def: 220 },
+        { id: '3', name: 'Oralit Dehidrasi', proj: 600, stock: 350, def: 250 },
+        { id: '6', name: 'Dexamethasone 0.5mg', proj: 80, stock: 4, def: 76 },
+        { id: '4', name: 'Anti Bisa Ular (SABU)', proj: 10, stock: 6, def: 4 }
       ];
 
       const tbody = document.getElementById('rkoTableBody');
@@ -1810,16 +2369,30 @@
           <td><strong>${r.name}</strong></td>
           <td>${r.proj}</td>
           <td>${r.stock}</td>
-          <td style="color: var(--critical-red); font-weight: 800;">+${r.def} (Order)</td>
+          <td style="color: var(--critical-red); font-weight: 800;">+${r.def}</td>
+          <td>
+            <button class="btn-control" style="background: var(--forest-green); padding: 3px 8px; font-size: 10px;" onclick="startOrderFlowForMed('${r.id}', ${r.def})">
+              Pesan
+            </button>
+          </td>
         </tr>
       `).join('');
     }
 
-    // Render Sync Screen (Screen 5)
+    // Render Pending Queue on Sync Tab
     function renderSyncScreen() {
       const qCont = document.getElementById('pendingQueueContainer');
+      if (pendingQueue.length === 0) {
+        qCont.innerHTML = `
+          <div style="background: var(--safe-bg); border: 1.5px solid var(--safe-border); border-radius: 12px; padding: 14px; text-align: center; color: var(--safe-green); font-size: 12px; font-weight: 700;">
+            <i class="fa-solid fa-circle-check"></i> Semua transaksi telah tersinkronisasi penuh ke server Dinkes.
+          </div>
+        `;
+        return;
+      }
+
       qCont.innerHTML = pendingQueue.map(q => `
-        <div class="med-item" style="padding: 10px 12px; margin-bottom: 6px;">
+        <div class="med-item" style="padding: 10px 12px; margin-bottom: 6px; cursor: default;">
           <div style="display:flex; justify-content: space-between; align-items:center;">
             <div>
               <strong style="font-size: 13px; color: var(--deep-green);"><i class="fa-solid fa-arrow-right-arrow-left"></i> ${q.type}: ${q.med}</strong>
@@ -1831,43 +2404,57 @@
       `).join('');
     }
 
-    // Full Render Call
     function renderAll() {
-      renderRecent();
+      renderDashboardCriticalPills();
+      renderRecentActivity();
       renderInventory();
-      renderExpiryScreen();
       renderPredictionScreen();
       renderSyncScreen();
     }
 
-    // Tab Navigation Switcher
+    // Tab Navigation Switcher (5 Main Destinations)
     function switchTab(tabId) {
       document.querySelectorAll('.screen-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
 
-      document.getElementById(`tab-${tabId}`).classList.add('active');
+      const targetTab = document.getElementById(`tab-${tabId}`);
+      if (targetTab) targetTab.classList.add('active');
       
       const titles = {
         'dashboard': ['OBATKU', 'Sistem Stok Obat Offline-First'],
         'inventory': ['Stok Obat', 'Katalog & Mutasi Fisik Puskesmas'],
-        'expiry': ['Peringatan Dini (EWS)', 'Triase Kedaluwarsa & Berita Acara'],
         'prediction': ['Prediksi AI', 'Edge-AI Proyeksi Musiman & RKO'],
-        'sync': ['Sinkronisasi Multi-Kanal', 'Status Transmisi Data 3T']
+        'sync': ['Sinkronisasi Multi-Kanal', 'Status Transmisi Data 3T'],
+        'settings': ['Pengaturan', 'Profil Faskes & Konfigurasi Sistem']
       };
 
-      document.getElementById('screenTitle').innerHTML = `<i class="fa-solid fa-pills" style="color: var(--mint-accent);"></i> ${titles[tabId][0]}`;
-      document.getElementById('screenSubtitle').innerText = titles[tabId][1];
+      if (titles[tabId]) {
+        document.getElementById('screenTitle').innerHTML = `<i class="fa-solid fa-pills" style="color: var(--mint-accent);"></i> ${titles[tabId][0]}`;
+        document.getElementById('screenSubtitle').innerText = titles[tabId][1];
+      }
 
-      // Mark nav button
-      const navIndices = { 'dashboard': 0, 'inventory': 1, 'expiry': 2, 'prediction': 3, 'sync': 4 };
-      document.querySelectorAll('.nav-item')[navIndices[tabId]].classList.add('active');
+      const navIndices = { 'dashboard': 0, 'inventory': 1, 'prediction': 2, 'sync': 3, 'settings': 4 };
+      if (navIndices[tabId] !== undefined) {
+        document.querySelectorAll('.nav-item')[navIndices[tabId]].classList.add('active');
+      }
 
       if (tabId === 'prediction') {
         setTimeout(renderPredictionScreen, 50);
       }
     }
 
-    // Filter Switcher in Inventory
+    // Direct Flow: Metric Card -> Filtered Inventory
+    function goToInventory(filter) {
+      switchTab('inventory');
+      const chips = document.querySelectorAll('.chip');
+      if (filter === 'semua') chips[0].click();
+      else if (filter === 'kritis') chips[1].click();
+      else if (filter === 'waspada') chips[2].click();
+      else if (filter === 'aman') chips[3].click();
+      else if (filter === 'cold_chain') chips[4].click();
+      playBeep(900, 50);
+    }
+
     function setFilter(filter, elem) {
       currentFilter = filter;
       document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
@@ -1875,20 +2462,12 @@
       renderInventory();
     }
 
-    function goToInventory(filter) {
-      switchTab('inventory');
-      const chips = document.querySelectorAll('.chip');
-      if (filter === 'aman') chips[1].click();
-      else if (filter === 'waspada') chips[2].click();
-      else if (filter === 'kritis') chips[3].click();
-    }
-
     function handleSearch(val) {
       currentSearch = val;
       renderInventory();
     }
 
-    // Stock Stepper Adjuster
+    // Stepper Stock Adjuster
     function adjustStock(id, delta) {
       playBeep(delta > 0 ? 800 : 600, 40);
       const med = medicines.find(m => m.id === id);
@@ -1896,22 +2475,26 @@
         med.qty = Math.max(0, med.qty + delta);
         med.synced = false;
         
-        // Log to pending queue
         pendingQueue.unshift({
           id: 'q_' + Date.now(),
           type: delta > 0 ? 'Stok Masuk' : 'Stok Keluar',
           med: med.name,
           qty: delta,
           time: 'Baru saja',
-          ref: 'Penyesuaian Langsung'
+          ref: 'Penyesuaian Fisik'
         });
 
         persistData();
         showToast(`Stok ${med.name}: ${med.qty} ${med.unit}`);
+
+        // Update detail modal value if open
+        if (selectedMedForDetail && selectedMedForDetail.id === id) {
+          document.getElementById('detailQtyVal').innerText = med.qty;
+        }
       }
     }
 
-    // Simulated Barcode Scanner
+    // Barcode Scanner Simulation
     function triggerBarcodeScan() {
       playBeep(1800, 120);
       const sampleBarcodes = ['BN-PCT-8802', 'BN-AMX-2041', 'BN-SABU-009', 'BN-DEX-5541'];
@@ -1921,7 +2504,117 @@
       showToast(`Barcode Terpindai: ${randomScan}`);
     }
 
-    // Add Medicine Modal Controls
+    // Modal: Detail Obat
+    function openMedDetailModal(medId) {
+      const med = medicines.find(m => m.id === medId);
+      if (!med) return;
+      selectedMedForDetail = med;
+
+      const days = getDaysDiff(med.expiry);
+      const status = getTriageStatus(med);
+
+      document.getElementById('detailMedName').innerText = med.name;
+      document.getElementById('detailMedForm').innerText = `Bentuk: ${med.form} \u2022 Satuan: ${med.unit}`;
+      document.getElementById('detailBatch').innerText = med.batch;
+      document.getElementById('detailExpiry').innerText = med.expiry;
+      document.getElementById('detailRack').innerText = med.rack === 'cold_chain' ? 'Cold Chain (2°-8°C)' : (med.rack === 'darurat' ? 'Triage Darurat' : 'Rak Umum');
+      document.getElementById('detailDaysCountdown').innerText = days <= 0 ? 'Kedaluwarsa!' : `${days} hari lagi`;
+      document.getElementById('detailQtyVal').innerText = med.qty;
+
+      const badge = document.getElementById('detailStatusBadge');
+      badge.className = `badge-status ${status}`;
+      badge.innerText = status.toUpperCase();
+
+      document.getElementById('btnDetailInc').onclick = () => adjustStock(med.id, 1);
+      document.getElementById('btnDetailDec').onclick = () => adjustStock(med.id, -1);
+
+      document.getElementById('medDetailModal').classList.add('active');
+      playBeep(1100, 60);
+    }
+
+    function closeMedDetailModal() {
+      document.getElementById('medDetailModal').classList.remove('active');
+    }
+
+    // Trigger Multi-Step Order Flow from Detail
+    function triggerOrderFromDetail() {
+      if (!selectedMedForDetail) return;
+      closeMedDetailModal();
+      startOrderFlowForMed(selectedMedForDetail.id);
+    }
+
+    function triggerDestructionFromDetail() {
+      if (!selectedMedForDetail) return;
+      closeMedDetailModal();
+      openDestructionModal(selectedMedForDetail.id);
+    }
+
+    // Multi-Step Order Flow (Happy Path)
+    let currentOrderMed = null;
+    function startOrderFlowForMed(medId, suggestedQty = 200) {
+      const med = medicines.find(m => m.id === medId);
+      if (!med) return;
+      currentOrderMed = med;
+
+      document.getElementById('orderMedTitle').innerText = `${med.name} (${med.form})`;
+      document.getElementById('orderCurrentStock').innerText = `${med.qty} ${med.unit}`;
+      document.getElementById('orderRequestQty').value = suggestedQty;
+
+      goToOrderStep(1);
+      document.getElementById('orderModal').classList.add('active');
+      playBeep(1000, 60);
+    }
+
+    function openBatchOrderModal() {
+      startOrderFlowForMed('2', 500); // Default batch Amoxicillin / multi
+      document.getElementById('orderMedTitle').innerText = "Paket RKO Kolektif (5 Obat Prioritas)";
+    }
+
+    function closeOrderModal() {
+      document.getElementById('orderModal').classList.remove('active');
+    }
+
+    function goToOrderStep(step) {
+      document.getElementById('orderStep1').style.display = step === 1 ? 'block' : 'none';
+      document.getElementById('orderStep2').style.display = step === 2 ? 'block' : 'none';
+      document.getElementById('orderStep3').style.display = step === 3 ? 'block' : 'none';
+
+      const n1 = document.getElementById('orderStep1Node');
+      const n2 = document.getElementById('orderStep2Node');
+      const n3 = document.getElementById('orderStep3Node');
+
+      n1.className = 'step-node' + (step >= 1 ? ' active' : '') + (step > 1 ? ' completed' : '');
+      n2.className = 'step-node' + (step >= 2 ? ' active' : '') + (step > 2 ? ' completed' : '');
+      n3.className = 'step-node' + (step === 3 ? ' active completed' : '');
+
+      playBeep(900 + step * 100, 40);
+    }
+
+    function submitOrderFinal() {
+      const qty = document.getElementById('orderRequestQty').value;
+      const officer = document.getElementById('orderOfficerName').value;
+      
+      pendingQueue.unshift({
+        id: 'q_' + Date.now(),
+        type: 'Surat Pesanan',
+        med: currentOrderMed ? currentOrderMed.name : 'RKO Kolektif',
+        qty: parseInt(qty),
+        time: 'Baru saja',
+        ref: `SPO-Dinkes oleh ${officer.split(',')[0]}`
+      });
+
+      persistData();
+      playBeep(1600, 150);
+      goToOrderStep(3);
+    }
+
+    function finishOrderFlow() {
+      closeOrderModal();
+      showToast('Surat pesanan berhasil diterbitkan!');
+      switchTab('dashboard'); // Return to Dashboard
+    }
+
+    // Modal: Tambah Obat
     function openAddMedicineModal() {
       document.getElementById('addMedicineModal').classList.add('active');
     }
@@ -1947,7 +2640,7 @@
       const jumlah = parseInt(document.getElementById('formJumlah').value);
       const satuan = document.getElementById('formSatuan').value;
       const batch = document.getElementById('formBatch').value;
-      const expMonth = document.getElementById('formExpiry').value; // e.g. 2027-08
+      const expMonth = document.getElementById('formExpiry').value;
 
       const newMed = {
         id: 'med_' + Date.now(),
@@ -1968,17 +2661,17 @@
         med: nama,
         qty: jumlah,
         time: 'Baru saja',
-        ref: 'SBBK Baru'
+        ref: 'SBBK-Dinkes'
       });
 
       persistData();
       closeAddMedicineModal();
-      playBeep(1200, 80);
+      playBeep(1300, 90);
       showToast(`Obat ${nama} berhasil disimpan ke SQLite!`);
       e.target.reset();
     }
 
-    // Destruction Modal Controls
+    // Modal: Pemusnahan
     function openDestructionModal(medId) {
       activeDestroyMedId = medId;
       const med = medicines.find(m => m.id === medId);
@@ -2008,30 +2701,58 @@
           med: med.name,
           qty: -qtyDestroyed,
           time: 'Baru saja',
-          ref: 'Berita Acara Pemusnahan'
+          ref: 'Berita Acara Pemusnahan Resmi'
         });
 
         persistData();
         closeDestructionModal();
-        playBeep(400, 150);
+        playBeep(500, 150);
         showToast(`Berita Acara ${med.name} Berhasil Dibuat!`);
       }
     }
 
-    // Sync Action
+    // Sync Action with Progress Animation
     function performSync() {
-      playBeep(1000, 100);
-      if (!isOnline) {
-        showToast('Sinkronisasi Offline: Data dienkripsi dalam antrean.');
-      } else {
-        medicines.forEach(m => m.synced = true);
-        pendingQueue = [];
-        persistData();
-        showToast('Semua data berhasil disinkronkan ke server Dinkes!');
+      const track = document.getElementById('syncProgressTrack');
+      const fill = document.getElementById('syncProgressFill');
+      const btn = document.getElementById('btnMainSync');
+
+      if (track) track.style.display = 'block';
+      if (fill) fill.style.width = '20%';
+      if (btn) btn.disabled = true;
+
+      playBeep(1000, 80);
+
+      setTimeout(() => { if (fill) fill.style.width = '60%'; }, 250);
+      setTimeout(() => { if (fill) fill.style.width = '95%'; }, 500);
+
+      setTimeout(() => {
+        if (track) track.style.display = 'none';
+        if (fill) fill.style.width = '0%';
+        if (btn) btn.disabled = false;
+
+        if (!isOnline) {
+          showToast('Sinkronisasi Offline: Data dienkripsi AES-256 dalam antrean SMS/SD.');
+        } else {
+          medicines.forEach(m => m.synced = true);
+          pendingQueue = [];
+          persistData();
+          showToast('Semua data berhasil disinkronkan ke server Dinkes!');
+        }
+      }, 750);
+    }
+
+    function selectSyncChannel(channel) {
+      if (channel === 'wifi') {
+        showToast('Jalur WiFi/4G: Siap mentransmisikan data saat sinyal terdeteksi.');
+      } else if (channel === 'sms') {
+        showToast('SMS Gateway (2G): Paket data dikompresi ke 140 karakter teks.');
+      } else if (channel === 'lora') {
+        showToast('LoRa Mesh: Sinyal diarahkan ke pemancar kapal logistik terdekat.');
       }
     }
 
-    // CSV Exporter (Real file download)
+    // CSV Exporters
     function exportFullInventoryCsv() {
       let csv = 'ID,Nama Obat,Bentuk Sediaan,Nomor Bets,Stok Fisik,Satuan,Tgl Kedaluwarsa,Rak,Status Sinkron\n';
       medicines.forEach(m => {
@@ -2054,7 +2775,7 @@
       csv += '"Paracetamol 500mg",550,240,310\n';
       csv += '"Amoxicillin 500mg",400,180,220\n';
       csv += '"Oralit Dehidrasi",600,350,250\n';
-      csv += '"Dexamethasone 0.5mg",80,5,75\n';
+      csv += '"Dexamethasone 0.5mg",80,4,76\n';
       csv += '"Anti Bisa Ular (SABU)",10,6,4\n';
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -2068,11 +2789,11 @@
       showToast('Surat RKO Berhasil Diekspor!');
     }
 
-    // PRD Modal
+    // Modal: PRD
     function openPrdModal() { document.getElementById('prdModal').classList.add('active'); }
     function closePrdModal() { document.getElementById('prdModal').classList.remove('active'); }
 
-    // Network Toggle
+    // Network Toggle Simulation
     function toggleNetwork() {
       isOnline = !isOnline;
       const btn = document.getElementById('netToggleBtn');
@@ -2090,11 +2811,11 @@
         text.innerText = 'Simulasi: Online (4G)';
         banner.className = 'status-banner online';
         icon.className = 'fa-solid fa-circle-check';
-        bannerText.innerText = 'Terhubung — Sinyal 4G Stabil (Siap Sinkron)';
+        bannerText.innerText = 'Terhubung — Sinyal 4G Stabil (Data Tersinkron)';
         signal.innerHTML = '<i class="fa-solid fa-signal" style="color:var(--mint-accent);"></i> 4G';
         
         syncTitle.innerText = 'Terhubung ke Jaringan Dinkes';
-        syncDesc.innerText = 'Koneksi internet aktif. Siap melakukan sinkronisasi dua arah.';
+        syncDesc.innerText = 'Koneksi internet aktif. Siap melakukan sinkronisasi dua arah secara instan.';
         syncIcon.innerHTML = '<i class="fa-solid fa-cloud-arrow-up" style="color:var(--safe-green);"></i>';
       } else {
         btn.classList.remove('active');
@@ -2110,7 +2831,7 @@
       }
     }
 
-    // View Mode Toggle (Mobile vs Fullscreen)
+    // View Mode Toggle
     function toggleViewMode() {
       const phone = document.getElementById('phoneDevice');
       const btnText = document.getElementById('viewModeText');
@@ -2122,10 +2843,21 @@
       }
     }
 
+    // Dismiss Onboarding Hint
+    function dismissOnboarding() {
+      const banner = document.getElementById('onboardingBanner');
+      if (banner) banner.style.display = 'none';
+    }
+
     // Reset Demo Data
     function resetDemoData() {
       localStorage.removeItem('obatku_inventory');
       medicines = JSON.parse(JSON.stringify(initialMedicines));
+      pendingQueue = [
+        { id: 'q1', type: 'Stok Keluar', med: 'Paracetamol 500mg', qty: -20, time: '10 menit lalu', ref: 'Resep Rawat Jalan' },
+        { id: 'q2', type: 'Stok Masuk', med: 'Oralit Dehidrasi', qty: 100, time: '1 jam lalu', ref: 'SBBK-09/Dinkes' },
+        { id: 'q3', type: 'Koreksi', med: 'Vaksin BCG', qty: -2, time: '3 jam lalu', ref: 'Kerusakan Vial' }
+      ];
       persistData();
       showToast('Data demo berhasil direset ke standar!');
     }
@@ -2148,7 +2880,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Initialize
+    // Start App
     persistData();
   </script>
 </body>
