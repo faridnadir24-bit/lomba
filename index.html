@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>OBATKU — Sistem Manajemen Stok Obat Offline-First Puskesmas 3T (NEXORA 2026)</title>
+  <title>OBATKU 2.0 — Sistem Stok Obat Offline-First Puskesmas 3T (NEXORA 2026)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
@@ -11,17 +11,17 @@
   
   <style>
     /* ==========================================================================
-       DESIGN SYSTEM: OBATKU HEALTHCARE 3T (COHESIVE & CALIBRATED)
+       DESIGN SYSTEM: OBATKU 2.0 (PROFESSIONAL CLINICAL LOGISTICS)
        ========================================================================== */
     :root {
-      /* Brand Palette: Clinical Emerald */
+      /* Brand: Official Clinical Emerald */
       --brand-primary: #0A5C36;
-      --brand-dark: #063D23;
+      --brand-dark: #063A22;
       --brand-light: #12824D;
       --brand-tint: #EDF7F2;
-      --brand-border: #C6E4D5;
+      --brand-border: #C2E2D2;
 
-      /* Triage FEFO Palette: Standardized Healthcare Colors */
+      /* Standardized FEFO Medical Triage */
       --safe: #16A34A;
       --safe-bg: #F0FDF4;
       --safe-border: #BBF7D0;
@@ -42,27 +42,27 @@
       --cold-border: #BAE6FD;
       --cold-text: #0369A1;
 
-      /* Neutral Surfaces & Elevation */
-      --surface-stage: #0E1713;
-      --surface-app: #F8FAF9;
-      --surface-card: #FFFFFF;
+      /* Surfaces & Theme */
+      --bg-stage: #0C1510;
+      --bg-app: #F7FAF8;
+      --card-bg: #FFFFFF;
       --border-color: #E2E8E4;
       --border-subtle: #EEF3F0;
 
-      /* Typography Tokens */
+      /* Typography */
       --text-title: #0D2319;
       --text-body: #2C3E35;
-      --text-muted: #5D7267;
-      --text-faint: #8E9F96;
+      --text-muted: #5E7569;
+      --text-faint: #8F9F96;
 
-      /* Radii & Shadows */
+      /* Metrics & Elevation */
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
-      --radius-xl: 40px;
-      --shadow-sm: 0 1px 2px rgba(10, 92, 54, 0.04);
-      --shadow-card: 0 1px 3px rgba(10, 92, 54, 0.05), 0 2px 6px rgba(10, 92, 54, 0.02);
-      --shadow-elevated: 0 4px 16px rgba(10, 92, 54, 0.08), 0 1px 3px rgba(10, 92, 54, 0.03);
+      --radius-xl: 36px;
+      --shadow-sm: 0 1px 3px rgba(10, 92, 54, 0.04);
+      --shadow-card: 0 1px 3px rgba(10, 92, 54, 0.04), 0 2px 8px rgba(10, 92, 54, 0.02);
+      --shadow-elevated: 0 6px 20px rgba(10, 92, 54, 0.08), 0 2px 4px rgba(10, 92, 54, 0.03);
       --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.35);
 
       /* Motion */
@@ -79,8 +79,10 @@
     }
 
     body {
-      background: var(--surface-stage);
-      background-image: radial-gradient(ellipse 80% 50% at 50% 10%, rgba(18, 130, 77, 0.12) 0%, transparent 70%);
+      background: var(--bg-stage);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(18, 130, 77, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(10, 92, 54, 0.10) 0%, transparent 50%);
       color: var(--text-body);
       min-height: 100vh;
       display: flex;
@@ -91,11 +93,11 @@
     }
 
     /* ==========================================================================
-       TOP CONTROL BAR (Untuk Dewan Juri & Simulasi Pengujian)
+       TOP CONTROL BAR
        ========================================================================== */
     .judge-bar {
       width: 100%;
-      background: rgba(14, 23, 19, 0.90);
+      background: rgba(12, 21, 16, 0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -116,21 +118,21 @@
     }
 
     .judge-logo-mark {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       background: var(--brand-primary);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 15px;
       color: #fff;
     }
 
     .judge-badge {
       background: rgba(255, 255, 255, 0.10);
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.9);
       font-size: 10px;
       font-weight: 700;
       padding: 3px 8px;
@@ -179,7 +181,7 @@
     }
 
     .btn-judge-prd {
-      background: rgba(220, 38, 38, 0.20);
+      background: rgba(220, 38, 38, 0.18);
       border-color: rgba(220, 38, 38, 0.40);
       color: #FCA5A5;
     }
@@ -189,22 +191,116 @@
     }
 
     /* ==========================================================================
-       STAGE CONTAINER & DEVICE FRAME
+       STAGE & SPLIT COMPANION LAYOUT (DESKTOP STUDIO)
        ========================================================================== */
     .stage-container {
       width: 100%;
       flex: 1;
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 24px 12px;
+      align-items: flex-start;
+      gap: 28px;
+      padding: 24px 16px;
+      max-width: 1220px;
+      margin: 0 auto;
     }
 
+    /* Desktop Companion Panel */
+    .companion-panel {
+      display: none;
+      width: 400px;
+      background: rgba(14, 25, 20, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px;
+      color: #fff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 24px;
+      max-height: 870px;
+      overflow-y: auto;
+    }
+
+    @media (min-width: 960px) {
+      .companion-panel {
+        display: block;
+      }
+    }
+
+    .companion-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .companion-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .companion-card h4 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #D8F3DC;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .companion-card p {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.5;
+    }
+
+    .test-scenario-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9px;
+      padding: 9px 12px;
+      color: #fff;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .test-scenario-btn:hover {
+      background: rgba(18, 130, 77, 0.35);
+      border-color: var(--brand-border);
+      transform: translateX(2px);
+    }
+
+    .test-scenario-btn i {
+      color: var(--brand-border);
+      font-size: 12px;
+    }
+
+    /* ==========================================================================
+       PHONE DEVICE MOCKUP
+       ========================================================================== */
     .phone-wrapper {
       width: 100%;
-      max-width: 410px;
+      max-width: 414px;
       height: 870px;
-      background: var(--surface-app);
+      background: var(--bg-app);
       border-radius: var(--radius-xl);
       box-shadow: 
         0 0 0 1px rgba(255, 255, 255, 0.08),
@@ -225,9 +321,27 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 
-    /* ==========================================================================
-       PHONE STATUS BAR (CLEAN & MINIMAL)
-       ========================================================================== */
+    /* Native mobile adaptation */
+    @media (max-width: 600px) {
+      .stage-container {
+        padding: 0;
+      }
+      .phone-wrapper {
+        max-width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+      }
+      .phone-statusbar {
+        display: none !important;
+      }
+      .judge-bar {
+        padding: 8px 12px;
+      }
+    }
+
+    /* Phone Status Bar */
     .phone-statusbar {
       background: var(--brand-dark);
       color: #fff;
@@ -248,8 +362,8 @@
       top: 8px;
       left: 50%;
       transform: translateX(-50%);
-      width: 60px;
-      height: 5px;
+      width: 56px;
+      height: 4px;
       background: rgba(0, 0, 0, 0.35);
       border-radius: 4px;
       z-index: 51;
@@ -268,14 +382,14 @@
     .app-header {
       background: var(--brand-dark);
       color: #fff;
-      padding: 12px 20px 14px;
+      padding: 12px 18px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 40;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .app-title-box h1 {
@@ -289,14 +403,25 @@
 
     .app-title-box p {
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.65);
+      color: rgba(255, 255, 255, 0.70);
       font-weight: 500;
       margin-top: 1px;
     }
 
-    /* ==========================================================================
-       PERSISTENT NETWORK STATUS BANNER
-       ========================================================================== */
+    /* Maritime & Weather Context Strip (Mentawai Realities) */
+    .context-strip {
+      background: #092C1C;
+      color: rgba(216, 243, 220, 0.85);
+      padding: 5px 16px;
+      font-size: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Persistent Network Status Banner */
     .status-banner {
       padding: 8px 16px;
       display: flex;
@@ -350,15 +475,13 @@
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
-      background: var(--surface-app);
+      background: var(--bg-app);
       padding: 16px;
       padding-bottom: 90px;
       position: relative;
     }
 
-    /* ==========================================================================
-       TAB TRANSITIONS (SMOOTH & SUBTLE)
-       ========================================================================== */
+    /* Tab Transitions */
     .screen-tab {
       display: none;
       opacity: 0;
@@ -383,11 +506,9 @@
     .screen-tab.active > *:nth-child(4) { animation: fadeSlideIn 0.25s ease-out both 0.11s; }
     .screen-tab.active > *:nth-child(5) { animation: fadeSlideIn 0.25s ease-out both 0.14s; }
 
-    /* ==========================================================================
-       BASE CARDS
-       ========================================================================== */
+    /* Base Card */
     .card {
-      background: var(--surface-card);
+      background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 16px;
@@ -404,30 +525,30 @@
     }
 
     /* ==========================================================================
-       FASKES HERO CARD (OFFICIAL CLINICAL IDENTITY)
+       FASKES HERO CARD
        ========================================================================== */
     .faskes-card {
-      background: linear-gradient(135deg, #0A5C36 0%, #063D23 100%);
+      background: linear-gradient(135deg, #0A5C36 0%, #063A22 100%);
       color: #fff;
       border: none;
-      padding: 18px 20px;
+      padding: 16px 18px;
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-md);
-      box-shadow: 0 4px 14px rgba(6, 61, 35, 0.25);
+      box-shadow: 0 4px 14px rgba(6, 58, 34, 0.25);
     }
 
     .faskes-badge-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .badge-3t {
       background: rgba(255, 255, 255, 0.15);
       color: #fff;
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 6px;
@@ -446,19 +567,84 @@
     }
 
     .faskes-name {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       letter-spacing: -0.02em;
     }
 
     .faskes-loc {
-      font-size: 12px;
+      font-size: 11.5px;
       color: rgba(255, 255, 255, 0.75);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       font-weight: 500;
+    }
+
+    /* ==========================================================================
+       FEFO STOCK HEALTH GAUGE (INTERACTIVE SEGMENTED PROGRESS)
+       ========================================================================== */
+    .stock-health-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .health-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-title);
+      margin-bottom: 8px;
+    }
+
+    .health-bar {
+      display: flex;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      background: #E2E8E4;
+      cursor: pointer;
+    }
+
+    .bar-seg {
+      height: 100%;
+      transition: opacity 0.2s ease;
+    }
+    .bar-seg:hover {
+      opacity: 0.85;
+    }
+
+    .bar-safe { background: var(--safe); width: 87%; }
+    .bar-warning { background: var(--warning); width: 8%; }
+    .bar-critical { background: var(--critical); width: 5%; }
+
+    .health-legend {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      font-weight: 600;
+      margin-top: 8px;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .legend-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
     }
 
     /* ==========================================================================
@@ -472,7 +658,7 @@
     }
 
     .metric-card {
-      background: var(--surface-card);
+      background: var(--card-bg);
       border-radius: var(--radius-md);
       padding: 12px 6px 10px;
       text-align: center;
@@ -579,9 +765,9 @@
        PRIORITY CRITICAL EMERGENCY PILLS
        ========================================================================== */
     .quick-action-pill {
-      background: var(--surface-card);
+      background: var(--card-bg);
       border: 1px solid var(--critical-border);
-      border-left: 3px solid var(--critical);
+      border-left: 3.5px solid var(--critical);
       border-radius: var(--radius-md);
       padding: 10px 12px;
       margin-bottom: 8px;
@@ -603,7 +789,7 @@
        MEDICINE LIST CARDS
        ========================================================================== */
     .med-item {
-      background: var(--surface-card);
+      background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 12px 14px;
@@ -681,7 +867,7 @@
 
     .badge-rack {
       background: #F1F5F3;
-      color: var(--text-secondary);
+      color: var(--text-body);
       font-size: 9.5px;
       font-weight: 600;
       padding: 2px 6px;
@@ -699,6 +885,20 @@
       background: var(--critical-bg);
       color: var(--critical-text);
       border: 1px solid var(--critical-border);
+    }
+
+    /* Buffer Progress Gauge inside Card */
+    .med-buffer-track {
+      width: 100%;
+      height: 4px;
+      background: #EAEFEA;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .med-buffer-fill {
+      height: 100%;
+      border-radius: 2px;
     }
 
     .med-footer {
@@ -719,13 +919,11 @@
     .expiry-warning { color: var(--warning-text); }
     .expiry-safe { color: var(--safe-text); }
 
-    /* ==========================================================================
-       QUANTITY STEPPER (+ / -)
-       ========================================================================== */
+    /* Quantity Stepper */
     .stepper-box {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       background: #F4F7F5;
       padding: 2px;
       border-radius: 8px;
@@ -768,7 +966,7 @@
     }
 
     /* ==========================================================================
-       LOGISTICS BOAT SCHEDULE CARD
+       SHIP LOGISTICS CARD
        ========================================================================== */
     .ship-card {
       background: linear-gradient(135deg, #103825 0%, #0A2619 100%);
@@ -802,7 +1000,7 @@
     }
 
     /* ==========================================================================
-       SEARCH BAR & SCAN BUTTON
+       SEARCH & FILTER BAR
        ========================================================================== */
     .search-row {
       display: flex;
@@ -823,7 +1021,7 @@
       padding: 10px 14px 10px 38px;
       font-size: 13px;
       outline: none;
-      background: var(--surface-card);
+      background: var(--card-bg);
       color: var(--text-title);
       transition: border-color 0.15s, box-shadow 0.15s;
     }
@@ -859,9 +1057,7 @@
     .btn-barcode-scan:hover { background: var(--brand-light); }
     .btn-barcode-scan:active { transform: scale(0.96); }
 
-    /* ==========================================================================
-       FILTER CHIPS
-       ========================================================================== */
+    /* Filter Chips */
     .chips-row {
       display: flex;
       gap: 6px;
@@ -873,7 +1069,7 @@
     .chips-row::-webkit-scrollbar { display: none; }
 
     .chip {
-      background: var(--surface-card);
+      background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 20px;
       padding: 6px 12px;
@@ -896,9 +1092,7 @@
       box-shadow: 0 2px 6px rgba(10, 92, 54, 0.25);
     }
 
-    /* ==========================================================================
-       FLOATING ACTION BUTTON (FAB)
-       ========================================================================== */
+    /* Floating Action Button */
     .fab-btn {
       position: absolute;
       bottom: 80px;
@@ -1008,21 +1202,21 @@
     }
 
     /* ==========================================================================
-       AI PREDICTION TAB COMPONENTS
+       PREDICTION & RKO TAB
        ========================================================================== */
     .prediction-hero {
-      background: linear-gradient(135deg, #0A5C36 0%, #063D23 100%);
+      background: linear-gradient(135deg, #0A5C36 0%, #063A22 100%);
       color: #fff;
       border: none;
       border-radius: var(--radius-md);
       padding: 16px 18px;
-      box-shadow: 0 4px 14px rgba(6, 61, 35, 0.25);
+      box-shadow: 0 4px 14px rgba(6, 58, 34, 0.25);
     }
 
     .chart-container {
       width: 100%;
       height: 190px;
-      background: var(--surface-card);
+      background: var(--card-bg);
       border-radius: var(--radius-md);
       position: relative;
       margin: 8px 0;
@@ -1054,7 +1248,7 @@
     }
 
     /* ==========================================================================
-       SYNC TAB & TRANSMISSION CHANNELS
+       SYNC TAB
        ========================================================================== */
     .progress-track {
       width: 100%;
@@ -1075,7 +1269,7 @@
     }
 
     .sync-channel-card {
-      background: var(--surface-card);
+      background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 12px 14px;
@@ -1100,8 +1294,22 @@
       color: var(--brand-primary);
     }
 
+    /* Live Payload Inspector */
+    .payload-box {
+      background: #0D1612;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: #6EE7B7;
+      margin-top: 10px;
+      line-height: 1.5;
+      word-break: break-all;
+    }
+
     /* ==========================================================================
-       SETTINGS & PROFILES
+       SETTINGS & CONTROLS
        ========================================================================== */
     .settings-card-header {
       display: flex;
@@ -1158,9 +1366,7 @@
     input:checked + .slider { background-color: var(--brand-primary); }
     input:checked + .slider:before { transform: translateX(18px); }
 
-    /* ==========================================================================
-       FORM CONTROLS & SELECTION GRIDS
-       ========================================================================== */
+    /* Form Controls */
     .form-group {
       margin-bottom: 14px;
     }
@@ -1181,7 +1387,7 @@
       padding: 10px 14px;
       font-size: 13.5px;
       outline: none;
-      background: var(--surface-card);
+      background: var(--card-bg);
       color: var(--text-title);
       transition: border-color 0.15s, box-shadow 0.15s;
     }
@@ -1201,7 +1407,7 @@
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 10px 6px;
-      background: var(--surface-card);
+      background: var(--card-bg);
       font-size: 11px;
       font-weight: 700;
       display: flex;
@@ -1230,7 +1436,7 @@
       align-items: center;
       gap: 12px;
       cursor: pointer;
-      background: var(--surface-card);
+      background: var(--card-bg);
       transition: all 0.15s;
       min-height: 50px;
     }
@@ -1251,9 +1457,7 @@
       color: var(--text-muted);
     }
 
-    /* ==========================================================================
-       MODALS (BOTTOM SHEET / POP-IN)
-       ========================================================================== */
+    /* Modals */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -1340,7 +1544,7 @@
       background: #E2E8E4;
     }
 
-    /* Multi-step progress indicator */
+    /* Stepper */
     .step-indicator {
       display: flex;
       align-items: center;
@@ -1404,7 +1608,7 @@
       color: var(--brand-primary);
     }
 
-    /* Toast Notification */
+    /* Toast */
     .toast-box {
       position: fixed;
       bottom: 25px;
@@ -1429,7 +1633,7 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Empty States */
+    /* Empty State */
     .empty-state {
       text-align: center;
       padding: 36px 16px;
@@ -1450,23 +1654,6 @@
       font-size: 12px;
       line-height: 1.4;
     }
-
-    /* Responsive */
-    @media (max-width: 440px) {
-      .phone-wrapper {
-        border-radius: 0;
-        height: 100vh;
-        max-width: 100%;
-        box-shadow: none;
-      }
-      .stage-container {
-        padding: 0;
-      }
-      .phone-statusbar::after {
-        width: 50px;
-        height: 4px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -1478,14 +1665,14 @@
         <i class="fa-solid fa-mortar-pestle"></i>
       </div>
       <div>
-        <strong style="font-size: 13.5px; letter-spacing: -0.02em;">OBATKU</strong>
+        <strong style="font-size: 13.5px; letter-spacing: -0.02em;">OBATKU 2.0</strong>
         <span class="judge-badge">NEXORA 2026</span>
       </div>
     </div>
 
     <div class="judge-controls">
       <button class="btn-control btn-judge-prd" onclick="openPrdModal()">
-        <i class="fa-solid fa-file-contract"></i> Info Juri / PRD
+        <i class="fa-solid fa-file-contract"></i> Panduan Juri & PRD
       </button>
 
       <button class="btn-control" id="netToggleBtn" onclick="toggleNetwork()">
@@ -1502,8 +1689,10 @@
     </div>
   </div>
 
-  <!-- Stage Container -->
+  <!-- Stage & Split Companion Container -->
   <div class="stage-container">
+    
+    <!-- Phone Mockup Frame -->
     <div class="phone-wrapper" id="phoneDevice">
       
       <!-- Phone Status Bar -->
@@ -1533,6 +1722,13 @@
             <i class="fa-solid fa-plus"></i> Tambah
           </button>
         </div>
+      </div>
+
+      <!-- Maritime & Weather Context Strip -->
+      <div class="context-strip">
+        <span><i class="fa-solid fa-water"></i> Laut Siberut: 0.8m (Tenang)</span>
+        <span><i class="fa-solid fa-tower-broadcast"></i> GSM 2G EDGE</span>
+        <span><i class="fa-solid fa-ship"></i> Kapal: H-9</span>
       </div>
 
       <!-- Persistent Interactive Network Banner -->
@@ -1566,7 +1762,34 @@
             </div>
           </div>
 
-          <!-- Key Metrics Cards (FEFO Triage 3-Col) -->
+          <!-- FEFO Stock Health Overview Gauge -->
+          <div class="stock-health-container">
+            <div class="health-header">
+              <span>Status Distribusi FEFO</span>
+              <span style="color: var(--brand-primary); font-size: 10px;">151 Total Item</span>
+            </div>
+            <div class="health-bar" onclick="goToInventory('semua')" title="Klik untuk lihat katalog lengkap">
+              <div class="bar-seg bar-safe" onclick="event.stopPropagation(); goToInventory('aman');" title="Aman: 136 item (87%)"></div>
+              <div class="bar-seg bar-warning" onclick="event.stopPropagation(); goToInventory('waspada');" title="Waspada: 12 item (8%)"></div>
+              <div class="bar-seg bar-critical" onclick="event.stopPropagation(); goToInventory('kritis');" title="Kritis: 3 item (5%)"></div>
+            </div>
+            <div class="health-legend">
+              <div class="legend-item" onclick="goToInventory('aman')">
+                <div class="legend-dot" style="background: var(--safe);"></div>
+                <span>Aman (87%)</span>
+              </div>
+              <div class="legend-item" onclick="goToInventory('waspada')">
+                <div class="legend-dot" style="background: var(--warning);"></div>
+                <span>Waspada (8%)</span>
+              </div>
+              <div class="legend-item" onclick="goToInventory('kritis')">
+                <div class="legend-dot" style="background: var(--critical);"></div>
+                <span>Kritis (5%)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Metrics Cards -->
           <div class="metrics-grid">
             <div class="metric-card safe" onclick="goToInventory('aman')" title="Klik untuk filter obat aman">
               <div class="metric-icon"><i class="fa-solid fa-shield-check"></i></div>
@@ -1715,7 +1938,7 @@
                 <strong style="font-size: 12.5px; color: var(--text-title);">
                   <i class="fa-solid fa-table-list" style="color: var(--brand-primary); margin-right: 4px;"></i> Rekomendasi RKO Otomatis
                 </strong>
-                <p style="font-size: 10.5px; color: var(--text-muted); margin-top: 1px;">Rencana Kebutuhan Obat periode depan</p>
+                <p style="font-size: 10.5px; color: var(--text-muted); margin-top: 1px;">Formula: (Konsumsi &times; Lead Time) + Buffer - Sisa Fisik</p>
               </div>
               <button class="btn-control" style="background: var(--brand-primary); padding: 4px 10px; font-size: 11px; border-radius: 8px;" onclick="exportRkoCsv()">
                 <i class="fa-solid fa-file-csv"></i> CSV
@@ -1779,6 +2002,14 @@
 
           <div id="pendingQueueContainer">
             <!-- Injected by JS -->
+          </div>
+
+          <!-- Live Encrypted Payload Inspector -->
+          <div class="section-title" style="margin-top: 16px;">
+            <span><i class="fa-solid fa-code" style="margin-right: 5px;"></i> Payload Terenkripsi (Simulasi 2G)</span>
+          </div>
+          <div class="payload-box" id="payloadBox">
+            OBATKU|MENTAWAI_PST13|HASH:8a72b94|SYNC_QUEUE_LEN:3|DATA:W3siaWQiOiJtZWRfMSIsInF0eSI6LTIwfSx7ImlkIjoibWVkXzIiLCJxdHkiOjEwMH1d
           </div>
 
           <!-- Multi-Channel Options -->
@@ -1914,10 +2145,10 @@
               <strong>Informasi Sistem</strong>
             </div>
             <div style="font-size: 11px; color: var(--text-muted); line-height: 1.7; font-weight: 500;">
-              Aplikasi: <strong style="color: var(--text-title);">OBATKU v1.2.0-NEXORA</strong><br>
+              Aplikasi: <strong style="color: var(--text-title);">OBATKU v2.0-NEXORA (Production Release)</strong><br>
               Engine: <strong style="color: var(--text-title);">SQLite (IndexedDB Mirror)</strong><br>
               Enkripsi: <strong style="color: var(--text-title);">AES-256 At-Rest</strong><br>
-              Faskes: <strong style="color: var(--text-title);">Pustu Sei Berembang (3T)</strong>
+              Faskes: <strong style="color: var(--text-title);">Pustu Sei Berembang (3T Mentawai)</strong>
             </div>
 
             <div style="margin-top: 14px;">
@@ -1961,6 +2192,58 @@
       </div>
 
     </div>
+
+    <!-- Desktop Companion Panel for Judges -->
+    <div class="companion-panel">
+      <div class="companion-title">
+        <i class="fa-solid fa-compass" style="color: #6EE7B7;"></i>
+        <span>Panduan Penilaian Juri & Alur</span>
+      </div>
+
+      <div class="companion-card" style="background: rgba(10, 92, 54, 0.25); border-color: rgba(110, 231, 183, 0.25);">
+        <h4><i class="fa-solid fa-award"></i> NEXORA 2026</h4>
+        <p>Subtema: <strong>Kesehatan & Kesejahteraan</strong><br>
+        Inovasi: Manajemen Stok Obat Berbasis <em>Offline-First</em> & Edge-AI Prediktif untuk Puskesmas 3T Indonesia.</p>
+      </div>
+
+      <div class="companion-title" style="font-size: 12.5px; margin-top: 14px;">
+        <i class="fa-solid fa-play" style="color: #FCD34D;"></i>
+        <span>Skenario Pengujian Interaktif (1-Klik)</span>
+      </div>
+
+      <button class="test-scenario-btn" onclick="scenarioCriticalOrder()">
+        <span><strong>1. Alur Deteksi Kritis &rarr; Pesan SPO</strong><br><small style="opacity: 0.7;">Buka Kritis &rarr; Buat Surat Pesanan Darurat</small></span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <button class="test-scenario-btn" onclick="scenarioAddMedicine()">
+        <span><strong>2. Alur Catat Obat Masuk (SBBK)</strong><br><small style="opacity: 0.7;">Formulir barang datang dari kapal logistik</small></span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <button class="test-scenario-btn" onclick="scenarioAiForecast()">
+        <span><strong>3. Alur Edge-AI Prediksi & RKO</strong><br><small style="opacity: 0.7;">Simulasi lonjakan ISPA musim hujan</small></span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <button class="test-scenario-btn" onclick="scenarioMultiChannelSync()">
+        <span><strong>4. Alur Sinkronisasi Multi-Kanal</strong><br><small style="opacity: 0.7;">Uji transmisi SMS / LoRa / SD Card</small></span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <div class="companion-card" style="margin-top: 14px;">
+        <h4><i class="fa-solid fa-code-branch"></i> Audit Source Code</h4>
+        <p>Seluruh 61 berkas native Flutter & arsitektur offline-first tersedia di GitHub:<br>
+        <a href="https://github.com/faridnadir24-bit/lomba" target="_blank" style="color: #6EE7B7; font-weight: 700; word-break: break-all;">
+          github.com/faridnadir24-bit/lomba
+        </a></p>
+      </div>
+
+      <div style="font-size: 11px; opacity: 0.65; text-align: center; margin-top: 8px;">
+        OBATKU v2.0 • Karya Farid Nadir & Tim NEXORA 2026
+      </div>
+    </div>
+
   </div>
 
   <!-- ==========================================================================
@@ -2017,7 +2300,7 @@
       <!-- Actions -->
       <div style="display: flex; flex-direction: column; gap: 8px;">
         <button class="btn-control" id="btnDetailEmergencyOrder" style="background: var(--warning-bg); border-color: var(--warning-border); color: var(--warning-text); height: 44px; justify-content: center; font-size: 12.5px; border-radius: var(--radius-md);" onclick="triggerOrderFromDetail()">
-          <i class="fa-solid fa-file-circle-plus"></i> Buat Surat Pesanan Darurat
+          <i class="fa-solid fa-file-circle-plus"></i> Buat Surat Pesanan Darurat (SPO)
         </button>
 
         <button class="btn-control" id="btnDetailDestroy" style="background: var(--critical-bg); border-color: var(--critical-border); color: var(--critical-text); height: 44px; justify-content: center; font-size: 12.5px; border-radius: var(--radius-md);" onclick="triggerDestructionFromDetail()">
@@ -2220,7 +2503,7 @@
             <i class="fa-solid fa-cubes" style="color: var(--brand-primary); font-size: 16px;"></i>
             <div>
               <div class="rack-title">Rak Umum</div>
-              <div class="rack-desc">Suhu ruangan normal (25° - 30°C)</div>
+              <div class="rack-desc">Suhu ruangan normal (25&deg; - 30&deg;C)</div>
             </div>
           </div>
           <div class="rack-option" onclick="selectRack('darurat', this)">
@@ -2233,7 +2516,7 @@
           <div class="rack-option" onclick="selectRack('cold_chain', this)">
             <i class="fa-solid fa-snowflake" style="color: var(--cold); font-size: 16px;"></i>
             <div>
-              <div class="rack-title">Cold Chain (2° - 8°C)</div>
+              <div class="rack-title">Cold Chain (2&deg; - 8&deg;C)</div>
               <div class="rack-desc">Vaksin, serum anti bisa ular & injeksi khusus</div>
             </div>
           </div>
@@ -2295,7 +2578,7 @@
   </div>
 
   <!-- ==========================================================================
-       MODAL: INFO JURI / PRD
+       MODAL: PANDUAN JURI & PRD
        ========================================================================== -->
   <div class="modal-overlay" id="prdModal">
     <div class="modal-box" style="max-width: 620px;">
@@ -2352,7 +2635,7 @@
   </div>
 
   <!-- ==========================================================================
-       JAVASCRIPT APPLICATION CORE LOGIC (PRESERVED & OPTIMIZED)
+       JAVASCRIPT APPLICATION CORE LOGIC (V2.0)
        ========================================================================== -->
   <script>
     // Audio Feedback Generator
@@ -2376,18 +2659,18 @@
 
     // Default Seed Dataset
     const initialMedicines = [
-      { id: '1', name: 'Paracetamol 500mg', form: 'Tablet', batch: 'BN-PCT-8802', qty: 240, unit: 'Tablet', expiry: '2027-04-30', rack: 'umum', synced: true },
-      { id: '2', name: 'Amoxicillin 500mg', form: 'Kapsul', batch: 'BN-AMX-2041', qty: 180, unit: 'Kapsul', expiry: '2026-10-04', rack: 'umum', synced: false },
-      { id: '3', name: 'Oralit Dehidrasi', form: 'Saset', batch: 'BN-ORS-4109', qty: 350, unit: 'Saset', expiry: '2027-11-20', rack: 'darurat', synced: true },
-      { id: '4', name: 'Serum Anti Bisa Ular (SABU)', form: 'Injeksi', batch: 'BN-SABU-009', qty: 6, unit: 'Vial', expiry: '2026-10-25', rack: 'cold_chain', synced: true },
-      { id: '5', name: 'Vaksin BCG Freeze-Dried', form: 'Vaksin', batch: 'BN-BCG-9932', qty: 25, unit: 'Ampul', expiry: '2026-10-18', rack: 'cold_chain', synced: false },
-      { id: '6', name: 'Dexamethasone 0.5mg', form: 'Tablet', batch: 'BN-DEX-5541', qty: 4, unit: 'Strip', expiry: '2026-10-03', rack: 'darurat', synced: true },
-      { id: '7', name: 'Metformin 500mg', form: 'Tablet', batch: 'BN-MET-1029', qty: 300, unit: 'Tablet', expiry: '2027-09-15', rack: 'umum', synced: true },
-      { id: '8', name: 'Salbutamol 2mg', form: 'Tablet', batch: 'BN-SAL-7714', qty: 8, unit: 'Tablet', expiry: '2026-10-06', rack: 'darurat', synced: true },
-      { id: '9', name: 'Captopril 25mg', form: 'Tablet', batch: 'BN-CAP-3321', qty: 120, unit: 'Tablet', expiry: '2027-06-30', rack: 'umum', synced: true },
-      { id: '10', name: 'Ibuprofen 400mg', form: 'Tablet', batch: 'BN-IBU-9941', qty: 90, unit: 'Tablet', expiry: '2027-03-31', rack: 'umum', synced: false },
-      { id: '11', name: 'Salep Oksitetrasiklin 1%', form: 'Salep', batch: 'BN-OKS-6612', qty: 30, unit: 'Tube', expiry: '2027-08-31', rack: 'umum', synced: true },
-      { id: '12', name: 'Injeksi Oksitosin 10 IU', form: 'Injeksi', batch: 'BN-OKS-1092', qty: 14, unit: 'Ampul', expiry: '2026-11-15', rack: 'cold_chain', synced: true }
+      { id: '1', name: 'Paracetamol 500mg', form: 'Tablet', batch: 'BN-PCT-8802', qty: 240, maxQty: 300, unit: 'Tablet', expiry: '2027-04-30', rack: 'umum', synced: true },
+      { id: '2', name: 'Amoxicillin 500mg', form: 'Kapsul', batch: 'BN-AMX-2041', qty: 180, maxQty: 400, unit: 'Kapsul', expiry: '2026-10-04', rack: 'umum', synced: false },
+      { id: '3', name: 'Oralit Dehidrasi', form: 'Saset', batch: 'BN-ORS-4109', qty: 350, maxQty: 500, unit: 'Saset', expiry: '2027-11-20', rack: 'darurat', synced: true },
+      { id: '4', name: 'Serum Anti Bisa Ular (SABU)', form: 'Injeksi', batch: 'BN-SABU-009', qty: 6, maxQty: 10, unit: 'Vial', expiry: '2026-10-25', rack: 'cold_chain', synced: true },
+      { id: '5', name: 'Vaksin BCG Freeze-Dried', form: 'Vaksin', batch: 'BN-BCG-9932', qty: 25, maxQty: 50, unit: 'Ampul', expiry: '2026-10-18', rack: 'cold_chain', synced: false },
+      { id: '6', name: 'Dexamethasone 0.5mg', form: 'Tablet', batch: 'BN-DEX-5541', qty: 4, maxQty: 80, unit: 'Strip', expiry: '2026-10-03', rack: 'darurat', synced: true },
+      { id: '7', name: 'Metformin 500mg', form: 'Tablet', batch: 'BN-MET-1029', qty: 300, maxQty: 400, unit: 'Tablet', expiry: '2027-09-15', rack: 'umum', synced: true },
+      { id: '8', name: 'Salbutamol 2mg', form: 'Tablet', batch: 'BN-SAL-7714', qty: 8, maxQty: 100, unit: 'Tablet', expiry: '2026-10-06', rack: 'darurat', synced: true },
+      { id: '9', name: 'Captopril 25mg', form: 'Tablet', batch: 'BN-CAP-3321', qty: 120, maxQty: 200, unit: 'Tablet', expiry: '2027-06-30', rack: 'umum', synced: true },
+      { id: '10', name: 'Ibuprofen 400mg', form: 'Tablet', batch: 'BN-IBU-9941', qty: 90, maxQty: 150, unit: 'Tablet', expiry: '2027-03-31', rack: 'umum', synced: false },
+      { id: '11', name: 'Salep Oksitetrasiklin 1%', form: 'Salep', batch: 'BN-OKS-6612', qty: 30, maxQty: 60, unit: 'Tube', expiry: '2027-08-31', rack: 'umum', synced: true },
+      { id: '12', name: 'Injeksi Oksitosin 10 IU', form: 'Injeksi', batch: 'BN-OKS-1092', qty: 14, maxQty: 30, unit: 'Ampul', expiry: '2026-11-15', rack: 'cold_chain', synced: true }
     ];
 
     // Pending Mutation Queue
@@ -2450,6 +2733,12 @@
       document.getElementById('countKritis').innerText = critical;
 
       document.getElementById('queueCount').innerText = pendingQueue.length;
+
+      // Update live payload simulation
+      const payloadElem = document.getElementById('payloadBox');
+      if (payloadElem) {
+        payloadElem.innerText = `OBATKU|MENTAWAI_PST13|HASH:${Math.floor(Date.now()/1000).toString(16)}|SYNC_QUEUE_LEN:${pendingQueue.length}|DATA:` + btoa(JSON.stringify(pendingQueue.slice(0, 2)));
+      }
     }
 
     // Render Critical Medication Alert List
@@ -2543,6 +2832,11 @@
         ? `<i class="fa-solid fa-cloud-check" style="color: var(--safe); font-size: 13px;" title="Tersinkronisasi"></i>`
         : `<i class="fa-solid fa-clock-rotate-left" style="color: var(--warning); font-size: 13px;" title="Pending Sync"></i>`;
 
+      // Buffer fill calculation
+      const maxVal = m.maxQty || 300;
+      const fillPct = Math.min(100, Math.round((m.qty / maxVal) * 100));
+      const fillColor = status === 'kritis' ? 'var(--critical)' : (status === 'waspada' ? 'var(--warning)' : 'var(--safe)');
+
       return `
         <div class="med-item" onclick="openMedDetailModal('${m.id}')">
           <div class="med-header">
@@ -2555,6 +2849,17 @@
                 <i class="fa-solid fa-circle" style="font-size: 5px;"></i> ${status.toUpperCase()}
               </span>
               ${rackBadge}
+            </div>
+          </div>
+
+          <!-- Stock Level Progress Gauge -->
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size: 9.5px; color: var(--text-muted); font-weight:600;">
+              <span>Stok: ${m.qty} / ${maxVal} ${m.unit}</span>
+              <span>${fillPct}%</span>
+            </div>
+            <div class="med-buffer-track">
+              <div class="med-buffer-fill" style="width: ${fillPct}%; background: ${fillColor};"></div>
             </div>
           </div>
 
@@ -2944,6 +3249,7 @@
         form: selectedSediaan,
         batch: batch,
         qty: jumlah,
+        maxQty: jumlah * 2,
         unit: satuan,
         expiry: `${expMonth}-28`,
         rack: selectedRack,
@@ -3042,17 +3348,19 @@
       if (channel === 'wifi') {
         showToast('Jalur WiFi/4G: Siap mentransmisikan data saat sinyal terdeteksi.');
       } else if (channel === 'sms') {
-        showToast('SMS Gateway (2G): Paket data dikompresi ke 140 karakter teks.');
+        showToast('SMS Gateway (2G): Paket data dikompresi ke 140 karakter teks GSM-7.');
       } else if (channel === 'lora') {
-        showToast('LoRa Mesh: Sinyal diarahkan ke pemancar kapal logistik terdekat.');
+        showToast('LoRa Mesh: Sinyal telemetry 433MHz diarahkan ke KM Mentawai Bahari.');
       }
     }
 
     // CSV Exporters
     function exportFullInventoryCsv() {
-      let csv = 'ID,Nama Obat,Bentuk Sediaan,Nomor Bets,Stok Fisik,Satuan,Tgl Kedaluwarsa,Rak,Status Sinkron\n';
+      let csv = 'ID,Nama Obat,Bentuk Sediaan,Nomor Bets,Stok Fisik,Satuan,Tgl Kedaluwarsa,Rak,Status Sinkron
+';
       medicines.forEach(m => {
-        csv += `"${m.id}","${m.name}","${m.form}","${m.batch}",${m.qty},"${m.unit}","${m.expiry}","${m.rack}","${m.synced ? 'Synced' : 'Pending'}"\n`;
+        csv += `"${m.id}","${m.name}","${m.form}","${m.batch}",${m.qty},"${m.unit}","${m.expiry}","${m.rack}","${m.synced ? 'Synced' : 'Pending'}"
+`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -3067,12 +3375,18 @@
     }
 
     function exportRkoCsv() {
-      let csv = 'Nama Obat,Proyeksi Kebutuhan (6 Bulan),Stok Riil Saat Ini,Selisih Kebutuhan RKO\n';
-      csv += '"Paracetamol 500mg",550,240,310\n';
-      csv += '"Amoxicillin 500mg",400,180,220\n';
-      csv += '"Oralit Dehidrasi",600,350,250\n';
-      csv += '"Dexamethasone 0.5mg",80,4,76\n';
-      csv += '"Anti Bisa Ular (SABU)",10,6,4\n';
+      let csv = 'Nama Obat,Proyeksi Kebutuhan (6 Bulan),Stok Riil Saat Ini,Selisih Kebutuhan RKO
+';
+      csv += '"Paracetamol 500mg",550,240,310
+';
+      csv += '"Amoxicillin 500mg",400,180,220
+';
+      csv += '"Oralit Dehidrasi",600,350,250
+';
+      csv += '"Dexamethasone 0.5mg",80,4,76
+';
+      csv += '"Anti Bisa Ular (SABU)",10,6,4
+';
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
@@ -3169,6 +3483,31 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
+
+    // ==========================================================================
+    // INTERACTIVE SCENARIOS FOR JUDGES (1-CLICK FLOWS)
+    // ==========================================================================
+    function scenarioCriticalOrder() {
+      switchTab('dashboard');
+      setTimeout(() => {
+        goToInventory('kritis');
+        setTimeout(() => {
+          startOrderFlowForMed('2', 300);
+        }, 300);
+      }, 100);
+    }
+
+    function scenarioAddMedicine() {
+      openAddMedicineModal();
+    }
+
+    function scenarioAiForecast() {
+      switchTab('prediction');
+    }
+
+    function scenarioMultiChannelSync() {
+      switchTab('sync');
+    }
 
     // Start App Initialization
     persistData();
