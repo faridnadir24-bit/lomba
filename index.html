@@ -6,40 +6,68 @@
   <title>OBATKU — Sistem Manajemen Stok Obat Offline-First Puskesmas 3T (NEXORA 2026)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <style>
+    /* ==========================================================================
+       DESIGN SYSTEM: OBATKU HEALTHCARE 3T (COHESIVE & CALIBRATED)
+       ========================================================================== */
     :root {
-      --deep-green: #1B4332;
-      --forest-green: #2D6A4F;
-      --forest-mid: #40916C;
-      --mint-accent: #D8F3DC;
-      --mint-light: #ECF9F0;
-      --mint-border: #B7E4C7;
-      --safe-green: #27AE60;
-      --safe-bg: #E8F8F0;
-      --safe-border: #A9DFBF;
-      --warning-yellow: #F39C12;
-      --warning-bg: #FEF5E7;
-      --warning-border: #FAD7A0;
-      --critical-red: #E74C3C;
-      --critical-bg: #FDEDEC;
-      --critical-border: #F5B7B1;
-      --surface: #F4F7F5;
-      --card-bg: #FFFFFF;
-      --text-main: #1A202C;
-      --text-secondary: #334155;
-      --text-muted: #64748B;
-      --border-color: #E2E8F0;
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      --shadow-card: 0 1px 3px rgba(27,67,50,0.04), 0 1px 2px rgba(27,67,50,0.03);
-      --shadow-hover: 0 8px 25px rgba(27,67,50,0.08), 0 2px 6px rgba(27,67,50,0.04);
-      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* Brand Palette: Clinical Emerald */
+      --brand-primary: #0A5C36;
+      --brand-dark: #063D23;
+      --brand-light: #12824D;
+      --brand-tint: #EDF7F2;
+      --brand-border: #C6E4D5;
+
+      /* Triage FEFO Palette: Standardized Healthcare Colors */
+      --safe: #16A34A;
+      --safe-bg: #F0FDF4;
+      --safe-border: #BBF7D0;
+      --safe-text: #166534;
+
+      --warning: #D97706;
+      --warning-bg: #FFFBEB;
+      --warning-border: #FED7AA;
+      --warning-text: #9A3412;
+
+      --critical: #DC2626;
+      --critical-bg: #FEF2F2;
+      --critical-border: #FECACA;
+      --critical-text: #991B1B;
+
+      --cold: #0284C7;
+      --cold-bg: #F0F9FF;
+      --cold-border: #BAE6FD;
+      --cold-text: #0369A1;
+
+      /* Neutral Surfaces & Elevation */
+      --surface-stage: #0E1713;
+      --surface-app: #F8FAF9;
+      --surface-card: #FFFFFF;
+      --border-color: #E2E8E4;
+      --border-subtle: #EEF3F0;
+
+      /* Typography Tokens */
+      --text-title: #0D2319;
+      --text-body: #2C3E35;
+      --text-muted: #5D7267;
+      --text-faint: #8E9F96;
+
+      /* Radii & Shadows */
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 40px;
+      --shadow-sm: 0 1px 2px rgba(10, 92, 54, 0.04);
+      --shadow-card: 0 1px 3px rgba(10, 92, 54, 0.05), 0 2px 6px rgba(10, 92, 54, 0.02);
+      --shadow-elevated: 0 4px 16px rgba(10, 92, 54, 0.08), 0 1px 3px rgba(10, 92, 54, 0.03);
+      --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     * {
@@ -51,11 +79,9 @@
     }
 
     body {
-      background: #0C1F17;
-      background-image: 
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(45,106,79,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(27,67,50,0.12) 0%, transparent 50%);
-      color: var(--text-main);
+      background: var(--surface-stage);
+      background-image: radial-gradient(ellipse 80% 50% at 50% 10%, rgba(18, 130, 77, 0.12) 0%, transparent 70%);
+      color: var(--text-body);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -64,13 +90,15 @@
       overflow-x: hidden;
     }
 
-    /* ========= TOP CONTROL BAR ========= */
+    /* ==========================================================================
+       TOP CONTROL BAR (Untuk Dewan Juri & Simulasi Pengujian)
+       ========================================================================== */
     .judge-bar {
       width: 100%;
-      background: rgba(17,40,30,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(216, 243, 220, 0.08);
+      background: rgba(14, 23, 19, 0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding: 10px 20px;
       display: flex;
       flex-wrap: wrap;
@@ -88,121 +116,122 @@
     }
 
     .judge-logo-mark {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, var(--forest-green), var(--forest-mid));
-      border-radius: 10px;
+      width: 30px;
+      height: 30px;
+      background: var(--brand-primary);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
-      color: var(--mint-accent);
-      box-shadow: 0 2px 8px rgba(45,106,79,0.3);
+      font-size: 14px;
+      color: #fff;
     }
 
     .judge-badge {
-      background: rgba(45,106,79,0.25);
-      color: var(--mint-accent);
+      background: rgba(255, 255, 255, 0.10);
+      color: rgba(255, 255, 255, 0.85);
       font-size: 10px;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 6px;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.6px;
       text-transform: uppercase;
-      border: 1px solid rgba(216, 243, 220, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .judge-controls {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
     .btn-control {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.08);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       padding: 6px 14px;
-      border-radius: 10px;
+      border-radius: 9px;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all var(--transition-fast);
+      transition: all 0.15s ease;
       min-height: 36px;
-      letter-spacing: -0.01em;
     }
 
     .btn-control:hover {
-      background: rgba(255, 255, 255, 0.14);
-      border-color: rgba(216, 243, 220, 0.3);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
     .btn-control:active {
-      transform: scale(0.96);
+      transform: scale(0.97);
     }
 
     .btn-control.active {
-      background: var(--forest-green);
-      border-color: var(--mint-accent);
+      background: var(--brand-primary);
+      border-color: var(--brand-border);
       color: #fff;
     }
 
     .btn-judge-prd {
-      background: rgba(231,76,60,0.85);
-      border-color: rgba(231,76,60,0.4);
-      color: #fff;
+      background: rgba(220, 38, 38, 0.20);
+      border-color: rgba(220, 38, 38, 0.40);
+      color: #FCA5A5;
     }
     .btn-judge-prd:hover {
-      background: #C0392B;
+      background: rgba(220, 38, 38, 0.35);
       color: #fff;
     }
 
-    /* ========= STAGE CONTAINER ========= */
+    /* ==========================================================================
+       STAGE CONTAINER & DEVICE FRAME
+       ========================================================================== */
     .stage-container {
       width: 100%;
       flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px 10px;
+      padding: 24px 12px;
     }
 
-    /* ========= DEVICE MOCKUP ========= */
     .phone-wrapper {
       width: 100%;
-      max-width: 400px;
-      height: 860px;
-      background: var(--surface);
-      border-radius: 48px;
+      max-width: 410px;
+      height: 870px;
+      background: var(--surface-app);
+      border-radius: var(--radius-xl);
       box-shadow: 
-        0 0 0 2px rgba(255,255,255,0.05),
-        0 0 0 11px #141E1A,
-        0 0 0 13px rgba(216,243,220,0.08),
-        0 30px 80px rgba(0,0,0,0.55),
-        0 10px 30px rgba(0,0,0,0.3);
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 0 0 9px #16241D,
+        0 0 0 10px rgba(255, 255, 255, 0.05),
+        0 24px 64px rgba(0, 0, 0, 0.55);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       position: relative;
-      transition: all var(--transition-smooth);
+      transition: all 0.35s var(--ease-out);
     }
 
     .phone-wrapper.fullscreen-mode {
       max-width: 860px;
       height: 94vh;
-      border-radius: 20px;
+      border-radius: 16px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 
-    /* ========= DYNAMIC ISLAND STATUS BAR ========= */
+    /* ==========================================================================
+       PHONE STATUS BAR (CLEAN & MINIMAL)
+       ========================================================================== */
     .phone-statusbar {
-      background: var(--deep-green);
+      background: var(--brand-dark);
       color: #fff;
-      padding: 10px 24px 6px 24px;
+      padding: 12px 24px 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -216,13 +245,13 @@
     .phone-statusbar::after {
       content: '';
       position: absolute;
-      top: 6px;
+      top: 8px;
       left: 50%;
       transform: translateX(-50%);
-      width: 100px;
-      height: 28px;
-      background: #000;
-      border-radius: 20px;
+      width: 60px;
+      height: 5px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 4px;
       z-index: 51;
     }
 
@@ -233,23 +262,26 @@
       font-size: 11px;
     }
 
-    /* ========= APP HEADER ========= */
+    /* ==========================================================================
+       APP HEADER
+       ========================================================================== */
     .app-header {
-      background: var(--deep-green);
+      background: var(--brand-dark);
       color: #fff;
-      padding: 10px 20px 14px 20px;
+      padding: 12px 20px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 40;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .app-title-box h1 {
       font-size: 17px;
       font-weight: 800;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -257,23 +289,23 @@
 
     .app-title-box p {
       font-size: 11px;
-      color: rgba(216,243,220,0.7);
+      color: rgba(255, 255, 255, 0.65);
       font-weight: 500;
       margin-top: 1px;
-      letter-spacing: -0.01em;
     }
 
-    /* ========= NETWORK BANNER ========= */
+    /* ==========================================================================
+       PERSISTENT NETWORK STATUS BANNER
+       ========================================================================== */
     .status-banner {
-      padding: 7px 16px;
+      padding: 8px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: 11px;
-      font-weight: 700;
-      transition: background 0.3s;
+      font-weight: 600;
+      transition: all 0.25s ease;
       z-index: 35;
-      border-bottom: 1px solid rgba(0,0,0,0.04);
       cursor: pointer;
     }
 
@@ -282,89 +314,56 @@
     }
 
     .status-banner.offline {
-      background: linear-gradient(90deg, #FEF3E2, #FEF5E7);
-      color: #8A4B00;
+      background: var(--warning-bg);
+      border-bottom: 1px solid var(--warning-border);
+      color: var(--warning-text);
     }
 
     .status-banner.online {
-      background: linear-gradient(90deg, #E4F6ED, #E8F8F0);
-      color: #145A32;
+      background: var(--safe-bg);
+      border-bottom: 1px solid var(--safe-border);
+      color: var(--safe-text);
     }
 
     .btn-sync-mini {
-      background: var(--deep-green);
+      background: var(--brand-primary);
       color: #fff;
       border: none;
       padding: 4px 10px;
-      border-radius: 8px;
+      border-radius: 7px;
       font-size: 10px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 4px;
-      transition: var(--transition-fast);
+      transition: transform 0.1s ease;
     }
     .btn-sync-mini:active {
-      transform: scale(0.92);
+      transform: scale(0.94);
     }
 
-    /* ========= ONBOARDING HINT ========= */
-    .onboarding-hint {
-      background: linear-gradient(135deg, rgba(232,248,240,0.8), rgba(216,243,220,0.6));
-      border: 1.5px solid rgba(45,106,79,0.25);
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      font-size: 12px;
-      color: var(--deep-green);
-      animation: fadeSlideIn 0.5s ease-out;
-      backdrop-filter: blur(8px);
-    }
-
-    .onboarding-hint button {
-      background: transparent;
-      border: none;
-      color: var(--forest-green);
-      cursor: pointer;
-      font-size: 14px;
-      padding: 4px;
-    }
-
-    /* ========= SCROLLABLE BODY ========= */
+    /* ==========================================================================
+       SCROLLABLE SCREEN CONTENT AREA
+       ========================================================================== */
     .screen-content {
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
-      background: var(--surface);
+      background: var(--surface-app);
       padding: 16px;
-      padding-bottom: 95px;
+      padding-bottom: 90px;
       position: relative;
     }
 
-    /* Very subtle grain texture */
-    .screen-content::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      opacity: 0.015;
-      z-index: 60;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-    }
-
-    /* ========= SCREEN TRANSITIONS ========= */
+    /* ==========================================================================
+       TAB TRANSITIONS (SMOOTH & SUBTLE)
+       ========================================================================== */
     .screen-tab {
       display: none;
       opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      transform: translateY(4px);
+      transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
     }
 
     .screen-tab.active {
@@ -374,94 +373,76 @@
     }
 
     @keyframes fadeSlideIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Staggered appearance for children */
-    .screen-tab.active > *:nth-child(1) { animation: fadeSlideIn 0.35s ease-out both; animation-delay: 0.02s; }
-    .screen-tab.active > *:nth-child(2) { animation: fadeSlideIn 0.35s ease-out both; animation-delay: 0.06s; }
-    .screen-tab.active > *:nth-child(3) { animation: fadeSlideIn 0.35s ease-out both; animation-delay: 0.10s; }
-    .screen-tab.active > *:nth-child(4) { animation: fadeSlideIn 0.35s ease-out both; animation-delay: 0.14s; }
-    .screen-tab.active > *:nth-child(5) { animation: fadeSlideIn 0.35s ease-out both; animation-delay: 0.18s; }
-    .screen-tab.active > *:nth-child(6) { animation: fadeSlideIn 0.35s ease-out both; animation-delay: 0.22s; }
-    .screen-tab.active > *:nth-child(7) { animation: fadeSlideIn 0.35s ease-out both; animation-delay: 0.26s; }
+    .screen-tab.active > *:nth-child(1) { animation: fadeSlideIn 0.25s ease-out both 0.02s; }
+    .screen-tab.active > *:nth-child(2) { animation: fadeSlideIn 0.25s ease-out both 0.05s; }
+    .screen-tab.active > *:nth-child(3) { animation: fadeSlideIn 0.25s ease-out both 0.08s; }
+    .screen-tab.active > *:nth-child(4) { animation: fadeSlideIn 0.25s ease-out both 0.11s; }
+    .screen-tab.active > *:nth-child(5) { animation: fadeSlideIn 0.25s ease-out both 0.14s; }
 
-    /* ========= CARDS ========= */
+    /* ==========================================================================
+       BASE CARDS
+       ========================================================================== */
     .card {
-      background: var(--card-bg);
-      border: 1px solid rgba(226,232,240,0.8);
+      background: var(--surface-card);
+      border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 16px;
       margin-bottom: 12px;
       box-shadow: var(--shadow-card);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     .card-interactive:hover {
-      border-color: rgba(45,106,79,0.3);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
+      border-color: var(--brand-border);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-elevated);
       cursor: pointer;
     }
 
-    /* ========= FASKES HERO CARD ========= */
+    /* ==========================================================================
+       FASKES HERO CARD (OFFICIAL CLINICAL IDENTITY)
+       ========================================================================== */
     .faskes-card {
-      background: linear-gradient(145deg, #1B4332 0%, #2D6A4F 60%, #40916C 100%);
+      background: linear-gradient(135deg, #0A5C36 0%, #063D23 100%);
       color: #fff;
       border: none;
-      padding: 20px;
+      padding: 18px 20px;
       position: relative;
       overflow: hidden;
-      border-radius: 20px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 14px rgba(6, 61, 35, 0.25);
     }
 
-    /* Topographic map lines — organic, hand-drawn feel */
-    .faskes-card::before {
-      content: '';
-      position: absolute;
-      top: -30px;
-      right: -40px;
-      width: 220px;
-      height: 220px;
-      background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 180 Q80 130 120 140 Q160 150 170 100 Q180 50 140 40 Q100 30 80 70 Q60 110 50 180Z' fill='none' stroke='rgba(216,243,220,0.06)' stroke-width='1.5'/%3E%3Cpath d='M60 170 Q85 125 115 135 Q150 145 160 100 Q170 55 135 48 Q105 40 85 75 Q65 110 60 170Z' fill='none' stroke='rgba(216,243,220,0.05)' stroke-width='1'/%3E%3Cpath d='M70 160 Q90 120 110 130 Q140 138 150 100 Q158 62 130 56 Q108 50 92 80 Q74 112 70 160Z' fill='none' stroke='rgba(216,243,220,0.04)' stroke-width='1'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-size: contain;
-      pointer-events: none;
-      opacity: 1;
-    }
-
-    .faskes-card::after {
-      content: '3T';
-      position: absolute;
-      right: 12px;
-      bottom: -8px;
-      font-size: 64px;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.04);
-      pointer-events: none;
-      letter-spacing: -3px;
-      font-family: 'Instrument Serif', serif;
+    .faskes-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
     }
 
     .badge-3t {
-      background: rgba(216, 243, 220, 0.15);
-      border: 1px solid rgba(216,243,220,0.2);
-      color: var(--mint-accent);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
       font-size: 10px;
       font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 20px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.4px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      margin-bottom: 8px;
-      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .badge-faskes-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 500;
     }
 
     .faskes-name {
@@ -473,14 +454,16 @@
 
     .faskes-loc {
       font-size: 12px;
-      opacity: 0.75;
+      color: rgba(255, 255, 255, 0.75);
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       font-weight: 500;
     }
 
-    /* ========= METRIC GRID ========= */
+    /* ==========================================================================
+       METRIC CARDS (3-COLUMN TRIAGE GRID)
+       ========================================================================== */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -489,99 +472,87 @@
     }
 
     .metric-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 14px 10px 12px;
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: 12px 6px 10px;
       text-align: center;
-      border: 1.5px solid var(--border-color);
+      border: 1px solid var(--border-color);
       cursor: pointer;
-      transition: all var(--transition-spring);
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
       position: relative;
-      overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
 
     .metric-card:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elevated);
     }
 
     .metric-card:active {
-      transform: scale(0.96);
+      transform: scale(0.97);
     }
 
-    .metric-card.safe {
-      border-color: rgba(39,174,96,0.35);
-      background: linear-gradient(180deg, #fff 60%, rgba(232,248,240,0.5) 100%);
-    }
-    .metric-card.warning {
-      border-color: rgba(243,156,18,0.35);
-      background: linear-gradient(180deg, #fff 60%, rgba(254,245,231,0.5) 100%);
-    }
-    .metric-card.critical {
-      border-color: rgba(231,76,60,0.35);
-      background: linear-gradient(180deg, #fff 60%, rgba(253,237,236,0.5) 100%);
-    }
+    .metric-card.safe { border-top: 3px solid var(--safe); }
+    .metric-card.warning { border-top: 3px solid var(--warning); }
+    .metric-card.critical { border-top: 3px solid var(--critical); }
 
     .metric-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 6px;
-      font-size: 14px;
+      margin: 0 auto 5px;
+      font-size: 13px;
     }
 
-    .metric-card.safe .metric-icon {
-      background: rgba(39,174,96,0.1);
-      color: var(--safe-green);
-    }
-    .metric-card.warning .metric-icon {
-      background: rgba(243,156,18,0.1);
-      color: var(--warning-yellow);
-    }
-    .metric-card.critical .metric-icon {
-      background: rgba(231,76,60,0.1);
-      color: var(--critical-red);
-    }
+    .metric-card.safe .metric-icon { background: var(--safe-bg); color: var(--safe); }
+    .metric-card.warning .metric-icon { background: var(--warning-bg); color: var(--warning); }
+    .metric-card.critical .metric-icon { background: var(--critical-bg); color: var(--critical); }
 
     .metric-num {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 800;
-      line-height: 1;
-      margin-bottom: 4px;
-      letter-spacing: -0.03em;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
     }
 
-    .metric-card.safe .metric-num { color: var(--safe-green); }
-    .metric-card.warning .metric-num { color: #D68910; }
-    .metric-card.critical .metric-num { color: var(--critical-red); }
+    .metric-card.safe .metric-num { color: var(--safe-text); }
+    .metric-card.warning .metric-num { color: var(--warning-text); }
+    .metric-card.critical .metric-num { color: var(--critical-text); }
 
     .metric-lbl {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 700;
       color: var(--text-muted);
-      line-height: 1.2;
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     .metric-action-hint {
       font-size: 9px;
-      margin-top: 5px;
+      margin-top: 6px;
       font-weight: 700;
-      color: var(--forest-green);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 2px;
-      opacity: 0.7;
     }
 
-    /* ========= SECTION TITLES ========= */
+    .metric-card.safe .metric-action-hint { color: var(--safe); }
+    .metric-card.warning .metric-action-hint { color: var(--warning); }
+    .metric-card.critical .metric-action-hint { color: var(--critical); }
+
+    /* ==========================================================================
+       SECTION HEADERS & LINKS
+       ========================================================================== */
     .section-title {
       font-size: 13px;
       font-weight: 800;
-      color: var(--deep-green);
+      color: var(--text-title);
       margin-bottom: 10px;
       display: flex;
       align-items: center;
@@ -589,43 +560,65 @@
       letter-spacing: -0.01em;
     }
 
-    .section-title i {
-      margin-right: 5px;
-    }
-
     .section-link {
       font-size: 11px;
-      color: var(--forest-mid);
+      color: var(--brand-primary);
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 3px;
-      transition: color var(--transition-fast);
+      transition: color 0.15s;
     }
 
     .section-link:hover {
-      color: var(--deep-green);
+      color: var(--brand-light);
     }
 
-    /* ========= MEDICINE LIST ITEM ========= */
+    /* ==========================================================================
+       PRIORITY CRITICAL EMERGENCY PILLS
+       ========================================================================== */
+    .quick-action-pill {
+      background: var(--surface-card);
+      border: 1px solid var(--critical-border);
+      border-left: 3px solid var(--critical);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quick-action-pill:hover {
+      background: var(--critical-bg);
+      transform: translateX(2px);
+    }
+
+    /* ==========================================================================
+       MEDICINE LIST CARDS
+       ========================================================================== */
     .med-item {
-      background: #fff;
-      border: 1px solid rgba(226,232,240,0.8);
-      border-radius: 14px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
       padding: 12px 14px;
       margin-bottom: 8px;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      transition: all var(--transition-fast);
+      transition: all 0.15s ease;
       cursor: pointer;
-      box-shadow: var(--shadow-card);
+      box-shadow: var(--shadow-sm);
     }
 
     .med-item:hover {
-      border-color: rgba(45,106,79,0.25);
-      box-shadow: var(--shadow-hover);
+      border-color: var(--brand-border);
+      box-shadow: var(--shadow-elevated);
       transform: translateY(-1px);
     }
 
@@ -637,9 +630,9 @@
     }
 
     .med-title {
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
-      color: var(--text-main);
+      color: var(--text-title);
       letter-spacing: -0.01em;
     }
 
@@ -659,52 +652,60 @@
     }
 
     .badge-status {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 8px;
+      padding: 2px 7px;
+      border-radius: 6px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
       letter-spacing: 0.3px;
+      text-transform: uppercase;
     }
 
     .badge-status.safe {
-      background: rgba(39,174,96,0.08);
-      color: #1E8449;
-      border: 1px solid rgba(39,174,96,0.2);
+      background: var(--safe-bg);
+      color: var(--safe-text);
+      border: 1px solid var(--safe-border);
     }
     .badge-status.warning {
-      background: rgba(243,156,18,0.08);
-      color: #8A4B00;
-      border: 1px solid rgba(243,156,18,0.2);
+      background: var(--warning-bg);
+      color: var(--warning-text);
+      border: 1px solid var(--warning-border);
     }
     .badge-status.critical {
-      background: rgba(231,76,60,0.08);
-      color: var(--critical-red);
-      border: 1px solid rgba(231,76,60,0.2);
+      background: var(--critical-bg);
+      color: var(--critical-text);
+      border: 1px solid var(--critical-border);
     }
 
     .badge-rack {
-      background: #F1F5F9;
-      color: #475569;
-      font-size: 10px;
+      background: #F1F5F3;
+      color: var(--text-secondary);
+      font-size: 9.5px;
       font-weight: 600;
-      padding: 3px 6px;
+      padding: 2px 6px;
       border-radius: 6px;
+      border: 1px solid #E2E8E5;
     }
 
     .badge-cold {
-      background: rgba(3,105,161,0.08);
-      color: #0369A1;
-      border: 1px solid rgba(3,105,161,0.15);
+      background: var(--cold-bg);
+      color: var(--cold-text);
+      border: 1px solid var(--cold-border);
+    }
+
+    .badge-darurat {
+      background: var(--critical-bg);
+      color: var(--critical-text);
+      border: 1px solid var(--critical-border);
     }
 
     .med-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid rgba(226,232,240,0.6);
+      border-top: 1px solid var(--border-subtle);
       padding-top: 8px;
       margin-top: 2px;
     }
@@ -714,68 +715,69 @@
       font-weight: 700;
     }
 
-    .expiry-critical { color: var(--critical-red); font-weight: 800; }
-    .expiry-warning { color: #D68910; }
-    .expiry-safe { color: var(--safe-green); }
+    .expiry-critical { color: var(--critical-text); }
+    .expiry-warning { color: var(--warning-text); }
+    .expiry-safe { color: var(--safe-text); }
 
-    /* ========= STEPPER ========= */
+    /* ==========================================================================
+       QUANTITY STEPPER (+ / -)
+       ========================================================================== */
     .stepper-box {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
+      background: #F4F7F5;
+      padding: 2px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
     }
 
     .btn-step {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      border: 1.5px solid var(--deep-green);
-      background: #fff;
-      color: var(--deep-green);
-      font-size: 16px;
-      font-weight: 800;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #FFFFFF;
+      color: var(--brand-dark);
+      font-size: 15px;
+      font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.15s ease;
     }
 
     .btn-step:hover {
-      background: var(--mint-light);
+      background: var(--brand-tint);
+      border-color: var(--brand-border);
+      color: var(--brand-primary);
     }
 
     .btn-step:active {
-      transform: scale(0.88);
+      transform: scale(0.90);
     }
 
     .stock-val {
-      font-size: 14px;
-      font-weight: 800;
-      min-width: 48px;
+      font-size: 13px;
+      font-weight: 700;
+      min-width: 44px;
       text-align: center;
-      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-title);
     }
 
-    /* ========= SHIP LOGISTICS ========= */
+    /* ==========================================================================
+       LOGISTICS BOAT SCHEDULE CARD
+       ========================================================================== */
     .ship-card {
-      background: linear-gradient(145deg, #0F2E23 0%, #1A4D3A 70%, #205C46 100%);
+      background: linear-gradient(135deg, #103825 0%, #0A2619 100%);
       color: #fff;
-      border: 1px solid rgba(45,106,79,0.3);
-      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
       position: relative;
       overflow: hidden;
-    }
-
-    .ship-card::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60%;
-      background: url("data:image/svg+xml,%3Csvg width='400' height='60' viewBox='0 0 400 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30 Q50 15 100 30 Q150 45 200 30 Q250 15 300 30 Q350 45 400 30' fill='none' stroke='rgba(216,243,220,0.04)' stroke-width='1'/%3E%3Cpath d='M0 40 Q50 25 100 40 Q150 55 200 40 Q250 25 300 40 Q350 55 400 40' fill='none' stroke='rgba(216,243,220,0.03)' stroke-width='1'/%3E%3C/svg%3E") repeat-x bottom;
-      pointer-events: none;
+      box-shadow: var(--shadow-card);
     }
 
     .ship-row {
@@ -787,12 +789,21 @@
     }
 
     .ship-icon {
-      font-size: 26px;
-      color: var(--mint-accent);
-      opacity: 0.8;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #D8F3DC;
+      flex-shrink: 0;
     }
 
-    /* ========= SEARCH & FILTER ========= */
+    /* ==========================================================================
+       SEARCH BAR & SCAN BUTTON
+       ========================================================================== */
     .search-row {
       display: flex;
       gap: 8px;
@@ -806,19 +817,20 @@
 
     .search-input-box input {
       width: 100%;
-      height: 46px;
-      border-radius: 12px;
-      border: 1.5px solid var(--border-color);
+      height: 44px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
       padding: 10px 14px 10px 38px;
       font-size: 13px;
       outline: none;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-      background: #fff;
+      background: var(--surface-card);
+      color: var(--text-title);
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     .search-input-box input:focus {
-      border-color: var(--forest-green);
-      box-shadow: 0 0 0 3px rgba(45,106,79,0.08);
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(10, 92, 54, 0.08);
     }
 
     .search-icon {
@@ -830,25 +842,26 @@
     }
 
     .btn-barcode-scan {
-      height: 46px;
+      height: 44px;
       padding: 0 14px;
-      background: var(--deep-green);
+      background: var(--brand-primary);
       color: #fff;
       border: none;
-      border-radius: 12px;
-      font-size: 13px;
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
       font-weight: 700;
       display: flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      transition: var(--transition-fast);
+      transition: background 0.15s;
     }
-    .btn-barcode-scan:active {
-      transform: scale(0.95);
-    }
+    .btn-barcode-scan:hover { background: var(--brand-light); }
+    .btn-barcode-scan:active { transform: scale(0.96); }
 
-    /* ========= FILTER CHIPS ========= */
+    /* ==========================================================================
+       FILTER CHIPS
+       ========================================================================== */
     .chips-row {
       display: flex;
       gap: 6px;
@@ -860,126 +873,294 @@
     .chips-row::-webkit-scrollbar { display: none; }
 
     .chip {
-      background: #fff;
-      border: 1.5px solid var(--border-color);
+      background: var(--surface-card);
+      border: 1px solid var(--border-color);
       border-radius: 20px;
       padding: 6px 12px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
       color: var(--text-muted);
-      transition: all var(--transition-fast);
-      min-height: 32px;
+      transition: all 0.15s ease;
+      min-height: 30px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
     }
 
     .chip.active {
-      background: var(--deep-green);
+      background: var(--brand-primary);
       color: #fff;
-      border-color: var(--deep-green);
-      box-shadow: 0 2px 8px rgba(27,67,50,0.2);
+      border-color: var(--brand-primary);
+      box-shadow: 0 2px 6px rgba(10, 92, 54, 0.25);
     }
 
-    /* ========= FAB ========= */
+    /* ==========================================================================
+       FLOATING ACTION BUTTON (FAB)
+       ========================================================================== */
     .fab-btn {
       position: absolute;
-      bottom: 84px;
-      right: 18px;
-      background: var(--deep-green);
+      bottom: 80px;
+      right: 16px;
+      background: var(--brand-primary);
       color: #fff;
       border: none;
-      border-radius: 16px;
+      border-radius: var(--radius-md);
       padding: 12px 18px;
       font-size: 13px;
       font-weight: 700;
       display: flex;
       align-items: center;
       gap: 7px;
-      box-shadow: 0 4px 16px rgba(27,67,50,0.35), 0 1px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 16px rgba(10, 92, 54, 0.35);
       cursor: pointer;
       z-index: 45;
-      transition: all var(--transition-spring);
-      min-height: 48px;
-      letter-spacing: -0.01em;
+      transition: all 0.2s var(--ease-spring);
+      min-height: 46px;
     }
 
     .fab-btn:hover {
-      background: var(--forest-green);
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 6px 24px rgba(27,67,50,0.4);
+      background: var(--brand-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(10, 92, 54, 0.40);
     }
 
     .fab-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.96);
     }
 
-    /* ========= 5-TAB BOTTOM NAV ========= */
+    /* ==========================================================================
+       5-TAB BOTTOM NAVIGATION BAR
+       ========================================================================== */
     .phone-bottom-nav {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 70px;
-      background: rgba(255,255,255,0.92);
+      height: 66px;
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-top: 1px solid rgba(226,232,240,0.6);
+      border-top: 1px solid var(--border-color);
       display: flex;
       justify-content: space-around;
       align-items: center;
       z-index: 50;
-      padding-bottom: 4px;
+      padding-bottom: 2px;
     }
 
     .nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      gap: 2px;
       color: var(--text-muted);
       font-size: 10px;
       font-weight: 600;
       cursor: pointer;
       padding: 6px 8px;
-      border-radius: 12px;
-      transition: all var(--transition-fast);
-      min-width: 56px;
+      border-radius: 10px;
+      transition: all 0.15s ease;
+      min-width: 54px;
       min-height: 48px;
       justify-content: center;
+      position: relative;
     }
 
     .nav-item i {
-      font-size: 18px;
-      transition: all var(--transition-spring);
+      font-size: 17px;
+      transition: transform 0.2s var(--ease-spring);
     }
 
     .nav-item.active {
-      color: var(--deep-green);
+      color: var(--brand-primary);
     }
 
     .nav-item.active i {
       transform: scale(1.15) translateY(-1px);
     }
 
+    .nav-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: 3px;
+      width: 16px;
+      height: 3px;
+      background: var(--brand-primary);
+      border-radius: 2px;
+    }
+
     .nav-badge-dot {
       position: relative;
     }
-    .nav-badge-dot::after {
+    .nav-badge-dot::before {
       content: '';
       position: absolute;
-      top: 2px;
+      top: 6px;
       right: 14px;
-      width: 7px;
-      height: 7px;
-      background: var(--critical-red);
+      width: 6px;
+      height: 6px;
+      background: var(--critical);
       border-radius: 50%;
       border: 1.5px solid #fff;
+      z-index: 1;
     }
 
-    /* ========= FORMS ========= */
+    /* ==========================================================================
+       AI PREDICTION TAB COMPONENTS
+       ========================================================================== */
+    .prediction-hero {
+      background: linear-gradient(135deg, #0A5C36 0%, #063D23 100%);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      box-shadow: 0 4px 14px rgba(6, 61, 35, 0.25);
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 190px;
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      position: relative;
+      margin: 8px 0;
+    }
+
+    .rko-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      margin-top: 10px;
+    }
+
+    .rko-table th {
+      background: #F4F7F5;
+      color: var(--text-title);
+      font-weight: 700;
+      padding: 8px 6px;
+      text-align: left;
+      border-bottom: 2px solid var(--border-color);
+      font-size: 10px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .rko-table td {
+      padding: 9px 6px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-body);
+    }
+
+    /* ==========================================================================
+       SYNC TAB & TRANSMISSION CHANNELS
+       ========================================================================== */
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--border-color);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 12px 0;
+      display: none;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--brand-primary);
+      transition: width 0.3s ease;
+      border-radius: 3px;
+    }
+
+    .sync-channel-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sync-channel-card:hover {
+      border-color: var(--brand-border);
+      box-shadow: var(--shadow-elevated);
+      transform: translateY(-1px);
+    }
+
+    .sync-channel-card i {
+      font-size: 18px;
+      margin-bottom: 4px;
+      color: var(--brand-primary);
+    }
+
+    /* ==========================================================================
+       SETTINGS & PROFILES
+       ========================================================================== */
+    .settings-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .settings-card-header i {
+      font-size: 14px;
+      color: var(--brand-primary);
+    }
+
+    .settings-card-header strong {
+      font-size: 13px;
+      color: var(--text-title);
+    }
+
+    .settings-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .settings-row:last-child {
+      border-bottom: none;
+    }
+
+    .switch-toggle {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+    }
+    .switch-toggle input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #CBD5E1;
+      transition: .25s;
+      border-radius: 22px;
+    }
+    .slider:before {
+      position: absolute; content: "";
+      height: 16px; width: 16px;
+      left: 3px; bottom: 3px;
+      background-color: white;
+      transition: .25s;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    input:checked + .slider { background-color: var(--brand-primary); }
+    input:checked + .slider:before { transform: translateX(18px); }
+
+    /* ==========================================================================
+       FORM CONTROLS & SELECTION GRIDS
+       ========================================================================== */
     .form-group {
       margin-bottom: 14px;
     }
@@ -988,26 +1169,26 @@
       display: block;
       font-size: 12px;
       font-weight: 700;
-      color: var(--deep-green);
+      color: var(--text-title);
       margin-bottom: 6px;
-      letter-spacing: -0.01em;
     }
 
     .form-input, .form-select {
       width: 100%;
-      height: 46px;
-      border: 1.5px solid var(--border-color);
-      border-radius: 12px;
+      height: 44px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
       padding: 10px 14px;
-      font-size: 14px;
+      font-size: 13.5px;
       outline: none;
-      background: #fff;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      background: var(--surface-card);
+      color: var(--text-title);
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     .form-input:focus, .form-select:focus {
-      border-color: var(--forest-green);
-      box-shadow: 0 0 0 3px rgba(45,106,79,0.08);
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(10, 92, 54, 0.08);
     }
 
     .sediaan-grid {
@@ -1017,10 +1198,10 @@
     }
 
     .sediaan-btn {
-      border: 1.5px solid var(--border-color);
-      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
       padding: 10px 6px;
-      background: #fff;
+      background: var(--surface-card);
       font-size: 11px;
       font-weight: 700;
       display: flex;
@@ -1028,41 +1209,41 @@
       align-items: center;
       gap: 4px;
       cursor: pointer;
-      transition: var(--transition-fast);
+      transition: all 0.15s;
       min-height: 52px;
       justify-content: center;
+      color: var(--text-body);
     }
 
     .sediaan-btn.selected {
-      background: var(--mint-light);
-      border-color: var(--forest-green);
-      color: var(--deep-green);
-      box-shadow: 0 0 0 3px rgba(45,106,79,0.06);
+      background: var(--brand-tint);
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
     }
 
     .rack-option {
-      border: 1.5px solid var(--border-color);
-      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
       padding: 10px 14px;
       margin-bottom: 8px;
       display: flex;
       align-items: center;
       gap: 12px;
       cursor: pointer;
-      background: #fff;
-      transition: var(--transition-fast);
-      min-height: 52px;
+      background: var(--surface-card);
+      transition: all 0.15s;
+      min-height: 50px;
     }
 
     .rack-option.selected {
-      border-color: var(--forest-green);
-      background: var(--mint-light);
-      box-shadow: 0 0 0 3px rgba(45,106,79,0.06);
+      border-color: var(--brand-primary);
+      background: var(--brand-tint);
     }
 
     .rack-title {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
+      color: var(--text-title);
     }
 
     .rack-desc {
@@ -1070,22 +1251,23 @@
       color: var(--text-muted);
     }
 
-    /* ========= MODALS ========= */
+    /* ==========================================================================
+       MODALS (BOTTOM SHEET / POP-IN)
+       ========================================================================== */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(12, 31, 23, 0.65);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(14, 23, 19, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       z-index: 200;
       display: none;
       align-items: flex-end;
       justify-content: center;
       padding: 0;
-      transition: opacity var(--transition-fast);
     }
 
     @media (min-width: 600px) {
@@ -1100,22 +1282,22 @@
     }
 
     .modal-box {
-      background: #fff;
+      background: #FFFFFF;
       border-radius: 24px 24px 0 0;
       width: 100%;
-      max-width: 500px;
+      max-width: 480px;
       max-height: 90vh;
       overflow-y: auto;
-      padding: 24px;
-      box-shadow: 0 -10px 50px rgba(0,0,0,0.25);
+      padding: 22px 20px;
+      box-shadow: var(--shadow-modal);
       position: relative;
-      animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: slideUp 0.3s var(--ease-out);
     }
 
     @media (min-width: 600px) {
       .modal-box {
-        border-radius: 24px;
-        animation: popIn 0.3s ease-out;
+        border-radius: 20px;
+        animation: popIn 0.25s ease-out;
       }
     }
 
@@ -1125,40 +1307,40 @@
     }
 
     @keyframes popIn {
-      from { transform: scale(0.94); opacity: 0; }
+      from { transform: scale(0.96); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
 
     .modal-drag-indicator {
       width: 36px;
       height: 4px;
-      background: #D1D5DB;
+      background: #E2E8E4;
       border-radius: 2px;
       margin: 0 auto 16px auto;
     }
 
     .modal-close {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 16px;
+      top: 18px;
+      right: 18px;
+      font-size: 14px;
       cursor: pointer;
       color: var(--text-muted);
       border: none;
-      background: #F1F5F9;
-      width: 32px;
-      height: 32px;
+      background: #F1F5F3;
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 10px;
-      transition: background var(--transition-fast);
+      border-radius: 8px;
+      transition: background 0.15s;
     }
     .modal-close:hover {
-      background: #E2E8F0;
+      background: #E2E8E4;
     }
 
-    /* ========= ORDER STEPPER ========= */
+    /* Multi-step progress indicator */
     .step-indicator {
       display: flex;
       align-items: center;
@@ -1188,27 +1370,27 @@
     }
 
     .step-circle {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: #E2E8F0;
+      background: var(--border-color);
       color: var(--text-muted);
       font-size: 12px;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all var(--transition-fast);
+      transition: all 0.2s;
     }
 
     .step-node.active .step-circle {
-      background: var(--deep-green);
+      background: var(--brand-primary);
       color: #fff;
-      box-shadow: 0 0 0 4px rgba(45,106,79,0.15);
+      box-shadow: 0 0 0 4px rgba(10, 92, 54, 0.15);
     }
 
     .step-node.completed .step-circle {
-      background: var(--safe-green);
+      background: var(--safe);
       color: #fff;
     }
 
@@ -1219,152 +1401,49 @@
     }
 
     .step-node.active .step-label {
-      color: var(--deep-green);
+      color: var(--brand-primary);
     }
 
-    /* ========= AI CHART ========= */
-    .chart-container {
-      width: 100%;
-      height: 200px;
-      background: #fff;
-      border-radius: var(--radius-md);
-      position: relative;
-      margin: 10px 0;
-    }
-
-    /* ========= RKO TABLE ========= */
-    .rko-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 11px;
-      margin-top: 10px;
-    }
-
-    .rko-table th {
-      background: var(--mint-light);
-      color: var(--deep-green);
-      font-weight: 700;
-      padding: 8px 6px;
-      text-align: left;
-      border-bottom: 2px solid var(--border-color);
-      font-size: 10px;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-    }
-
-    .rko-table td {
-      padding: 8px 6px;
-      border-bottom: 1px solid rgba(226,232,240,0.6);
-    }
-
-    /* ========= SYNC PROGRESS ========= */
-    .progress-track {
-      width: 100%;
-      height: 6px;
-      background: #E2E8F0;
-      border-radius: 3px;
-      overflow: hidden;
-      margin: 12px 0;
-      display: none;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--forest-green), var(--safe-green));
-      transition: width 0.3s ease;
-      border-radius: 3px;
-    }
-
-    /* ========= QUICK ACTION PILLS ========= */
-    .quick-action-pill {
-      background: #fff;
-      border: 1px solid rgba(231,76,60,0.15);
-      border-radius: 14px;
-      padding: 10px 12px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      transition: all var(--transition-fast);
-      cursor: pointer;
-      box-shadow: var(--shadow-card);
-    }
-    .quick-action-pill:hover {
-      background: var(--critical-bg);
-      border-color: rgba(231,76,60,0.25);
-      transform: translateX(3px);
-    }
-
-    /* ========= TOAST ========= */
+    /* Toast Notification */
     .toast-box {
       position: fixed;
       bottom: 25px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: var(--deep-green);
+      background: var(--brand-dark);
       color: #fff;
-      padding: 12px 22px;
-      border-radius: 14px;
-      font-size: 13px;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
       font-weight: 600;
       display: flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
       z-index: 300;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.35s var(--ease-spring);
       pointer-events: none;
-      letter-spacing: -0.01em;
     }
 
     .toast-box.show {
       transform: translateX(-50%) translateY(0);
     }
 
-    /* ========= SETTINGS TOGGLES ========= */
-    .switch-toggle {
-      position: relative;
-      display: inline-block;
-      width: 44px;
-      height: 24px;
-    }
-    .switch-toggle input { opacity: 0; width: 0; height: 0; }
-    .slider {
-      position: absolute; cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #CBD5E1;
-      transition: .3s;
-      border-radius: 24px;
-    }
-    .slider:before {
-      position: absolute; content: "";
-      height: 18px; width: 18px;
-      left: 3px; bottom: 3px;
-      background-color: white;
-      transition: .3s;
-      border-radius: 50%;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-    }
-    input:checked + .slider { background-color: var(--forest-green); }
-    input:checked + .slider:before { transform: translateX(20px); }
-
-    /* ========= EMPTY STATE ========= */
+    /* Empty States */
     .empty-state {
       text-align: center;
       padding: 36px 16px;
       color: var(--text-muted);
     }
     .empty-state i {
-      font-size: 38px;
+      font-size: 34px;
       margin-bottom: 10px;
-      opacity: 0.4;
+      opacity: 0.35;
     }
     .empty-state h4 {
       font-size: 14px;
       font-weight: 700;
-      color: var(--text-main);
+      color: var(--text-title);
       margin-bottom: 4px;
     }
     .empty-state p {
@@ -1372,85 +1451,7 @@
       line-height: 1.4;
     }
 
-    /* ========= SETTINGS CARD STYLES ========= */
-    .settings-card-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .settings-card-header i {
-      font-size: 14px;
-      color: var(--forest-green);
-    }
-
-    .settings-card-header strong {
-      font-size: 13px;
-      color: var(--deep-green);
-      letter-spacing: -0.01em;
-    }
-
-    .settings-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(226,232,240,0.5);
-    }
-
-    .settings-row:last-child {
-      border-bottom: none;
-    }
-
-    /* ========= PREDICTION CARD ACCENTS ========= */
-    .prediction-hero {
-      background: linear-gradient(145deg, #132E22 0%, #1E4634 60%, #275E44 100%);
-      color: #fff;
-      border: 1px solid rgba(45,106,79,0.3);
-      border-radius: 18px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .prediction-hero::after {
-      content: '';
-      position: absolute;
-      top: -20px;
-      right: -20px;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, rgba(216,243,220,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    /* ========= SYNC CHANNEL GRID ========= */
-    .sync-channel-card {
-      background: #fff;
-      border: 1px solid rgba(226,232,240,0.8);
-      border-radius: 14px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      box-shadow: var(--shadow-card);
-    }
-
-    .sync-channel-card:hover {
-      border-color: rgba(45,106,79,0.3);
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-2px);
-    }
-
-    .sync-channel-card i {
-      font-size: 20px;
-      margin-bottom: 2px;
-    }
-
-    /* ========= RESPONSIVE ========= */
+    /* Responsive */
     @media (max-width: 440px) {
       .phone-wrapper {
         border-radius: 0;
@@ -1462,8 +1463,8 @@
         padding: 0;
       }
       .phone-statusbar::after {
-        width: 80px;
-        height: 24px;
+        width: 50px;
+        height: 4px;
       }
     }
   </style>
@@ -1477,7 +1478,7 @@
         <i class="fa-solid fa-mortar-pestle"></i>
       </div>
       <div>
-        <strong style="font-size: 14px; letter-spacing: -0.02em;">OBATKU</strong>
+        <strong style="font-size: 13.5px; letter-spacing: -0.02em;">OBATKU</strong>
         <span class="judge-badge">NEXORA 2026</span>
       </div>
     </div>
@@ -1505,11 +1506,11 @@
   <div class="stage-container">
     <div class="phone-wrapper" id="phoneDevice">
       
-      <!-- Phone Status Bar with Dynamic Island -->
+      <!-- Phone Status Bar -->
       <div class="phone-statusbar">
         <span id="liveClock">14:30</span>
         <div class="statusbar-icons">
-          <span id="signalIcon"><i class="fa-solid fa-signal" style="opacity: 0.6;"></i> 2G</span>
+          <span id="signalIcon"><i class="fa-solid fa-signal" style="opacity: 0.65;"></i> 2G</span>
           <i class="fa-solid fa-battery-three-quarters"></i>
         </div>
       </div>
@@ -1519,16 +1520,16 @@
         <div class="app-title-box">
           <h1 id="screenTitle">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
-              <rect x="3" y="6" width="7" height="14" rx="3.5" fill="#D8F3DC" opacity="0.9"/>
-              <rect x="14" y="4" width="7" height="16" rx="3.5" fill="#B7E4C7" opacity="0.8"/>
-              <rect x="8" y="8" width="8" height="12" rx="4" fill="#95D5B2" opacity="0.7"/>
+              <rect x="3" y="6" width="7" height="14" rx="3.5" fill="#D8F3DC" opacity="0.95"/>
+              <rect x="14" y="4" width="7" height="16" rx="3.5" fill="#B7E4C7" opacity="0.85"/>
+              <rect x="8" y="8" width="8" height="12" rx="4" fill="#95D5B2" opacity="0.75"/>
             </svg>
             OBATKU
           </h1>
           <p id="screenSubtitle">Sistem Stok Obat Offline-First</p>
         </div>
         <div>
-          <button class="btn-control" style="padding: 5px 12px; font-size: 11px; border-radius: 10px;" onclick="openAddMedicineModal()">
+          <button class="btn-control" style="background: rgba(255,255,255,0.12); padding: 5px 12px; font-size: 11px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18);" onclick="openAddMedicineModal()">
             <i class="fa-solid fa-plus"></i> Tambah
           </button>
         </div>
@@ -1553,49 +1554,43 @@
         <!-- ============================================== -->
         <div class="screen-tab active" id="tab-dashboard">
           
-          <!-- Guided Micro-Onboarding (Dismissible) -->
-          <div class="onboarding-hint" id="onboardingBanner">
-            <div style="display:flex; align-items: center; gap:8px;">
-              <i class="fa-solid fa-hand-pointer" style="font-size: 16px;"></i>
-              <span><strong>Alur Mengalir:</strong> Ketuk kartu <strong>Kritis (3)</strong> di bawah untuk langsung menindaklanjuti stok darurat.</span>
-            </div>
-            <button onclick="dismissOnboarding()"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-
-          <!-- Faskes Info Header -->
+          <!-- Faskes Info Header Card -->
           <div class="card faskes-card">
-            <span class="badge-3t"><i class="fa-solid fa-location-dot"></i> Wilayah 3T Terpencil</span>
+            <div class="faskes-badge-row">
+              <span class="badge-3t"><i class="fa-solid fa-location-dot"></i> Wilayah 3T Terpencil</span>
+              <span class="badge-faskes-id">PST-130104</span>
+            </div>
             <div class="faskes-name">Pustu Sei Berembang</div>
             <div class="faskes-loc">
               <i class="fa-regular fa-hospital"></i> Puskesmas Induk Muara Siberut &bull; Kep. Mentawai
             </div>
           </div>
 
-          <!-- Key Metrics Cards -->
+          <!-- Key Metrics Cards (FEFO Triage 3-Col) -->
           <div class="metrics-grid">
             <div class="metric-card safe" onclick="goToInventory('aman')" title="Klik untuk filter obat aman">
               <div class="metric-icon"><i class="fa-solid fa-shield-check"></i></div>
               <div class="metric-num" id="metricSafe">136</div>
-              <div class="metric-lbl">Obat Aman</div>
+              <div class="metric-lbl">Aman</div>
               <div class="metric-action-hint">Lihat <i class="fa-solid fa-chevron-right"></i></div>
             </div>
             <div class="metric-card warning" onclick="goToInventory('waspada')" title="Klik untuk filter mendekati kadaluarsa">
               <div class="metric-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
               <div class="metric-num" id="metricWarning">12</div>
-              <div class="metric-lbl">Waspada (ED)</div>
-              <div class="metric-action-hint" style="color:#B9770E;">Rotasi <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="metric-lbl">Waspada</div>
+              <div class="metric-action-hint">Rotasi <i class="fa-solid fa-chevron-right"></i></div>
             </div>
             <div class="metric-card critical" onclick="goToInventory('kritis')" title="Klik untuk tindakan darurat">
               <div class="metric-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
               <div class="metric-num" id="metricCritical">3</div>
-              <div class="metric-lbl">Kritis / Defisit</div>
-              <div class="metric-action-hint" style="color:var(--critical-red);">Tindakan <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="metric-lbl">Kritis</div>
+              <div class="metric-action-hint">Tindak <i class="fa-solid fa-chevron-right"></i></div>
             </div>
           </div>
 
           <!-- Priority Action: Top 3 Critical Items -->
-          <div class="section-title" style="color: var(--critical-red);">
-            <span><i class="fa-solid fa-triangle-exclamation"></i> Perhatian Mendesak</span>
+          <div class="section-title">
+            <span style="color: var(--critical-text);"><i class="fa-solid fa-triangle-exclamation" style="margin-right: 5px;"></i> Perhatian Mendesak</span>
             <span class="section-link" onclick="goToInventory('kritis')">Semua Kritis <i class="fa-solid fa-arrow-right"></i></span>
           </div>
 
@@ -1608,26 +1603,26 @@
             <div class="ship-row">
               <div class="ship-icon"><i class="fa-solid fa-ship"></i></div>
               <div style="flex:1;">
-                <div style="font-size: 10px; text-transform: uppercase; color: var(--mint-accent); font-weight: 700; letter-spacing: 0.5px;">
-                  Kapal Logistik Dinkes
+                <div style="font-size: 10px; text-transform: uppercase; color: #A7F3D0; font-weight: 700; letter-spacing: 0.5px;">
+                  Distribusi Logistik Dinkes
                 </div>
-                <div style="font-size: 14px; font-weight: 800; letter-spacing: -0.02em;">KM Mentawai Bahari III</div>
-                <div style="font-size: 11px; opacity: 0.75; margin-top: 3px; font-weight: 500;">
+                <div style="font-size: 13.5px; font-weight: 800; letter-spacing: -0.01em;">KM Mentawai Bahari III</div>
+                <div style="font-size: 11px; opacity: 0.8; margin-top: 2px; font-weight: 500;">
                   <i class="fa-regular fa-clock"></i> Est. Tiba: <strong>14 Okt 2026</strong> (Radio VHF Ch 16)
                 </div>
               </div>
-              <i class="fa-solid fa-chevron-right" style="opacity: 0.4; font-size: 12px;"></i>
+              <i class="fa-solid fa-chevron-right" style="opacity: 0.45; font-size: 12px;"></i>
             </div>
           </div>
 
           <!-- Field Tips (FEFO) -->
-          <div class="card" style="background: linear-gradient(135deg, #ECF9F0, #E4F6ED); border-color: rgba(45,106,79,0.2); border-left: 3px solid var(--forest-green);">
+          <div class="card" style="background: var(--safe-bg); border-color: var(--safe-border); border-left: 3px solid var(--safe); padding: 12px 14px;">
             <div style="display:flex; gap: 10px; align-items: flex-start;">
-              <i class="fa-solid fa-lightbulb" style="color: var(--forest-mid); font-size: 15px; margin-top: 2px;"></i>
+              <i class="fa-solid fa-lightbulb" style="color: var(--safe); font-size: 14px; margin-top: 2px;"></i>
               <div>
-                <strong style="font-size: 12px; color: var(--deep-green);">Tips Logistik Lapangan: FEFO</strong>
-                <p style="font-size: 11px; color: var(--text-secondary); margin-top: 3px; line-height: 1.5;">
-                  Rotasi obat dengan sistem <em>First Expired First Out</em> sebelum didistribusikan ke Posyandu keliling.
+                <strong style="font-size: 12px; color: var(--safe-text);">Pedoman Operasional: Rotasi FEFO</strong>
+                <p style="font-size: 11px; color: var(--text-body); margin-top: 2px; line-height: 1.45;">
+                  Prioritaskan obat dengan masa kedaluwarsa terdekat (<em>First Expired First Out</em>) saat melayani Posyandu keliling.
                 </p>
               </div>
             </div>
@@ -1635,7 +1630,7 @@
 
           <!-- Activity & Recent Mutations Log -->
           <div class="section-title">
-            <span><i class="fa-solid fa-clock-rotate-left"></i> Aktivitas Terbaru</span>
+            <span><i class="fa-solid fa-clock-rotate-left" style="margin-right: 5px;"></i> Aktivitas Terkini</span>
             <span class="section-link" onclick="switchTab('inventory')">Katalog Lengkap <i class="fa-solid fa-arrow-right"></i></span>
           </div>
 
@@ -1683,32 +1678,33 @@
           <div class="card prediction-hero">
             <div style="display:flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;">
               <div>
-                <span class="badge-3t" style="background: rgba(216,243,220,0.12);">Edge-AI v2.4 (On-Device)</span>
-                <div style="font-size: 16px; font-weight: 800; margin-top: 6px; letter-spacing: -0.02em;">Prediksi Konsumsi Obat</div>
-                <div style="font-size: 11px; opacity: 0.7; font-weight: 500;">Analisis lokal dari 8.420 riwayat resep</div>
+                <span class="badge-3t" style="background: rgba(255,255,255,0.15); font-size: 9.5px;">Edge-AI v2.4 (On-Device)</span>
+                <div style="font-size: 15px; font-weight: 800; margin-top: 5px; letter-spacing: -0.02em;">Prediksi Konsumsi Obat</div>
+                <div style="font-size: 11px; opacity: 0.8; font-weight: 500;">Berdasarkan 8.420 riwayat resep faskes</div>
               </div>
               <div style="text-align: right;">
-                <div style="font-size: 28px; font-weight: 900; color: var(--mint-accent); letter-spacing: -0.03em;">92%</div>
-                <div style="font-size: 10px; opacity: 0.65; font-weight: 500;">Akurasi Model</div>
+                <div style="font-size: 26px; font-weight: 800; color: #D8F3DC; letter-spacing: -0.02em;">92%</div>
+                <div style="font-size: 10px; opacity: 0.75; font-weight: 500;">Akurasi Model</div>
               </div>
             </div>
           </div>
 
           <!-- Cumulative Trend Curve Chart -->
           <div class="card">
-            <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <strong style="font-size: 13px; color: var(--deep-green); letter-spacing: -0.01em;">
-                <i class="fa-solid fa-chart-line"></i> Proyeksi Kebutuhan (6 Bulan)
+            <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <strong style="font-size: 12.5px; color: var(--text-title);">
+                <i class="fa-solid fa-chart-line" style="color: var(--brand-primary); margin-right: 4px;"></i> Proyeksi Kebutuhan (6 Bulan)
               </strong>
-              <span style="font-size: 10px; color: var(--text-muted); font-weight: 500;">Pola Musiman</span>
+              <span style="font-size: 10px; color: var(--text-muted); font-weight: 600;">Pola Musiman Mentawai</span>
             </div>
             
             <div class="chart-container">
-              <canvas id="predictionChart" width="380" height="200"></canvas>
+              <canvas id="predictionChart" width="380" height="190"></canvas>
             </div>
-            <div style="font-size: 11px; color: #8A4B00; background: linear-gradient(135deg, #FEF5E7, #FEFCF3); padding: 10px 12px; border-radius: 12px; margin-top: 8px; border: 1px solid rgba(243,156,18,0.15); line-height: 1.5;">
+            
+            <div style="font-size: 11px; color: var(--warning-text); background: var(--warning-bg); padding: 10px 12px; border-radius: var(--radius-md); margin-top: 8px; border: 1px solid var(--warning-border); line-height: 1.45;">
               <i class="fa-solid fa-cloud-showers-heavy"></i> <strong>Pola Musim Hujan (Des - Feb):</strong><br>
-              Model memproyeksikan lonjakan kasus ISPA & Diare hingga +45%. Stok buffer ditingkatkan otomatis.
+              Model memproyeksikan lonjakan kasus ISPA & Diare hingga +45%. Stok buffer dinaikkan otomatis.
             </div>
           </div>
 
@@ -1716,12 +1712,12 @@
           <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div>
-                <strong style="font-size: 13px; color: var(--deep-green); letter-spacing: -0.01em;">
-                  <i class="fa-solid fa-table-list"></i> Rekomendasi RKO Otomatis
+                <strong style="font-size: 12.5px; color: var(--text-title);">
+                  <i class="fa-solid fa-table-list" style="color: var(--brand-primary); margin-right: 4px;"></i> Rekomendasi RKO Otomatis
                 </strong>
-                <p style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">Rencana Kebutuhan Obat periode depan</p>
+                <p style="font-size: 10.5px; color: var(--text-muted); margin-top: 1px;">Rencana Kebutuhan Obat periode depan</p>
               </div>
-              <button class="btn-control" style="background: var(--forest-green); padding: 5px 10px; font-size: 11px;" onclick="exportRkoCsv()">
+              <button class="btn-control" style="background: var(--brand-primary); padding: 4px 10px; font-size: 11px; border-radius: 8px;" onclick="exportRkoCsv()">
                 <i class="fa-solid fa-file-csv"></i> CSV
               </button>
             </div>
@@ -1732,7 +1728,7 @@
                   <th>Nama Obat</th>
                   <th>Proyeksi</th>
                   <th>Stok</th>
-                  <th>Kurang</th>
+                  <th>Defisit</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -1742,7 +1738,7 @@
             </table>
 
             <div style="margin-top: 14px;">
-              <button class="btn-control" style="width: 100%; background: var(--deep-green); height: 46px; font-size: 13px; justify-content: center;" onclick="openBatchOrderModal()">
+              <button class="btn-control" style="width: 100%; background: var(--brand-primary); height: 44px; font-size: 12.5px; justify-content: center; border-radius: var(--radius-md);" onclick="openBatchOrderModal()">
                 <i class="fa-solid fa-file-circle-check"></i> Buat Surat Pesanan RKO Kolektif
               </button>
             </div>
@@ -1754,12 +1750,12 @@
         <!-- ============================================== -->
         <div class="screen-tab" id="tab-sync">
           <!-- Connection Status Card -->
-          <div class="card" style="text-align: center; padding: 24px 16px;">
-            <div id="syncStatusIcon" style="font-size: 42px; color: var(--warning-yellow); margin-bottom: 10px;">
+          <div class="card" style="text-align: center; padding: 22px 16px;">
+            <div id="syncStatusIcon" style="font-size: 38px; color: var(--warning); margin-bottom: 8px;">
               <i class="fa-solid fa-cloud-arrow-up"></i>
             </div>
-            <div style="font-size: 17px; font-weight: 800; letter-spacing: -0.02em;" id="syncStatusTitle">Mode Offline Terproteksi</div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px; max-width: 300px; margin-left: auto; margin-right: auto; line-height: 1.5;" id="syncStatusDesc">
+            <div style="font-size: 16px; font-weight: 800; letter-spacing: -0.02em; color: var(--text-title);" id="syncStatusTitle">Mode Offline Terproteksi</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 4px; max-width: 320px; margin-left: auto; margin-right: auto; line-height: 1.45;" id="syncStatusDesc">
               Semua mutasi obat tersimpan di database lokal SQLite terenkripsi. Siap dialirkan saat kanal transmisi terbuka.
             </div>
 
@@ -1768,8 +1764,8 @@
               <div class="progress-fill" id="syncProgressFill"></div>
             </div>
 
-            <div style="margin-top: 16px;">
-              <button class="btn-control" id="btnMainSync" style="background: var(--deep-green); padding: 12px 24px; font-size: 14px; margin: 0 auto; border-radius: 14px;" onclick="performSync()">
+            <div style="margin-top: 14px;">
+              <button class="btn-control" id="btnMainSync" style="background: var(--brand-primary); padding: 10px 22px; font-size: 13px; margin: 0 auto; border-radius: var(--radius-md);" onclick="performSync()">
                 <i class="fa-solid fa-arrows-rotate"></i> Sinkronkan Sekarang
               </button>
             </div>
@@ -1777,8 +1773,8 @@
 
           <!-- Pending Transaction Queue -->
           <div class="section-title">
-            <span><i class="fa-solid fa-layer-group"></i> Antrean Tertunda (<span id="queueCount">3</span>)</span>
-            <span style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Urutan Pengiriman</span>
+            <span><i class="fa-solid fa-layer-group" style="margin-right: 5px;"></i> Antrean Sinkronisasi (<span id="queueCount">3</span>)</span>
+            <span style="font-size: 10.5px; color: var(--text-muted); font-weight: 600;">Urutan FIFO</span>
           </div>
 
           <div id="pendingQueueContainer">
@@ -1786,39 +1782,39 @@
           </div>
 
           <!-- Multi-Channel Options -->
-          <div class="section-title" style="margin-top: 18px;">
-            <span><i class="fa-solid fa-tower-broadcast"></i> Jalur Transmisi 3T</span>
+          <div class="section-title" style="margin-top: 16px;">
+            <span><i class="fa-solid fa-tower-broadcast" style="margin-right: 5px;"></i> Kanal Transmisi 3T</span>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div class="sync-channel-card" onclick="selectSyncChannel('wifi')" style="border-color: rgba(45,106,79,0.2);">
-              <i class="fa-solid fa-wifi" style="color: var(--forest-green);"></i>
-              <div style="font-size: 12px; font-weight: 700;">Internet 4G / WiFi</div>
-              <div style="font-size: 10px; color: var(--text-muted);">Otomatis saat sinyal pulih</div>
+            <div class="sync-channel-card" onclick="selectSyncChannel('wifi')">
+              <i class="fa-solid fa-wifi"></i>
+              <div style="font-size: 12px; font-weight: 700; color: var(--text-title);">Internet 4G / WiFi</div>
+              <div style="font-size: 10px; color: var(--text-muted);">Transmisi otomatis REST API</div>
             </div>
 
             <div class="sync-channel-card" onclick="selectSyncChannel('sms')">
-              <i class="fa-solid fa-comment-sms" style="color: #0284C7;"></i>
-              <div style="font-size: 12px; font-weight: 700;">SMS Gateway (2G)</div>
+              <i class="fa-solid fa-comment-sms"></i>
+              <div style="font-size: 12px; font-weight: 700; color: var(--text-title);">SMS Gateway (2G)</div>
               <div style="font-size: 10px; color: var(--text-muted);">Kompresi base64 data kecil</div>
             </div>
 
             <div class="sync-channel-card" onclick="selectSyncChannel('lora')">
-              <i class="fa-solid fa-network-wired" style="color: #7C3AED;"></i>
-              <div style="font-size: 12px; font-weight: 700;">LoRa / P2P Mesh</div>
-              <div style="font-size: 10px; color: var(--text-muted);">Radio ke kapal medis</div>
+              <i class="fa-solid fa-tower-cell"></i>
+              <div style="font-size: 12px; font-weight: 700; color: var(--text-title);">LoRa / P2P Mesh</div>
+              <div style="font-size: 10px; color: var(--text-muted);">Radio telemetry ke kapal</div>
             </div>
 
-            <div class="sync-channel-card" onclick="exportFullInventoryCsv()" style="border-color: rgba(39,174,96,0.2);">
-              <i class="fa-solid fa-sd-card" style="color: var(--safe-green);"></i>
-              <div style="font-size: 12px; font-weight: 700;">Ekspor SD Card</div>
-              <div style="font-size: 10px; color: var(--safe-green); font-weight: 600;">Unduh CSV Fisik</div>
+            <div class="sync-channel-card" onclick="exportFullInventoryCsv()">
+              <i class="fa-solid fa-sd-card"></i>
+              <div style="font-size: 12px; font-weight: 700; color: var(--text-title);">Ekspor SD Card</div>
+              <div style="font-size: 10px; color: var(--brand-primary); font-weight: 700;">Unduh Berkas CSV</div>
             </div>
           </div>
 
           <!-- Security Badge -->
           <div style="margin-top: 16px; text-align: center; font-size: 11px; color: var(--text-muted); font-weight: 500;">
-            <i class="fa-solid fa-lock" style="color: var(--forest-green);"></i> Enkripsi AES-256 Standar Kemenkes RI
+            <i class="fa-solid fa-lock" style="color: var(--brand-primary);"></i> Enkripsi AES-256 Standar Kemenkes RI
           </div>
         </div>
 
@@ -1828,16 +1824,16 @@
         <div class="screen-tab" id="tab-settings">
           
           <!-- Facility & Officer Profile Card -->
-          <div class="card" style="border-left: 3px solid var(--forest-green);">
+          <div class="card" style="border-left: 3px solid var(--brand-primary);">
             <div style="display:flex; align-items:center; gap: 14px;">
-              <div style="width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, var(--mint-light), var(--mint-accent)); display:flex; align-items:center; justify-content:center; color: var(--deep-green); font-size: 20px; flex-shrink: 0;">
+              <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--brand-tint); display:flex; align-items:center; justify-content:center; color: var(--brand-primary); font-size: 18px; flex-shrink: 0;">
                 <i class="fa-solid fa-user-nurse"></i>
               </div>
               <div style="flex: 1;">
-                <strong style="font-size: 15px; color: var(--deep-green); letter-spacing: -0.02em;">Bidan Siti Rahma, A.Md.Keb</strong>
+                <strong style="font-size: 14px; color: var(--text-title); letter-spacing: -0.01em;">Bidan Siti Rahma, A.Md.Keb</strong>
                 <div style="font-size: 11px; color: var(--text-muted); font-weight: 500;">NIP. 19980512 202401 2 003</div>
-                <div style="font-size: 11px; color: var(--forest-mid); font-weight: 700; margin-top: 2px;">
-                  Pustu Sei Berembang &bull; Faskes 3T
+                <div style="font-size: 11px; color: var(--brand-primary); font-weight: 700; margin-top: 2px;">
+                  Pustu Sei Berembang &bull; Wilayah 3T
                 </div>
               </div>
             </div>
@@ -1849,34 +1845,34 @@
               <i class="fa-solid fa-sliders"></i>
               <strong>Threshold Peringatan Kedaluwarsa</strong>
             </div>
-            <p style="font-size: 11px; color: var(--text-muted); margin: -6px 0 14px 0; line-height: 1.4;">
-              Atur batas hari peringatan dini untuk rotasi FEFO faskes.
+            <p style="font-size: 11px; color: var(--text-muted); margin: -4px 0 12px 0; line-height: 1.4;">
+              Batas hari peringatan dini rotasi FEFO faskes.
             </p>
 
             <div class="settings-row">
-              <span style="font-size: 12px; font-weight: 700; color: var(--critical-red); display:flex; align-items:center; gap: 6px;">
-                <i class="fa-solid fa-circle" style="font-size: 7px;"></i> Zona Kritis:
+              <span style="font-size: 12px; font-weight: 700; color: var(--critical-text); display:flex; align-items:center; gap: 6px;">
+                <i class="fa-solid fa-circle" style="font-size: 6px;"></i> Zona Kritis:
               </span>
-              <span style="font-size: 12px; font-weight: 700; background: rgba(231,76,60,0.08); color: var(--critical-red); padding: 3px 10px; border-radius: 8px;">
-                ≤ <span id="thresholdKritisVal">7</span> Hari
-              </span>
-            </div>
-
-            <div class="settings-row">
-              <span style="font-size: 12px; font-weight: 700; color: #B9770E; display:flex; align-items:center; gap: 6px;">
-                <i class="fa-solid fa-circle" style="font-size: 7px;"></i> Zona Waspada:
-              </span>
-              <span style="font-size: 12px; font-weight: 700; background: rgba(243,156,18,0.08); color: #B9770E; padding: 3px 10px; border-radius: 8px;">
-                ≤ <span id="thresholdWaspadaVal">30</span> Hari
+              <span style="font-size: 11.5px; font-weight: 700; background: var(--critical-bg); color: var(--critical-text); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--critical-border);">
+                &le; <span id="thresholdKritisVal">7</span> Hari
               </span>
             </div>
 
             <div class="settings-row">
-              <span style="font-size: 12px; font-weight: 700; color: var(--forest-green); display:flex; align-items:center; gap: 6px;">
-                <i class="fa-solid fa-circle" style="font-size: 7px;"></i> Zona RKO:
+              <span style="font-size: 12px; font-weight: 700; color: var(--warning-text); display:flex; align-items:center; gap: 6px;">
+                <i class="fa-solid fa-circle" style="font-size: 6px;"></i> Zona Waspada:
               </span>
-              <span style="font-size: 12px; font-weight: 700; background: rgba(45,106,79,0.06); color: var(--forest-green); padding: 3px 10px; border-radius: 8px;">
-                ≤ 90 Hari
+              <span style="font-size: 11.5px; font-weight: 700; background: var(--warning-bg); color: var(--warning-text); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--warning-border);">
+                &le; <span id="thresholdWaspadaVal">30</span> Hari
+              </span>
+            </div>
+
+            <div class="settings-row">
+              <span style="font-size: 12px; font-weight: 700; color: var(--safe-text); display:flex; align-items:center; gap: 6px;">
+                <i class="fa-solid fa-circle" style="font-size: 6px;"></i> Zona RKO:
+              </span>
+              <span style="font-size: 11.5px; font-weight: 700; background: var(--safe-bg); color: var(--safe-text); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--safe-border);">
+                &le; 90 Hari
               </span>
             </div>
           </div>
@@ -1890,8 +1886,8 @@
 
             <div class="settings-row">
               <div>
-                <div style="font-size: 12px; font-weight: 700;">Mode Hemat Baterai (2G)</div>
-                <div style="font-size: 10px; color: var(--text-muted);">Matikan animasi & sinkronisasi latar</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--text-title);">Mode Hemat Baterai (2G)</div>
+                <div style="font-size: 10.5px; color: var(--text-muted);">Matikan animasi & sinkronisasi latar</div>
               </div>
               <label class="switch-toggle">
                 <input type="checkbox" checked onchange="showToast('Mode Hemat Daya Aktif')">
@@ -1901,8 +1897,8 @@
 
             <div class="settings-row">
               <div>
-                <div style="font-size: 12px; font-weight: 700;">Feedback Haptik & Audio</div>
-                <div style="font-size: 10px; color: var(--text-muted);">Bunyi beep saat verifikasi barcode</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--text-title);">Feedback Audio</div>
+                <div style="font-size: 10.5px; color: var(--text-muted);">Bunyi beep verifikasi barcode & transaksi</div>
               </div>
               <label class="switch-toggle">
                 <input type="checkbox" checked id="soundFeedbackToggle" onchange="showToast('Feedback Suara Diperbarui')">
@@ -1917,15 +1913,15 @@
               <i class="fa-solid fa-circle-info"></i>
               <strong>Informasi Sistem</strong>
             </div>
-            <div style="font-size: 11px; color: var(--text-muted); line-height: 1.8; font-weight: 500;">
-              Aplikasi: <strong style="color: var(--text-secondary);">OBATKU v1.2.0-NEXORA</strong><br>
-              Engine: <strong style="color: var(--text-secondary);">SQLite (IndexedDB Mirror)</strong><br>
-              Enkripsi: <strong style="color: var(--text-secondary);">AES-256 At-Rest</strong><br>
-              Faskes: <strong style="color: var(--text-secondary);">Pustu Sei Berembang (3T)</strong>
+            <div style="font-size: 11px; color: var(--text-muted); line-height: 1.7; font-weight: 500;">
+              Aplikasi: <strong style="color: var(--text-title);">OBATKU v1.2.0-NEXORA</strong><br>
+              Engine: <strong style="color: var(--text-title);">SQLite (IndexedDB Mirror)</strong><br>
+              Enkripsi: <strong style="color: var(--text-title);">AES-256 At-Rest</strong><br>
+              Faskes: <strong style="color: var(--text-title);">Pustu Sei Berembang (3T)</strong>
             </div>
 
             <div style="margin-top: 14px;">
-              <button class="btn-control" style="width: 100%; background: rgba(239,68,68,0.9); height: 42px; font-size: 12px; justify-content: center; border-radius: 12px;" onclick="resetDemoData()">
+              <button class="btn-control" style="width: 100%; background: #EF4444; height: 40px; font-size: 12px; justify-content: center; border-radius: var(--radius-md); border: none;" onclick="resetDemoData()">
                 <i class="fa-solid fa-rotate-left"></i> Reset ke Data Awal Demo
               </button>
             </div>
@@ -1967,9 +1963,9 @@
     </div>
   </div>
 
-  <!-- ============================================== -->
-  <!-- MODAL: DETAIL OBAT                            -->
-  <!-- ============================================== -->
+  <!-- ==========================================================================
+       MODAL: DETAIL OBAT
+       ========================================================================== -->
   <div class="modal-overlay" id="medDetailModal">
     <div class="modal-box">
       <div class="modal-drag-indicator"></div>
@@ -1978,38 +1974,38 @@
       <div style="display:flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
         <div>
           <span class="badge-status safe" id="detailStatusBadge">AMAN</span>
-          <h3 style="font-size: 18px; font-weight: 800; color: var(--deep-green); margin-top: 6px; letter-spacing: -0.02em;" id="detailMedName">Paracetamol 500mg</h3>
-          <div style="font-size: 12px; color: var(--text-muted); font-weight: 500;" id="detailMedForm">Bentuk: Tablet &bull; Sediaan Baku</div>
+          <h3 style="font-size: 17px; font-weight: 800; color: var(--text-title); margin-top: 6px; letter-spacing: -0.02em;" id="detailMedName">Paracetamol 500mg</h3>
+          <div style="font-size: 11.5px; color: var(--text-muted); font-weight: 500;" id="detailMedForm">Bentuk: Tablet &bull; Sediaan Baku</div>
         </div>
         <div id="detailSyncStatus"></div>
       </div>
 
-      <div class="card" style="background: var(--surface); border: 1px solid rgba(226,232,240,0.8); margin: 12px 0; border-radius: 14px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+      <div class="card" style="background: #F8FAF9; border: 1px solid var(--border-color); margin: 12px 0; border-radius: var(--radius-md);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <div>
-            <span style="font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Nomor Bets</span>
-            <div style="font-size: 13px; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 2px;" id="detailBatch">BN-PCT-8802</div>
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;">Nomor Bets</span>
+            <div style="font-size: 12.5px; font-weight: 700; font-family: 'JetBrains Mono', monospace; margin-top: 2px;" id="detailBatch">BN-PCT-8802</div>
           </div>
           <div>
-            <span style="font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Kedaluwarsa</span>
-            <div style="font-size: 13px; font-weight: 800; margin-top: 2px;" id="detailExpiry">2027-04-30</div>
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;">Kedaluwarsa</span>
+            <div style="font-size: 12.5px; font-weight: 700; margin-top: 2px;" id="detailExpiry">2027-04-30</div>
           </div>
           <div>
-            <span style="font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Lokasi Rak</span>
-            <div style="font-size: 13px; font-weight: 800; margin-top: 2px;" id="detailRack">Rak Umum</div>
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;">Lokasi Rak</span>
+            <div style="font-size: 12.5px; font-weight: 700; margin-top: 2px;" id="detailRack">Rak Umum</div>
           </div>
           <div>
-            <span style="font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Status Hari</span>
-            <div style="font-size: 13px; font-weight: 800; margin-top: 2px;" id="detailDaysCountdown">262 hari lagi</div>
+            <span style="font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;">Hitung Mundur</span>
+            <div style="font-size: 12.5px; font-weight: 700; margin-top: 2px;" id="detailDaysCountdown">262 hari lagi</div>
           </div>
         </div>
       </div>
 
       <!-- Quick Quantity Adjustment -->
-      <div style="display:flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin-bottom: 16px;">
+      <div style="display:flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); margin-bottom: 16px;">
         <div>
-          <strong style="font-size: 13px;">Koreksi Stok Fisik</strong>
-          <p style="font-size: 11px; color: var(--text-muted);">Sesuai hitung kartu register</p>
+          <strong style="font-size: 13px; color: var(--text-title);">Penyesuaian Fisik Stok</strong>
+          <p style="font-size: 11px; color: var(--text-muted);">Sesuai verifikasi register</p>
         </div>
         <div class="stepper-box">
           <button class="btn-step" id="btnDetailDec">-</button>
@@ -2020,15 +2016,15 @@
 
       <!-- Actions -->
       <div style="display: flex; flex-direction: column; gap: 8px;">
-        <button class="btn-control" id="btnDetailEmergencyOrder" style="background: var(--warning-yellow); color:#fff; height: 46px; justify-content: center; font-size: 13px; border-radius: 14px;" onclick="triggerOrderFromDetail()">
+        <button class="btn-control" id="btnDetailEmergencyOrder" style="background: var(--warning-bg); border-color: var(--warning-border); color: var(--warning-text); height: 44px; justify-content: center; font-size: 12.5px; border-radius: var(--radius-md);" onclick="triggerOrderFromDetail()">
           <i class="fa-solid fa-file-circle-plus"></i> Buat Surat Pesanan Darurat
         </button>
 
-        <button class="btn-control" id="btnDetailDestroy" style="background: var(--critical-red); color:#fff; height: 46px; justify-content: center; font-size: 13px; border-radius: 14px;" onclick="triggerDestructionFromDetail()">
+        <button class="btn-control" id="btnDetailDestroy" style="background: var(--critical-bg); border-color: var(--critical-border); color: var(--critical-text); height: 44px; justify-content: center; font-size: 12.5px; border-radius: var(--radius-md);" onclick="triggerDestructionFromDetail()">
           <i class="fa-solid fa-fire"></i> Buat Berita Acara Pemusnahan
         </button>
 
-        <button class="btn-control" style="background: #F1F5F9; color: var(--text-main); height: 42px; justify-content: center; font-size: 12px; border-radius: 12px;" onclick="closeMedDetailModal()">
+        <button class="btn-control" style="background: #F1F5F3; color: var(--text-body); border-color: var(--border-color); height: 40px; justify-content: center; font-size: 12px; border-radius: var(--radius-md);" onclick="closeMedDetailModal()">
           Tutup Detail
         </button>
       </div>
@@ -2036,17 +2032,17 @@
     </div>
   </div>
 
-  <!-- ============================================== -->
-  <!-- MODAL: MULTI-STEP SURAT PESANAN               -->
-  <!-- ============================================== -->
+  <!-- ==========================================================================
+       MODAL: MULTI-STEP SURAT PESANAN
+       ========================================================================== -->
   <div class="modal-overlay" id="orderModal">
     <div class="modal-box">
       <div class="modal-drag-indicator"></div>
       <button class="modal-close" onclick="closeOrderModal()"><i class="fa-solid fa-xmark"></i></button>
 
       <div style="text-align: center; margin-bottom: 12px;">
-        <h3 style="font-size: 16px; font-weight: 800; color: var(--deep-green); letter-spacing: -0.02em;">Surat Pesanan Obat Darurat (SPO)</h3>
-        <p style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Formulir Resmi Pengajuan ke Gudang Farmasi Dinkes</p>
+        <h3 style="font-size: 15px; font-weight: 800; color: var(--text-title); letter-spacing: -0.02em;">Surat Pesanan Obat Darurat (SPO)</h3>
+        <p style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Formulir Pengajuan Cepat ke Gudang Farmasi Dinkes</p>
       </div>
 
       <!-- Progress Stepper -->
@@ -2057,7 +2053,7 @@
         </div>
         <div class="step-node" id="orderStep2Node">
           <div class="step-circle">2</div>
-          <div class="step-label">Saksi</div>
+          <div class="step-label">Petugas</div>
         </div>
         <div class="step-node" id="orderStep3Node">
           <div class="step-circle">3</div>
@@ -2067,10 +2063,10 @@
 
       <!-- STEP 1 -->
       <div id="orderStep1">
-        <div class="card" style="background: linear-gradient(135deg, #FEF5E7, #FEFCF3); border-color: rgba(243,156,18,0.2);">
-          <strong style="color: #935116; font-size: 13px;" id="orderMedTitle">Amoxicillin 500mg Kapsul</strong>
+        <div class="card" style="background: var(--warning-bg); border-color: var(--warning-border); padding: 12px;">
+          <strong style="color: var(--warning-text); font-size: 12.5px;" id="orderMedTitle">Amoxicillin 500mg Kapsul</strong>
           <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
-            Stok Saat Ini: <span id="orderCurrentStock">180</span> &bull; Status: <span style="color:var(--critical-red); font-weight:700;">Segera Habis/ED</span>
+            Stok Saat Ini: <span id="orderCurrentStock">180</span> &bull; Status: <span style="color: var(--critical-text); font-weight:700;">Segera Habis/ED</span>
           </div>
         </div>
 
@@ -2083,13 +2079,13 @@
           <label class="form-label">Alasan Kedaruratan</label>
           <select class="form-select" id="orderReason">
             <option value="Buffer Stock Kritis">Buffer Stock Menipis / Defisit</option>
-            <option value="Mendekati Kedaluwarsa (H-7)">Mendekati Kedaluwarsa (H ≤ 7 Hari)</option>
+            <option value="Mendekati Kedaluwarsa (H-7)">Mendekati Kedaluwarsa (H &le; 7 Hari)</option>
             <option value="Lonjakan Kasus Musiman (ISPA/Diare)">Lonjakan Kasus Musiman (ISPA / Diare)</option>
             <option value="Distribusi Posyandu">Persiapan Posyandu Pulau Terpencil</option>
           </select>
         </div>
 
-        <button class="btn-control" style="width: 100%; background: var(--deep-green); height: 46px; font-size: 13px; justify-content: center; margin-top: 10px; border-radius: 14px;" onclick="goToOrderStep(2)">
+        <button class="btn-control" style="width: 100%; background: var(--brand-primary); height: 44px; font-size: 12.5px; justify-content: center; margin-top: 10px; border-radius: var(--radius-md);" onclick="goToOrderStep(2)">
           Lanjut ke Konfirmasi Petugas <i class="fa-solid fa-arrow-right"></i>
         </button>
       </div>
@@ -2110,31 +2106,31 @@
           </select>
         </div>
 
-        <div style="background: linear-gradient(135deg, #ECF9F0, #E4F6ED); padding: 10px 12px; border-radius: 12px; font-size: 11px; color: var(--deep-green); margin-bottom: 14px; border: 1px solid rgba(45,106,79,0.12);">
-          <i class="fa-solid fa-shield-halved"></i> Transaksi akan dicatat ke dalam antrean sinkronisasi lokal dan dikirimkan saat jaringan terhubung.
+        <div style="background: var(--safe-bg); border: 1px solid var(--safe-border); padding: 10px 12px; border-radius: var(--radius-md); font-size: 11px; color: var(--safe-text); margin-bottom: 14px;">
+          <i class="fa-solid fa-shield-halved"></i> Transaksi akan dicatat ke antrean offline lokal dan dikirim saat jaringan terhubung.
         </div>
 
         <div style="display:flex; gap: 8px;">
-          <button class="btn-control" style="flex:1; background: #E2E8F0; color: var(--text-main); height: 46px; justify-content: center; border-radius: 14px;" onclick="goToOrderStep(1)">
+          <button class="btn-control" style="flex:1; background: #F1F5F3; color: var(--text-body); border-color: var(--border-color); height: 44px; justify-content: center; border-radius: var(--radius-md);" onclick="goToOrderStep(1)">
             Kembali
           </button>
-          <button class="btn-control" style="flex:2; background: var(--forest-green); height: 46px; justify-content: center; font-size: 13px; border-radius: 14px;" onclick="submitOrderFinal()">
-            <i class="fa-solid fa-check"></i> Terbitkan Surat Pesanan
+          <button class="btn-control" style="flex:2; background: var(--brand-primary); height: 44px; justify-content: center; font-size: 12.5px; border-radius: var(--radius-md);" onclick="submitOrderFinal()">
+            <i class="fa-solid fa-check"></i> Terbitkan Pesanan
           </button>
         </div>
       </div>
 
       <!-- STEP 3 (SUCCESS) -->
       <div id="orderStep3" style="display: none; text-align: center; padding: 20px 10px;">
-        <div style="width: 60px; height: 60px; background: rgba(39,174,96,0.08); color: var(--safe-green); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 14px auto;">
+        <div style="width: 54px; height: 54px; background: var(--safe-bg); color: var(--safe); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 12px auto; border: 1px solid var(--safe-border);">
           <i class="fa-solid fa-check"></i>
         </div>
-        <h3 style="font-size: 17px; font-weight: 800; color: var(--deep-green); letter-spacing: -0.02em;">Surat Pesanan Diterbitkan!</h3>
-        <p style="font-size: 12px; color: var(--text-muted); margin: 6px 0 16px 0; line-height: 1.5;">
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--text-title); letter-spacing: -0.02em;">Surat Pesanan Diterbitkan!</h3>
+        <p style="font-size: 11.5px; color: var(--text-muted); margin: 6px 0 16px 0; line-height: 1.5;">
           Nomor: <strong>SPO/2026/PST-09/441</strong><br>
           Tersimpan di SQLite lokal & masuk ke antrean sinkronisasi Dinkes.
         </p>
-        <button class="btn-control" style="width: 100%; background: var(--deep-green); height: 46px; font-size: 13px; justify-content: center; border-radius: 14px;" onclick="finishOrderFlow()">
+        <button class="btn-control" style="width: 100%; background: var(--brand-primary); height: 44px; font-size: 12.5px; justify-content: center; border-radius: var(--radius-md);" onclick="finishOrderFlow()">
           Selesai & Kembali ke Layar
         </button>
       </div>
@@ -2142,20 +2138,20 @@
     </div>
   </div>
 
-  <!-- ============================================== -->
-  <!-- MODAL: TAMBAH OBAT (SBBK BARANG MASUK)         -->
-  <!-- ============================================== -->
+  <!-- ==========================================================================
+       MODAL: TAMBAH OBAT (SBBK BARANG MASUK)
+       ========================================================================== -->
   <div class="modal-overlay" id="addMedicineModal">
     <div class="modal-box">
       <div class="modal-drag-indicator"></div>
       <button class="modal-close" onclick="closeAddMedicineModal()"><i class="fa-solid fa-xmark"></i></button>
       
-      <div style="display:flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-        <i class="fa-solid fa-box-medical" style="color: var(--forest-green); font-size: 20px;"></i>
-        <h3 style="font-size: 16px; font-weight: 800; color: var(--deep-green); letter-spacing: -0.02em;">Catat Obat Masuk (SBBK)</h3>
+      <div style="display:flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+        <i class="fa-solid fa-box-medical" style="color: var(--brand-primary); font-size: 18px;"></i>
+        <h3 style="font-size: 15px; font-weight: 800; color: var(--text-title); letter-spacing: -0.02em;">Catat Obat Masuk (SBBK)</h3>
       </div>
 
-      <div style="background: linear-gradient(135deg, #ECF9F0, #E4F6ED); padding: 8px 12px; border-radius: 10px; font-size: 11px; color: var(--deep-green); margin-bottom: 14px; border: 1px solid rgba(45,106,79,0.12);">
+      <div style="background: var(--brand-tint); border: 1px solid var(--brand-border); padding: 8px 12px; border-radius: var(--radius-md); font-size: 11px; color: var(--brand-dark); margin-bottom: 14px;">
         <i class="fa-solid fa-file-invoice"></i> Cocokkan dengan lembar Surat Bukti Barang Masuk (SBBK) dari Gudang Dinkes.
       </div>
 
@@ -2221,21 +2217,21 @@
         <div class="form-group">
           <label class="form-label">Lokasi Penyimpanan Farmasi</label>
           <div class="rack-option selected" onclick="selectRack('umum', this)">
-            <i class="fa-solid fa-cubes" style="color: var(--forest-green); font-size: 18px;"></i>
+            <i class="fa-solid fa-cubes" style="color: var(--brand-primary); font-size: 16px;"></i>
             <div>
               <div class="rack-title">Rak Umum</div>
               <div class="rack-desc">Suhu ruangan normal (25° - 30°C)</div>
             </div>
           </div>
           <div class="rack-option" onclick="selectRack('darurat', this)">
-            <i class="fa-solid fa-truck-medical" style="color: var(--critical-red); font-size: 18px;"></i>
+            <i class="fa-solid fa-truck-medical" style="color: var(--critical); font-size: 16px;"></i>
             <div>
               <div class="rack-title">Triage / Kedaruratan 24 Jam</div>
               <div class="rack-desc">Resusitasi & IGD rawat jalan darurat</div>
             </div>
           </div>
           <div class="rack-option" onclick="selectRack('cold_chain', this)">
-            <i class="fa-solid fa-snowflake" style="color: #0284C7; font-size: 18px;"></i>
+            <i class="fa-solid fa-snowflake" style="color: var(--cold); font-size: 16px;"></i>
             <div>
               <div class="rack-title">Cold Chain (2° - 8°C)</div>
               <div class="rack-desc">Vaksin, serum anti bisa ular & injeksi khusus</div>
@@ -2243,32 +2239,32 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-control" style="width: 100%; background: var(--deep-green); height: 50px; font-size: 15px; justify-content: center; margin-top: 8px; border-radius: 14px;">
+        <button type="submit" class="btn-control" style="width: 100%; background: var(--brand-primary); height: 46px; font-size: 13.5px; justify-content: center; margin-top: 6px; border-radius: var(--radius-md);">
           <i class="fa-solid fa-floppy-disk"></i> Simpan ke SQLite Lokal
         </button>
       </form>
     </div>
   </div>
 
-  <!-- ============================================== -->
-  <!-- MODAL: BERITA ACARA PEMUSNAHAN OBAT            -->
-  <!-- ============================================== -->
+  <!-- ==========================================================================
+       MODAL: BERITA ACARA PEMUSNAHAN OBAT
+       ========================================================================== -->
   <div class="modal-overlay" id="destructionModal">
     <div class="modal-box">
       <div class="modal-drag-indicator"></div>
       <button class="modal-close" onclick="closeDestructionModal()"><i class="fa-solid fa-xmark"></i></button>
-      <div style="display:flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--critical-red);">
-        <i class="fa-solid fa-fire" style="font-size: 20px;"></i>
-        <h3 style="font-size: 16px; font-weight: 800; letter-spacing: -0.02em;">Berita Acara Pemusnahan Obat</h3>
+      <div style="display:flex; align-items: center; gap: 8px; margin-bottom: 10px; color: var(--critical-text);">
+        <i class="fa-solid fa-fire" style="font-size: 18px;"></i>
+        <h3 style="font-size: 15px; font-weight: 800; letter-spacing: -0.02em;">Berita Acara Pemusnahan Obat</h3>
       </div>
       
-      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4;">
+      <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">
         Sesuai Permenkes RI tentang pengelolaan obat rusak / kedaluwarsa di Puskesmas Pembantu.
       </p>
 
-      <div style="background: rgba(231,76,60,0.06); padding: 12px; border-radius: 12px; border: 1px solid rgba(231,76,60,0.15); margin-bottom: 14px;">
-        <strong id="destroyMedName" style="color: var(--critical-red); font-size: 13px;">Paracetamol 500mg</strong>
-        <div style="font-size: 11px; color: #7B241C; margin-top: 4px;">
+      <div style="background: var(--critical-bg); border: 1px solid var(--critical-border); padding: 12px; border-radius: var(--radius-md); margin-bottom: 14px;">
+        <strong id="destroyMedName" style="color: var(--critical-text); font-size: 12.5px;">Paracetamol 500mg</strong>
+        <div style="font-size: 11px; color: var(--critical-text); margin-top: 3px;">
           No. Bets: <span id="destroyMedBatch">BN-9921</span> | Jumlah: <span id="destroyMedQty">120</span> <span id="destroyMedUnit">Tablet</span>
         </div>
       </div>
@@ -2292,58 +2288,58 @@
         </select>
       </div>
 
-      <button class="btn-control" style="width: 100%; background: var(--critical-red); height: 48px; font-size: 14px; justify-content: center; border-radius: 14px;" onclick="confirmDestruction()">
+      <button class="btn-control" style="width: 100%; background: var(--critical); height: 44px; font-size: 13px; justify-content: center; border-radius: var(--radius-md); border: none;" onclick="confirmDestruction()">
         <i class="fa-solid fa-trash-can"></i> Eksekusi & Catat Berita Acara
       </button>
     </div>
   </div>
 
-  <!-- ============================================== -->
-  <!-- MODAL: INFO JURI / PRD                         -->
-  <!-- ============================================== -->
+  <!-- ==========================================================================
+       MODAL: INFO JURI / PRD
+       ========================================================================== -->
   <div class="modal-overlay" id="prdModal">
-    <div class="modal-box" style="max-width: 650px;">
+    <div class="modal-box" style="max-width: 620px;">
       <div class="modal-drag-indicator"></div>
       <button class="modal-close" onclick="closePrdModal()"><i class="fa-solid fa-xmark"></i></button>
       
-      <div style="display:flex; align-items: center; gap: 10px; margin-bottom: 14px;">
-        <div style="width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, #FEF3C7, #FDE68A); display:flex; align-items:center; justify-content:center;">
-          <i class="fa-solid fa-award" style="color: #D97706; font-size: 22px;"></i>
+      <div style="display:flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+        <div style="width: 40px; height: 40px; border-radius: var(--radius-md); background: #FEF3C7; display:flex; align-items:center; justify-content:center; border: 1px solid #FDE68A;">
+          <i class="fa-solid fa-award" style="color: #D97706; font-size: 20px;"></i>
         </div>
         <div>
-          <h2 style="font-size: 17px; font-weight: 800; color: var(--deep-green); letter-spacing: -0.02em;">OBATKU — Inovasi NEXORA 2026</h2>
+          <h2 style="font-size: 16px; font-weight: 800; color: var(--text-title); letter-spacing: -0.02em;">OBATKU — Inovasi NEXORA 2026</h2>
           <p style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Subtema: Kesehatan dan Kesejahteraan &bull; Daerah 3T</p>
         </div>
       </div>
 
-      <div style="font-size: 12px; line-height: 1.7; color: var(--text-secondary);">
-        <h4 style="color: var(--forest-green); margin: 14px 0 6px 0; font-size: 13px;">1. Latar Belakang & Problem Statement</h4>
-        <p>Di wilayah 3T (Kepulauan Mentawai, pedalaman Papua, Maluku Tenggara), fasilitas pelayanan primer (Pustu/Poskesdes) menghadapi keterbatasan ekstrem: ketiadaan internet berminggu-minggu, distribusi logistik hanya sebulan sekali via kapal, dan pencatatan kertas yang memicu tingginya obat kadaluarsa dan stockout obat esensial.</p>
+      <div style="font-size: 12px; line-height: 1.65; color: var(--text-body);">
+        <h4 style="color: var(--brand-primary); margin: 12px 0 4px 0; font-size: 12.5px;">1. Latar Belakang & Problem Statement</h4>
+        <p>Di wilayah 3T (Kepulauan Mentawai, pedalaman Papua, Maluku Tenggara), fasilitas pelayanan primer (Pustu/Poskesdes) menghadapi keterbatasan ekstrem: ketiadaan internet berminggu-minggu, jadwal kapal logistik bulanan, dan pencatatan kertas yang memicu tingginya obat kadaluarsa serta defisit obat esensial.</p>
 
-        <h4 style="color: var(--forest-green); margin: 14px 0 6px 0; font-size: 13px;">2. Alur Pengguna "Mengalir Seperti Air"</h4>
-        <p><strong>Melihat Kondisi → Identifikasi Masalah → Ambil Tindakan → Selesai:</strong></p>
+        <h4 style="color: var(--brand-primary); margin: 12px 0 4px 0; font-size: 12.5px;">2. Alur Pengguna "Mengalir Seperti Air"</h4>
+        <p><strong>Melihat Kondisi &rarr; Identifikasi Masalah &rarr; Ambil Tindakan &rarr; Selesai:</strong></p>
         <ul style="padding-left: 18px; margin-top: 4px;">
-          <li><strong>Deteksi Cepat:</strong> Kartu metrik di Beranda langsung membawa pengguna ke daftar obat yang terfilter.</li>
-          <li><strong>Aksi Seketika:</strong> Tombol aksi cepat di setiap kartu obat membuka modal pembuatan Surat Pesanan Darurat berjenjang.</li>
-          <li><strong>Penyimpanan Instan:</strong> Semua perubahan tercatat secara ACID di SQLite lokal dan siap disinkronkan.</li>
+          <li><strong>Deteksi Cepat:</strong> Kartu metrik di Beranda langsung memfilter daftar obat sesuai tingkat triase FEFO.</li>
+          <li><strong>Aksi Seketika:</strong> Tombol aksi cepat membuka modal pembuatan Surat Pesanan Darurat berjenjang (3 langkah).</li>
+          <li><strong>Penyimpanan Instan:</strong> Semua perubahan tersimpan secara ACID di SQLite lokal dan siap disinkronkan saat kanal terbuka.</li>
         </ul>
 
-        <h4 style="color: var(--forest-green); margin: 14px 0 6px 0; font-size: 13px;">3. Arsitektur Unggulan</h4>
+        <h4 style="color: var(--brand-primary); margin: 12px 0 4px 0; font-size: 12.5px;">3. Arsitektur Unggulan</h4>
         <ul style="padding-left: 18px;">
-          <li><strong>True Offline-First:</strong> Embedded local storage sebagai single source of truth.</li>
-          <li><strong>Multi-Channel Sync:</strong> WiFi/4G, SMS Gateway 2G, LoRa mesh, ekspor SD Card.</li>
-          <li><strong>Edge-AI RKO:</strong> Model v2.4 on-device memprediksi lonjakan musiman penyakit.</li>
+          <li><strong>True Offline-First:</strong> Local database terenkripsi AES-256 sebagai single source of truth.</li>
+          <li><strong>Multi-Channel Sync:</strong> WiFi/4G, SMS Gateway 2G, LoRa VHF Mesh, dan ekspor SD Card CSV.</li>
+          <li><strong>Edge-AI RKO:</strong> Model prediktif on-device memitigasi lonjakan musiman penyakit tanpa ketergantungan cloud.</li>
         </ul>
 
-        <h4 style="color: var(--forest-green); margin: 14px 0 6px 0; font-size: 13px;">4. Repositori Source Code</h4>
-        <p>Aplikasi mobile native Flutter (61 file) dapat diaudit pada:<br>
-          <a href="https://github.com/faridnadir24-bit/lomba" target="_blank" style="color: var(--forest-green); font-weight: 700; word-break: break-all;">
+        <h4 style="color: var(--brand-primary); margin: 12px 0 4px 0; font-size: 12.5px;">4. Repositori Source Code</h4>
+        <p>Kode sumber native Flutter (61 file) dapat diaudit pada:<br>
+          <a href="https://github.com/faridnadir24-bit/lomba" target="_blank" style="color: var(--brand-primary); font-weight: 700; word-break: break-all;">
             https://github.com/faridnadir24-bit/lomba
           </a>
         </p>
       </div>
 
-      <button class="btn-control" style="width: 100%; background: var(--deep-green); height: 44px; margin-top: 16px; justify-content: center; border-radius: 14px;" onclick="closePrdModal()">
+      <button class="btn-control" style="width: 100%; background: var(--brand-primary); height: 42px; margin-top: 14px; justify-content: center; border-radius: var(--radius-md);" onclick="closePrdModal()">
         Tutup Panduan Juri
       </button>
     </div>
@@ -2351,11 +2347,13 @@
 
   <!-- Toast Notification Box -->
   <div class="toast-box" id="toastBox">
-    <i class="fa-solid fa-circle-check" style="color: var(--mint-accent); font-size: 16px;"></i>
+    <i class="fa-solid fa-circle-check" style="color: #6EE7B7; font-size: 16px;"></i>
     <span id="toastMsg">Data berhasil disimpan</span>
   </div>
 
-  <!-- JAVASCRIPT APPLICATION CORE LOGIC -->
+  <!-- ==========================================================================
+       JAVASCRIPT APPLICATION CORE LOGIC (PRESERVED & OPTIMIZED)
+       ========================================================================== -->
   <script>
     // Audio Feedback Generator
     function playBeep(freq = 1400, duration = 80) {
@@ -2399,7 +2397,7 @@
       { id: 'q3', type: 'Koreksi', med: 'Vaksin BCG', qty: -2, time: '3 jam lalu', ref: 'Kerusakan Vial' }
     ];
 
-    // State
+    // State Variables
     let medicines = JSON.parse(localStorage.getItem('obatku_inventory')) || initialMedicines;
     let isOnline = false;
     let currentFilter = 'semua';
@@ -2416,7 +2414,7 @@
       renderAll();
     }
 
-    // Days until expiry from standardized project time
+    // Days difference calculation against standardized test anchor (2026-10-02)
     function getDaysDiff(expiryDateStr) {
       const today = new Date('2026-10-02');
       const exp = new Date(expiryDateStr);
@@ -2424,7 +2422,7 @@
       return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     }
 
-    // Triage status calculation
+    // Triage status: FEFO Rules
     function getTriageStatus(med) {
       const days = getDaysDiff(med.expiry);
       if (days <= 7 || med.qty <= 10) return 'kritis';
@@ -2432,7 +2430,7 @@
       return 'aman';
     }
 
-    // Update Counts
+    // Update Top Metric Counters
     function updateMetrics() {
       let safe = 0, warning = 0, critical = 0;
       medicines.forEach(m => {
@@ -2454,15 +2452,15 @@
       document.getElementById('queueCount').innerText = pendingQueue.length;
     }
 
-    // Render Recent Critical Medicines on Dashboard
+    // Render Critical Medication Alert List
     function renderDashboardCriticalPills() {
       const container = document.getElementById('dashboardCriticalPills');
       const criticalMeds = medicines.filter(m => getTriageStatus(m) === 'kritis').slice(0, 3);
 
       if (criticalMeds.length === 0) {
         container.innerHTML = `
-          <div style="background: rgba(39,174,96,0.06); border: 1px solid rgba(39,174,96,0.15); border-radius: 14px; padding: 12px; text-align: center; color: var(--safe-green); font-size: 12px; font-weight: 600; margin-bottom: 12px;">
-            <i class="fa-solid fa-circle-check"></i> Luar Biasa! Tidak ada obat dalam kondisi kritis saat ini.
+          <div style="background: var(--safe-bg); border: 1px solid var(--safe-border); border-radius: var(--radius-md); padding: 12px; text-align: center; color: var(--safe-text); font-size: 12px; font-weight: 600; margin-bottom: 12px;">
+            <i class="fa-solid fa-circle-check"></i> Seluruh stok obat berada dalam status aman.
           </div>
         `;
         return;
@@ -2474,12 +2472,12 @@
         return `
           <div class="quick-action-pill" onclick="openMedDetailModal('${m.id}')">
             <div style="flex:1;">
-              <strong style="font-size: 13px; color: var(--text-main); letter-spacing: -0.01em;">${m.name}</strong>
-              <div style="font-size: 11px; color: var(--critical-red); font-weight: 700; margin-top: 2px;">
+              <strong style="font-size: 13px; color: var(--text-title);">${m.name}</strong>
+              <div style="font-size: 11px; color: var(--critical-text); font-weight: 700; margin-top: 2px;">
                 <i class="fa-solid fa-triangle-exclamation"></i> ${reasonText}
               </div>
             </div>
-            <button class="btn-control" style="background: var(--critical-red); font-size: 11px; padding: 5px 10px; border-radius: 10px;" onclick="event.stopPropagation(); startOrderFlowForMed('${m.id}')">
+            <button class="btn-control" style="background: var(--critical); font-size: 11px; padding: 4px 10px; border-radius: 7px; border: none;" onclick="event.stopPropagation(); startOrderFlowForMed('${m.id}')">
               Pesan <i class="fa-solid fa-arrow-right"></i>
             </button>
           </div>
@@ -2513,7 +2511,7 @@
           <div class="empty-state">
             <i class="fa-solid fa-prescription-bottle-medical"></i>
             <h4>Tidak Ada Obat Ditemukan</h4>
-            <p>Cobalah mengganti kata kunci pencarian atau memilih filter status yang lain.</p>
+            <p>Silakan ganti kata kunci pencarian atau sesuaikan filter status.</p>
           </div>
         `;
         return;
@@ -2522,7 +2520,7 @@
       container.innerHTML = filtered.map(m => createMedItemHtml(m)).join('');
     }
 
-    // Create Item HTML with Click-to-Detail
+    // Create Item HTML with Clean Clinical Aesthetics
     function createMedItemHtml(m) {
       const days = getDaysDiff(m.expiry);
       const status = getTriageStatus(m);
@@ -2530,7 +2528,7 @@
       if (days <= 0) {
         expiryBadge = `<span class="med-expiry expiry-critical"><i class="fa-solid fa-triangle-exclamation"></i> KADALUWARSA!</span>`;
       } else if (days <= 7) {
-        expiryBadge = `<span class="med-expiry expiry-critical"><i class="fa-solid fa-clock"></i> ${days} hari lagi!</span>`;
+        expiryBadge = `<span class="med-expiry expiry-critical"><i class="fa-solid fa-clock"></i> ${days} hari lagi</span>`;
       } else if (days <= 30) {
         expiryBadge = `<span class="med-expiry expiry-warning"><i class="fa-solid fa-clock"></i> ${days} hari lagi</span>`;
       } else {
@@ -2539,11 +2537,11 @@
 
       const rackBadge = m.rack === 'cold_chain' 
         ? `<span class="badge-rack badge-cold"><i class="fa-solid fa-snowflake"></i> Cold Chain</span>`
-        : (m.rack === 'darurat' ? `<span class="badge-rack" style="background:rgba(231,76,60,0.06); color:#B91C1C; border: 1px solid rgba(231,76,60,0.15);"><i class="fa-solid fa-truck-medical"></i> Darurat</span>` : `<span class="badge-rack">Rak Umum</span>`);
+        : (m.rack === 'darurat' ? `<span class="badge-rack badge-darurat"><i class="fa-solid fa-truck-medical"></i> Darurat</span>` : `<span class="badge-rack">Rak Umum</span>`);
 
       const syncIcon = m.synced 
-        ? `<i class="fa-solid fa-cloud-check" style="color: var(--safe-green);" title="Tersinkronisasi"></i>`
-        : `<i class="fa-solid fa-clock-rotate-left" style="color: var(--warning-yellow);" title="Pending Sync"></i>`;
+        ? `<i class="fa-solid fa-cloud-check" style="color: var(--safe); font-size: 13px;" title="Tersinkronisasi"></i>`
+        : `<i class="fa-solid fa-clock-rotate-left" style="color: var(--warning); font-size: 13px;" title="Pending Sync"></i>`;
 
       return `
         <div class="med-item" onclick="openMedDetailModal('${m.id}')">
@@ -2565,10 +2563,10 @@
               <div style="font-size: 10px; color: var(--text-muted);">Kedaluwarsa: ${m.expiry}</div>
               ${expiryBadge}
             </div>
-            <div style="display:flex; align-items:center; gap:10px;">
+            <div style="display:flex; align-items:center; gap:8px;">
               <div class="stepper-box" onclick="event.stopPropagation()">
                 <button class="btn-step" onclick="adjustStock('${m.id}', -1)">-</button>
-                <span class="stock-val">${m.qty} <small style="font-size: 10px; color:var(--text-muted);">${m.unit}</small></span>
+                <span class="stock-val">${m.qty} <small style="font-size: 9.5px; color:var(--text-muted);">${m.unit}</small></span>
                 <button class="btn-step" onclick="adjustStock('${m.id}', 1)">+</button>
               </div>
               ${syncIcon}
@@ -2578,7 +2576,7 @@
       `;
     }
 
-    // Render Prediction Chart & RKO Table
+    // Render Prediction Chart & RKO Table with High-DPI Canvas
     function renderPredictionScreen() {
       const canvas = document.getElementById('predictionChart');
       if (canvas && canvas.getContext) {
@@ -2591,10 +2589,11 @@
         const values = [420, 510, 780, 890, 720, 480];
         const maxVal = 1000;
 
-        ctx.strokeStyle = 'rgba(226,232,240,0.6)';
+        // Grid lines
+        ctx.strokeStyle = '#EEF3F0';
         ctx.lineWidth = 1;
         for (let i = 1; i <= 4; i++) {
-          const y = (h - 35) * (i / 4);
+          const y = (h - 32) * (i / 4);
           ctx.beginPath();
           ctx.moveTo(35, y);
           ctx.lineTo(w - 15, y);
@@ -2604,13 +2603,13 @@
         const stepX = (w - 60) / (values.length - 1);
         const points = values.map((val, idx) => ({
           x: 40 + idx * stepX,
-          y: (h - 40) - (val / maxVal) * (h - 60)
+          y: (h - 36) - (val / maxVal) * (h - 55)
         }));
 
-        // Smooth curve with bezier
+        // Area Gradient Fill
         const grad = ctx.createLinearGradient(0, 0, 0, h);
-        grad.addColorStop(0, 'rgba(45, 106, 79, 0.25)');
-        grad.addColorStop(1, 'rgba(216, 243, 220, 0.01)');
+        grad.addColorStop(0, 'rgba(10, 92, 54, 0.20)');
+        grad.addColorStop(1, 'rgba(10, 92, 54, 0.01)');
 
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
@@ -2618,35 +2617,37 @@
           const cx = (points[i-1].x + points[i].x) / 2;
           ctx.bezierCurveTo(cx, points[i-1].y, cx, points[i].y, points[i].x, points[i].y);
         }
-        ctx.lineTo(points[points.length - 1].x, h - 35);
-        ctx.lineTo(points[0].x, h - 35);
+        ctx.lineTo(points[points.length - 1].x, h - 30);
+        ctx.lineTo(points[0].x, h - 30);
         ctx.closePath();
         ctx.fillStyle = grad;
         ctx.fill();
 
+        // Stroke line
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
         for (let i = 1; i < points.length; i++) {
           const cx = (points[i-1].x + points[i].x) / 2;
           ctx.bezierCurveTo(cx, points[i-1].y, cx, points[i].y, points[i].x, points[i].y);
         }
-        ctx.strokeStyle = '#2D6A4F';
+        ctx.strokeStyle = '#0A5C36';
         ctx.lineWidth = 2.5;
         ctx.stroke();
 
+        // Points & Labels
         points.forEach((pt, i) => {
           ctx.beginPath();
           ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
-          ctx.fillStyle = '#1B4332';
+          ctx.fillStyle = '#063D23';
           ctx.fill();
-          ctx.strokeStyle = '#fff';
+          ctx.strokeStyle = '#FFFFFF';
           ctx.lineWidth = 2;
           ctx.stroke();
 
-          ctx.fillStyle = '#64748B';
-          ctx.font = '500 10px Plus Jakarta Sans';
+          ctx.fillStyle = '#5D7267';
+          ctx.font = '600 10px Plus Jakarta Sans';
           ctx.textAlign = 'center';
-          ctx.fillText(months[i], pt.x, h - 15);
+          ctx.fillText(months[i], pt.x, h - 12);
         });
       }
 
@@ -2665,9 +2666,9 @@
           <td><strong>${r.name}</strong></td>
           <td>${r.proj}</td>
           <td>${r.stock}</td>
-          <td style="color: var(--critical-red); font-weight: 800;">+${r.def}</td>
+          <td style="color: var(--critical-text); font-weight: 800;">+${r.def}</td>
           <td>
-            <button class="btn-control" style="background: var(--forest-green); padding: 3px 8px; font-size: 10px; border-radius: 8px;" onclick="startOrderFlowForMed('${r.id}', ${r.def})">
+            <button class="btn-control" style="background: var(--brand-primary); padding: 3px 8px; font-size: 10px; border-radius: 6px; border:none;" onclick="startOrderFlowForMed('${r.id}', ${r.def})">
               Pesan
             </button>
           </td>
@@ -2680,8 +2681,8 @@
       const qCont = document.getElementById('pendingQueueContainer');
       if (pendingQueue.length === 0) {
         qCont.innerHTML = `
-          <div style="background: rgba(39,174,96,0.06); border: 1px solid rgba(39,174,96,0.15); border-radius: 14px; padding: 14px; text-align: center; color: var(--safe-green); font-size: 12px; font-weight: 600;">
-            <i class="fa-solid fa-circle-check"></i> Semua transaksi telah tersinkronisasi penuh ke server Dinkes.
+          <div style="background: var(--safe-bg); border: 1px solid var(--safe-border); border-radius: var(--radius-md); padding: 14px; text-align: center; color: var(--safe-text); font-size: 12px; font-weight: 600;">
+            <i class="fa-solid fa-circle-check"></i> Seluruh data transaksi telah tersinkronisasi ke server Dinkes.
           </div>
         `;
         return;
@@ -2691,8 +2692,8 @@
         <div class="med-item" style="padding: 10px 12px; margin-bottom: 6px; cursor: default;">
           <div style="display:flex; justify-content: space-between; align-items:center;">
             <div>
-              <strong style="font-size: 13px; color: var(--deep-green);"><i class="fa-solid fa-arrow-right-arrow-left"></i> ${q.type}: ${q.med}</strong>
-              <div style="font-size: 10px; color: var(--text-muted);">${q.ref} &bull; ${q.time}</div>
+              <strong style="font-size: 12.5px; color: var(--text-title);"><i class="fa-solid fa-arrow-right-arrow-left" style="color: var(--brand-primary); margin-right: 4px;"></i> ${q.type}: ${q.med}</strong>
+              <div style="font-size: 10px; color: var(--text-muted); margin-top: 1px;">${q.ref} &bull; ${q.time}</div>
             </div>
             <span class="badge-status warning">${q.qty > 0 ? '+' : ''}${q.qty}</span>
           </div>
@@ -2725,7 +2726,7 @@
       };
 
       if (titles[tabId]) {
-        const svgLogo = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><rect x="3" y="6" width="7" height="14" rx="3.5" fill="#D8F3DC" opacity="0.9"/><rect x="14" y="4" width="7" height="16" rx="3.5" fill="#B7E4C7" opacity="0.8"/><rect x="8" y="8" width="8" height="12" rx="4" fill="#95D5B2" opacity="0.7"/></svg>`;
+        const svgLogo = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><rect x="3" y="6" width="7" height="14" rx="3.5" fill="#D8F3DC" opacity="0.95"/><rect x="14" y="4" width="7" height="16" rx="3.5" fill="#B7E4C7" opacity="0.85"/><rect x="8" y="8" width="8" height="12" rx="4" fill="#95D5B2" opacity="0.75"/></svg>`;
         document.getElementById('screenTitle').innerHTML = `${svgLogo} ${titles[tabId][0]}`;
         document.getElementById('screenSubtitle').innerText = titles[tabId][1];
       }
@@ -2810,7 +2811,7 @@
       const status = getTriageStatus(med);
 
       document.getElementById('detailMedName').innerText = med.name;
-      document.getElementById('detailMedForm').innerText = `Bentuk: ${med.form} \u2022 Satuan: ${med.unit}`;
+      document.getElementById('detailMedForm').innerText = `Bentuk: ${med.form} • Satuan: ${med.unit}`;
       document.getElementById('detailBatch').innerText = med.batch;
       document.getElementById('detailExpiry').innerText = med.expiry;
       document.getElementById('detailRack').innerText = med.rack === 'cold_chain' ? 'Cold Chain (2°-8°C)' : (med.rack === 'darurat' ? 'Triage Darurat' : 'Rak Umum');
@@ -3107,22 +3108,22 @@
         banner.className = 'status-banner online';
         icon.className = 'fa-solid fa-circle-check';
         bannerText.innerText = 'Terhubung — Sinyal 4G Stabil (Data Tersinkron)';
-        signal.innerHTML = '<i class="fa-solid fa-signal" style="color:var(--mint-accent);"></i> 4G';
+        signal.innerHTML = '<i class="fa-solid fa-signal" style="color:#A7F3D0;"></i> 4G';
         
         syncTitle.innerText = 'Terhubung ke Jaringan Dinkes';
         syncDesc.innerText = 'Koneksi internet aktif. Siap melakukan sinkronisasi dua arah secara instan.';
-        syncIcon.innerHTML = '<i class="fa-solid fa-cloud-arrow-up" style="color:var(--safe-green);"></i>';
+        syncIcon.innerHTML = '<i class="fa-solid fa-cloud-arrow-up" style="color:var(--safe);"></i>';
       } else {
         btn.classList.remove('active');
         text.innerText = 'Simulasi: Offline (2G)';
         banner.className = 'status-banner offline';
         icon.className = 'fa-solid fa-triangle-exclamation';
         bannerText.innerText = `Offline — ${pendingQueue.length} transaksi tersimpan lokal`;
-        signal.innerHTML = '<i class="fa-solid fa-signal" style="opacity: 0.6;"></i> 2G';
+        signal.innerHTML = '<i class="fa-solid fa-signal" style="opacity: 0.65;"></i> 2G';
 
         syncTitle.innerText = 'Mode Offline Terproteksi';
         syncDesc.innerText = 'Semua mutasi obat tersimpan di database lokal SQLite terenkripsi.';
-        syncIcon.innerHTML = '<i class="fa-solid fa-cloud-arrow-up" style="color:var(--warning-yellow);"></i>';
+        syncIcon.innerHTML = '<i class="fa-solid fa-cloud-arrow-up" style="color:var(--warning);"></i>';
       }
     }
 
@@ -3136,12 +3137,6 @@
       } else {
         btnText.innerText = 'Mode Layar Penuh';
       }
-    }
-
-    // Dismiss Onboarding Hint
-    function dismissOnboarding() {
-      const banner = document.getElementById('onboardingBanner');
-      if (banner) banner.style.display = 'none';
     }
 
     // Reset Demo Data
@@ -3175,7 +3170,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Start App
+    // Start App Initialization
     persistData();
   </script>
 </body>
