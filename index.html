@@ -15,56 +15,56 @@
        Clean, authoritative, human-crafted healthcare interface
        ========================================================================== */
     :root {
-      /* Brand Palette */
-      --brand-primary: #0A5C36;
-      --brand-dark: #063A22;
-      --brand-light: #12824D;
-      --brand-tint: #EDF7F2;
-      --brand-border: #C2E2D2;
+      /* Brand Palette: Deep Clinical Emerald (Authoritative, Calming, Trustworthy) */
+      --brand-primary: #0D5C3A;
+      --brand-dark: #083823;
+      --brand-light: #12794D;
+      --brand-tint: #F0FDF4;
+      --brand-border: #D1FAE5;
 
-      /* Standardized FEFO Medical Triage */
-      --safe: #16A34A;
+      /* Restrained Medical Status Indicators (Soft accents, never heavy fills) */
+      --safe: #15803D;
       --safe-bg: #F0FDF4;
-      --safe-border: #BBF7D0;
+      --safe-border: #DCFCE7;
       --safe-text: #166534;
 
-      --warning: #D97706;
+      --warning: #B45309;
       --warning-bg: #FFFBEB;
-      --warning-border: #FED7AA;
-      --warning-text: #9A3412;
+      --warning-border: #FEF3C7;
+      --warning-text: #92400E;
 
-      --critical: #DC2626;
+      --critical: #B91C1C;
       --critical-bg: #FEF2F2;
-      --critical-border: #FECACA;
+      --critical-border: #FEE2E2;
       --critical-text: #991B1B;
 
-      --cold: #0284C7;
+      --cold: #0369A1;
       --cold-bg: #F0F9FF;
-      --cold-border: #BAE6FD;
-      --cold-text: #0369A1;
+      --cold-border: #E0F2FE;
+      --cold-text: #075985;
 
-      /* Surfaces */
-      --bg-stage: #0D1612;
-      --bg-app: #F6F8F7;
+      /* Surfaces: Clean, Eye-Comfortable Neutral Grays */
+      --bg-stage: #0B0F17;
+      --bg-app: #F8FAFC;
       --card-bg: #FFFFFF;
-      --border-color: #E2E8E4;
-      --border-subtle: #EEF3F0;
+      --border-color: #E2E8F0;
+      --border-subtle: #F1F5F9;
 
-      /* Typography */
-      --text-title: #0D2319;
-      --text-body: #2C3E35;
-      --text-muted: #5E7569;
-      --text-faint: #8F9F96;
+      /* Typography: High-Contrast Slate Hierarchy */
+      --text-title: #0F172A;
+      --text-body: #334155;
+      --text-muted: #64748B;
+      --text-faint: #94A3B8;
 
-      /* Radii & Shadows */
+      /* Radii & Natural Shadows */
       --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-xl: 38px;
-      --shadow-sm: 0 1px 3px rgba(10, 92, 54, 0.04);
-      --shadow-card: 0 1px 3px rgba(10, 92, 54, 0.04), 0 2px 8px rgba(10, 92, 54, 0.02);
-      --shadow-elevated: 0 6px 20px rgba(10, 92, 54, 0.08), 0 2px 4px rgba(10, 92, 54, 0.03);
-      --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 36px;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+      --shadow-elevated: 0 4px 12px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+      --shadow-modal: 0 20px 40px rgba(15, 23, 42, 0.25);
 
       /* Transitions */
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -81,9 +81,6 @@
 
     body {
       background: var(--bg-stage);
-      background-image: 
-        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(18, 130, 77, 0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(10, 92, 54, 0.08) 0%, transparent 60%);
       color: var(--text-body);
       min-height: 100vh;
       display: flex;
@@ -98,9 +95,7 @@
        ========================================================================== */
     .judge-bar {
       width: 100%;
-      background: rgba(13, 22, 18, 0.94);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: #111827;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding: 10px 20px;
       display: flex;
@@ -115,30 +110,29 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      color: #fff;
+      color: #F8FAFC;
     }
 
     .judge-logo-mark {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       background: var(--brand-primary);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 9px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
+      font-size: 14px;
       color: #fff;
     }
 
     .judge-badge {
       background: rgba(255, 255, 255, 0.10);
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.85);
       font-size: 10px;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 6px;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
@@ -151,11 +145,11 @@
     }
 
     .btn-control {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      color: #E2E8F0;
       border: 1px solid rgba(255, 255, 255, 0.12);
       padding: 6px 14px;
-      border-radius: 9px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
@@ -163,12 +157,13 @@
       align-items: center;
       gap: 6px;
       transition: all 0.15s ease;
-      min-height: 36px;
+      min-height: 34px;
     }
 
     .btn-control:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.20);
+      color: #FFFFFF;
     }
 
     .btn-control:active {
@@ -182,12 +177,12 @@
     }
 
     .btn-judge-prd {
-      background: rgba(220, 38, 38, 0.18);
-      border-color: rgba(220, 38, 38, 0.40);
-      color: #FCA5A5;
+      background: rgba(13, 92, 58, 0.25);
+      border-color: rgba(13, 92, 58, 0.50);
+      color: #6EE7B7;
     }
     .btn-judge-prd:hover {
-      background: rgba(220, 38, 38, 0.35);
+      background: rgba(13, 92, 58, 0.40);
       color: #fff;
     }
 
@@ -241,17 +236,8 @@
         border: none;
       }
       .phone-statusbar {
-        display: none !important;
-      }
-      .judge-bar {
-        padding: 8px 12px;
-      }
-    }
-
-    /* Phone Status Bar */
-    .phone-statusbar {
-      background: var(--brand-dark);
-      color: #fff;
+      background: #FFFFFF;
+      color: var(--text-title);
       padding: 12px 24px 8px;
       display: flex;
       justify-content: space-between;
@@ -261,6 +247,7 @@
       z-index: 50;
       user-select: none;
       position: relative;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .phone-statusbar::after {
@@ -269,9 +256,9 @@
       top: 8px;
       left: 50%;
       transform: translateX(-50%);
-      width: 56px;
+      width: 52px;
       height: 4px;
-      background: rgba(0, 0, 0, 0.35);
+      background: #E2E8F0;
       border-radius: 4px;
       z-index: 51;
     }
@@ -287,22 +274,23 @@
        APP HEADER
        ========================================================================== */
     .app-header {
-      background: var(--brand-dark);
-      color: #fff;
-      padding: 12px 18px 14px;
+      background: #FFFFFF;
+      color: var(--text-title);
+      padding: 13px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 40;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid var(--border-color);
     }
 
     .app-title-box h1 {
       font-size: 17px;
       font-weight: 800;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
+      color: var(--text-title);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -310,12 +298,12 @@
 
     .app-title-box p {
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.70);
+      color: var(--text-muted);
       font-weight: 500;
       margin-top: 1px;
     }
 
-    /* Persistent Network Status Banner */
+    /* Subtle Network Status Banner */
     .status-banner {
       padding: 8px 16px;
       display: flex;
@@ -326,28 +314,27 @@
       transition: all 0.25s ease;
       z-index: 35;
       cursor: pointer;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-body);
     }
 
     .status-banner:hover {
-      filter: brightness(0.97);
+      background: #F1F5F9;
     }
 
-    .status-banner.offline {
-      background: var(--warning-bg);
-      border-bottom: 1px solid var(--warning-border);
-      color: var(--warning-text);
+    .status-banner.offline #bannerIcon {
+      color: var(--warning);
     }
 
-    .status-banner.online {
-      background: var(--safe-bg);
-      border-bottom: 1px solid var(--safe-border);
-      color: var(--safe-text);
+    .status-banner.online #bannerIcon {
+      color: var(--safe);
     }
 
     .btn-sync-mini {
-      background: var(--brand-primary);
-      color: #fff;
-      border: none;
+      background: #FFFFFF;
+      color: var(--brand-primary);
+      border: 1px solid var(--border-color);
       padding: 4px 10px;
       border-radius: 7px;
       font-size: 10px;
@@ -356,10 +343,14 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      transition: transform 0.1s ease;
+      transition: all 0.15s ease;
+    }
+    .btn-sync-mini:hover {
+      background: var(--brand-tint);
+      border-color: var(--brand-border);
     }
     .btn-sync-mini:active {
-      transform: scale(0.94);
+      transform: scale(0.95);
     }
 
     /* ==========================================================================
@@ -422,8 +413,8 @@
        ONBOARDING COACHMARK BANNER
        ========================================================================== */
     .onboarding-banner {
-      background: var(--safe-bg);
-      border: 1px solid var(--safe-border);
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
       border-left: 3.5px solid var(--brand-primary);
       border-radius: var(--radius-md);
       padding: 10px 14px;
@@ -441,7 +432,7 @@
       align-items: center;
       gap: 10px;
       font-size: 11.5px;
-      color: var(--safe-text);
+      color: var(--text-body);
       line-height: 1.45;
     }
 
@@ -449,7 +440,7 @@
       width: 28px;
       height: 28px;
       border-radius: 8px;
-      background: #DCFCE7;
+      background: #F1F5F9;
       color: var(--brand-primary);
       display: flex;
       align-items: center;
@@ -475,17 +466,18 @@
     }
 
     /* ==========================================================================
-       FASKES HERO CARD
+       FASKES HERO CARD (Clean White Record Card)
        ========================================================================== */
     .faskes-card {
-      background: linear-gradient(135deg, #0A5C36 0%, #063A22 100%);
-      color: #fff;
-      border: none;
+      background: #FFFFFF;
+      color: var(--text-title);
+      border: 1px solid var(--border-color);
+      border-left: 3.5px solid var(--brand-primary);
       padding: 16px 18px;
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-md);
-      box-shadow: 0 4px 14px rgba(6, 58, 34, 0.25);
+      box-shadow: var(--shadow-card);
     }
 
     .faskes-badge-row {
@@ -496,8 +488,9 @@
     }
 
     .badge-3t {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
+      background: var(--brand-tint);
+      color: var(--brand-primary);
+      border: 1px solid var(--brand-border);
       font-size: 9.5px;
       font-weight: 700;
       padding: 3px 8px;
@@ -511,21 +504,22 @@
 
     .badge-faskes-id {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: rgba(255, 255, 255, 0.7);
-      font-weight: 500;
+      font-size: 10.5px;
+      color: var(--text-muted);
+      font-weight: 600;
     }
 
     .faskes-name {
       font-size: 16px;
       font-weight: 800;
+      color: var(--text-title);
       margin-bottom: 3px;
       letter-spacing: -0.02em;
     }
 
     .faskes-loc {
       font-size: 11.5px;
-      color: rgba(255, 255, 255, 0.75);
+      color: var(--text-muted);
       display: flex;
       align-items: center;
       gap: 5px;
@@ -533,7 +527,7 @@
     }
 
     /* ==========================================================================
-       METRIC CARDS (3-COLUMN TRIAGE GRID)
+       METRIC CARDS (Clean Telemetry Monitor)
        ========================================================================== */
     .metrics-grid {
       display: grid;
@@ -549,38 +543,43 @@
       text-align: center;
       border: 1px solid var(--border-color);
       cursor: pointer;
-      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
       position: relative;
       box-shadow: var(--shadow-sm);
     }
 
     .metric-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-elevated);
+      border-color: #CBD5E1;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-card);
     }
 
     .metric-card:active {
       transform: scale(0.97);
     }
 
-    .metric-card.safe { border-top: 3px solid var(--safe); }
-    .metric-card.warning { border-top: 3px solid var(--warning); }
-    .metric-card.critical { border-top: 3px solid var(--critical); }
-
-    .metric-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
+    .metric-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 3px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 5px;
-      font-size: 13px;
+      gap: 4px;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
     }
 
-    .metric-card.safe .metric-icon { background: var(--safe-bg); color: var(--safe); }
-    .metric-card.warning .metric-icon { background: var(--warning-bg); color: var(--warning); }
-    .metric-card.critical .metric-icon { background: var(--critical-bg); color: var(--critical); }
+    .metric-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .metric-dot.safe { background: var(--safe); }
+    .metric-dot.warning { background: var(--warning); }
+    .metric-dot.critical { background: var(--critical); }
 
     .metric-num {
       font-size: 24px;
@@ -588,34 +587,23 @@
       line-height: 1.1;
       font-variant-numeric: tabular-nums;
       letter-spacing: -0.02em;
-    }
-
-    .metric-card.safe .metric-num { color: var(--safe-text); }
-    .metric-card.warning .metric-num { color: var(--warning-text); }
-    .metric-card.critical .metric-num { color: var(--critical-text); }
-
-    .metric-lbl {
-      font-size: 9.5px;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-top: 2px;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
+      color: var(--text-title);
     }
 
     .metric-action-hint {
-      font-size: 9px;
-      margin-top: 6px;
-      font-weight: 700;
+      font-size: 9.5px;
+      margin-top: 5px;
+      font-weight: 600;
+      color: var(--text-muted);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 2px;
     }
 
-    .metric-card.safe .metric-action-hint { color: var(--safe); }
-    .metric-card.warning .metric-action-hint { color: var(--warning); }
-    .metric-card.critical .metric-action-hint { color: var(--critical); }
+    .metric-card:hover .metric-action-hint {
+      color: var(--brand-primary);
+    }
 
     /* ==========================================================================
        SECTION HEADERS & LINKS
@@ -837,12 +825,12 @@
     }
 
     /* ==========================================================================
-       SHIP LOGISTICS CARD
+       SHIP LOGISTICS CARD (Clean White Logistics Card)
        ========================================================================== */
     .ship-card {
-      background: linear-gradient(135deg, #103825 0%, #0A2619 100%);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--card-bg);
+      color: var(--text-body);
+      border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       position: relative;
       overflow: hidden;
@@ -861,12 +849,12 @@
       width: 40px;
       height: 40px;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.10);
+      background: #F1F5F9;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      color: #D8F3DC;
+      font-size: 18px;
+      color: var(--brand-primary);
       flex-shrink: 0;
     }
 
@@ -957,10 +945,10 @@
     }
 
     .chip.active {
-      background: var(--brand-primary);
-      color: #fff;
-      border-color: var(--brand-primary);
-      box-shadow: 0 2px 6px rgba(10, 92, 54, 0.25);
+      background: var(--text-title);
+      color: #FFFFFF;
+      border-color: var(--text-title);
+      box-shadow: var(--shadow-sm);
     }
 
     /* Floating Action Button */
@@ -1076,12 +1064,12 @@
        PREDICTION & RKO TAB
        ========================================================================== */
     .prediction-hero {
-      background: linear-gradient(135deg, #0A5C36 0%, #063A22 100%);
-      color: #fff;
-      border: none;
+      background: var(--card-bg);
+      color: var(--text-title);
+      border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 16px 18px;
-      box-shadow: 0 4px 14px rgba(6, 58, 34, 0.25);
+      box-shadow: var(--shadow-sm);
     }
 
     .chart-container {
@@ -1563,19 +1551,13 @@
       <div class="app-header">
         <div class="app-title-box">
           <h1 id="screenTitle">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
-              <rect x="3" y="6" width="7" height="14" rx="3.5" fill="#D8F3DC" opacity="0.95"/>
-              <rect x="14" y="4" width="7" height="16" rx="3.5" fill="#B7E4C7" opacity="0.85"/>
-              <rect x="8" y="8" width="8" height="12" rx="4" fill="#95D5B2" opacity="0.75"/>
-            </svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><rect x="3" y="6" width="7" height="14" rx="3.5" fill="#0D5C3A"/><rect x="14" y="4" width="7" height="16" rx="3.5" fill="#15803D" opacity="0.85"/><rect x="8" y="8" width="8" height="12" rx="4" fill="#22C55E" opacity="0.7"/></svg>
             OBATKU
           </h1>
           <p id="screenSubtitle">Sistem Stok Obat Offline-First</p>
         </div>
         <div>
-          <button class="btn-control" style="background: rgba(255,255,255,0.12); padding: 5px 12px; font-size: 11px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18);" onclick="openAddMedicineModal()">
-            <i class="fa-solid fa-plus"></i> Tambah
-          </button>
+          <button class="btn-control" style="background: var(--brand-tint); color: var(--brand-primary); border: 1px solid var(--brand-border); padding: 5px 12px; font-size: 11px; border-radius: 8px; font-weight: 700;" onclick="openAddMedicineModal()"><i class="fa-solid fa-plus"></i> Tambah</button>
         </div>
       </div>
 
@@ -1623,22 +1605,19 @@
 
           <!-- Key Metrics Cards -->
           <div class="metrics-grid">
-            <div class="metric-card safe" onclick="goToInventory('aman')" title="Klik untuk filter obat aman">
-              <div class="metric-icon"><i class="fa-solid fa-shield-check"></i></div>
+            <div class="metric-card" onclick="goToInventory('aman')" title="Klik untuk filter obat aman">
+              <div class="metric-lbl"><span class="metric-dot safe"></span> Aman</div>
               <div class="metric-num" id="metricSafe">136</div>
-              <div class="metric-lbl">Aman</div>
               <div class="metric-action-hint">Lihat <i class="fa-solid fa-chevron-right"></i></div>
             </div>
-            <div class="metric-card warning" onclick="goToInventory('waspada')" title="Klik untuk filter mendekati kadaluarsa">
-              <div class="metric-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div class="metric-card" onclick="goToInventory('waspada')" title="Klik untuk filter mendekati kadaluarsa">
+              <div class="metric-lbl"><span class="metric-dot warning"></span> Waspada</div>
               <div class="metric-num" id="metricWarning">12</div>
-              <div class="metric-lbl">Waspada</div>
               <div class="metric-action-hint">Rotasi <i class="fa-solid fa-chevron-right"></i></div>
             </div>
-            <div class="metric-card critical" onclick="goToInventory('kritis')" title="Klik untuk tindakan darurat">
-              <div class="metric-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="metric-card" onclick="goToInventory('kritis')" title="Klik untuk tindakan darurat">
+              <div class="metric-lbl"><span class="metric-dot critical"></span> Kritis</div>
               <div class="metric-num" id="metricCritical">3</div>
-              <div class="metric-lbl">Kritis</div>
               <div class="metric-action-hint">Tindak <i class="fa-solid fa-chevron-right"></i></div>
             </div>
           </div>
@@ -1658,11 +1637,7 @@
             <div class="ship-row">
               <div class="ship-icon"><i class="fa-solid fa-ship"></i></div>
               <div style="flex:1;">
-                <div style="font-size: 10px; text-transform: uppercase; color: #A7F3D0; font-weight: 700; letter-spacing: 0.5px;">
-                  Distribusi Logistik Dinkes
-                </div>
-                <div style="font-size: 13.5px; font-weight: 800; letter-spacing: -0.01em;">KM Mentawai Bahari III</div>
-                <div style="font-size: 11px; opacity: 0.8; margin-top: 2px; font-weight: 500;">
+                <div style="font-size: 10px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px;">Distribusi Logistik Dinkes</div><div style="font-size: 13.5px; font-weight: 800; color: var(--text-title); letter-spacing: -0.01em;">KM Mentawai Bahari III</div><div style="font-size: 11px; color: var(--text-muted); margin-top: 2px; font-weight: 500;">
                   <i class="fa-regular fa-clock"></i> Est. Tiba: <strong>14 Okt 2026</strong> (Radio VHF Ch 16)
                 </div>
               </div>
@@ -1671,7 +1646,7 @@
           </div>
 
           <!-- Field Tips (FEFO) -->
-          <div class="card" style="background: var(--safe-bg); border-color: var(--safe-border); border-left: 3px solid var(--safe); padding: 12px 14px;">
+          <div class="card" style="background: #FFFFFF; border: 1px solid var(--border-color); border-left: 3.5px solid var(--brand-primary); padding: 12px 14px;">
             <div style="display:flex; gap: 10px; align-items: flex-start;">
               <i class="fa-solid fa-lightbulb" style="color: var(--safe); font-size: 14px; margin-top: 2px;"></i>
               <div>
@@ -1733,12 +1708,7 @@
           <div class="card prediction-hero">
             <div style="display:flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;">
               <div>
-                <span class="badge-3t" style="background: rgba(255,255,255,0.15); font-size: 9.5px;">Edge-AI v2.4 (On-Device)</span>
-                <div style="font-size: 15px; font-weight: 800; margin-top: 5px; letter-spacing: -0.02em;">Prediksi Konsumsi Obat</div>
-                <div style="font-size: 11px; opacity: 0.8; font-weight: 500;">Berdasarkan 8.420 riwayat resep faskes</div>
-              </div>
-              <div style="text-align: right;">
-                <div style="font-size: 26px; font-weight: 800; color: #D8F3DC; letter-spacing: -0.02em;">92%</div>
+                <span class="badge-3t" style="font-size: 9.5px;">Edge-AI v2.4 (On-Device)</span><div style="font-size: 15px; font-weight: 800; color: var(--text-title); margin-top: 5px; letter-spacing: -0.02em;">Prediksi Konsumsi Obat</div><div style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Berdasarkan 8.420 riwayat resep faskes</div></div><div style="text-align: right;"><div style="font-size: 26px; font-weight: 800; color: var(--brand-primary); letter-spacing: -0.02em;">92%</div>
                 <div style="font-size: 10px; opacity: 0.75; font-weight: 500;">Akurasi Model</div>
               </div>
             </div>
@@ -1757,7 +1727,7 @@
               <canvas id="predictionChart" width="380" height="190"></canvas>
             </div>
             
-            <div style="font-size: 11px; color: var(--warning-text); background: var(--warning-bg); padding: 10px 12px; border-radius: var(--radius-md); margin-top: 8px; border: 1px solid var(--warning-border); line-height: 1.45;">
+            <div style="font-size: 11px; color: var(--text-body); background: #F8FAFC; padding: 10px 12px; border-radius: var(--radius-md); margin-top: 8px; border: 1px solid var(--border-color); line-height: 1.45;">
               <i class="fa-solid fa-cloud-showers-heavy"></i> <strong>Pola Musim Hujan (Des - Feb):</strong><br>
               Model memproyeksikan lonjakan kasus ISPA & Diare hingga +45%. Stok buffer dinaikkan otomatis.
             </div>
@@ -2663,8 +2633,8 @@
 
         // Area Gradient Fill
         const grad = ctx.createLinearGradient(0, 0, 0, h);
-        grad.addColorStop(0, 'rgba(10, 92, 54, 0.20)');
-        grad.addColorStop(1, 'rgba(10, 92, 54, 0.01)');
+        grad.addColorStop(0, 'rgba(13, 92, 58, 0.12)');
+        grad.addColorStop(1, 'rgba(13, 92, 58, 0.00)');
 
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
@@ -2685,7 +2655,7 @@
           const cx = (points[i-1].x + points[i].x) / 2;
           ctx.bezierCurveTo(cx, points[i-1].y, cx, points[i].y, points[i].x, points[i].y);
         }
-        ctx.strokeStyle = '#0A5C36';
+        ctx.strokeStyle = '#0D5C3A';
         ctx.lineWidth = 2.5;
         ctx.stroke();
 
@@ -2693,13 +2663,13 @@
         points.forEach((pt, i) => {
           ctx.beginPath();
           ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
-          ctx.fillStyle = '#063D23';
+          ctx.fillStyle = '#0D5C3A';
           ctx.fill();
           ctx.strokeStyle = '#FFFFFF';
           ctx.lineWidth = 2;
           ctx.stroke();
 
-          ctx.fillStyle = '#5D7267';
+          ctx.fillStyle = '#64748B';
           ctx.font = '600 10px Plus Jakarta Sans';
           ctx.textAlign = 'center';
           ctx.fillText(months[i], pt.x, h - 12);
@@ -2781,9 +2751,7 @@
       };
 
       if (titles[tabId]) {
-        const svgLogo = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><rect x="3" y="6" width="7" height="14" rx="3.5" fill="#D8F3DC" opacity="0.95"/>
-<rect x="14" y="4" width="7" height="16" rx="3.5" fill="#B7E4C7" opacity="0.85"/>
-<rect x="8" y="8" width="8" height="12" rx="4" fill="#95D5B2" opacity="0.75"/></svg>`;
+        const svgLogo = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><rect x="3" y="6" width="7" height="14" rx="3.5" fill="#0D5C3A"/><rect x="14" y="4" width="7" height="16" rx="3.5" fill="#15803D" opacity="0.85"/><rect x="8" y="8" width="8" height="12" rx="4" fill="#22C55E" opacity="0.7"/></svg>`;
         document.getElementById('screenTitle').innerHTML = `${svgLogo} ${titles[tabId][0]}`;
         document.getElementById('screenSubtitle').innerText = titles[tabId][1];
       }
